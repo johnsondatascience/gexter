@@ -1,0 +1,72 @@
+{
+  "timestamp": "2025-11-18 00:39:12.455239",
+  "market_internals": {
+    "timestamp": "2025-11-18 00:39:12.455239",
+    "advances": 0,
+    "declines": 0,
+    "unchanged": 148,
+    "advance_decline_ratio": 1.0,
+    "breadth_ratio": 0.0,
+    "up_volume": 0,
+    "down_volume": 0,
+    "up_down_volume_ratio": 1.0,
+    "volume_ratio": 0.0,
+    "tick": null,
+    "trin": null,
+    "add": null,
+    "cumulative_ad_line": 0.0,
+    "breadth_thrust": null,
+    "sector_breadth": {
+      "timestamp": "2025-11-18 00:39:13.601272",
+      "sectors_advancing": 0,
+      "sectors_declining": 0,
+      "sector_breadth_ratio": 0.0,
+      "strongest_sector": "XLK (Technology)",
+      "weakest_sector": "XLK (Technology)",
+      "sector_performance": {
+        "XLK": 0.0,
+        "XLV": 0.0,
+        "XLF": 0.0,
+        "XLE": 0.0,
+        "XLI": 0.0,
+        "XLC": 0.0,
+        "XLY": 0.0,
+        "XLP": 0.0,
+        "XLRE": 0.0,
+        "XLU": 0.0,
+        "XLB": 0.0
+      }
+    }
+  },
+  "breadth_indices": {},
+  "individual_signals": [
+    {
+      "source": "Breadth Analysis",
+      "signal": "NEUTRAL",
+      "confidence": 0.5,
+      "reasoning": "Mixed breadth: 0 advancing, 0 declining",
+      "weight": 0.35,
+      "normalized_weight": 0.3888888888888889
+    },
+    {
+      "source": "Volume Analysis",
+      "signal": "NEUTRAL",
+      "confidence": 0.5,
+      "reasoning": "Balanced volume: 0 up, 0 down",
+      "weight": 0.3,
+      "normalized_weight": 0.33333333333333337
+    },
+    {
+      "source": "Sector Rotation",
+      "signal": "NEUTRAL",
+      "confidence": 0.5,
+      "reasoning": "Mixed sector performance: 0\u2191 0\u2193",
+      "weight": 0.25,
+      "normalized_weight": 0.2777777777777778
+    }
+  ],
+  "composite_signal": "NEUTRAL",
+  "composite_score": 0.0,
+  "composite_confidence": 0.5,
+  "recommendation": "Mixed internals provide no clear directional bias. Wait for confirmation from breadth and volume before taking new positions."
+}
