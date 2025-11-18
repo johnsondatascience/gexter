@@ -1,0 +1,101 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: gex_postgres
+    environment:
+      POSTGRES_DB: gexdb
+      POSTGRES_USER: gexuser
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-changeme123}
+      POSTGRES_INITDB_ARGS: "-E UTF8"
+      # Performance tuning
+      POSTGRES_MAX_CONNECTIONS: 100
+      POSTGRES_SHARED_BUFFERS: 256MB
+      POSTGRES_EFFECTIVE_CACHE_SIZE: 1GB
+      POSTGRES_WORK_MEM: 16MB
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/01-init.sql
+      - ./config/postgres.conf:/etc/postgresql/postgresql.conf
+    command: postgres -c config_file=/etc/postgresql/postgresql.conf
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U gexuser -d gexdb"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+    networks:
+      - gex_network
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: gex_pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_EMAIL:-admin@example.com}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_PASSWORD:-admin123}
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+      PGADMIN_CONFIG_MASTER_PASSWORD_REQUIRED: 'False'
+    ports:
+      - "5050:80"
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: unless-stopped
+    networks:
+      - gex_network
+
+  gex_collector:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: gex_collector
+    environment:
+      # Database configuration
+      DATABASE_TYPE: postgresql
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: 5432
+      POSTGRES_DB: gexdb
+      POSTGRES_USER: gexuser
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-changeme123}
+      POSTGRES_POOL_SIZE: 5
+      POSTGRES_MAX_OVERFLOW: 10
+      # Tradier API credentials
+      TRADIER_API_KEY: ${TRADIER_API_KEY}
+      TRADIER_ACCOUNT_ID: ${TRADIER_ACCOUNT_ID}
+      # Application settings
+      TIMEZONE: America/New_York
+      LOG_LEVEL: ${LOG_LEVEL:-INFO}
+      TRADING_HOURS_START: ${TRADING_HOURS_START:-09:30}
+      TRADING_HOURS_END: ${TRADING_HOURS_END:-16:00}
+      COLLECTION_INTERVAL_MINUTES: ${COLLECTION_INTERVAL_MINUTES:-30}
+    volumes:
+      - gex_logs:/app/logs
+      - ./src:/app/src:ro  # Mount source code as read-only for development
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: unless-stopped
+    networks:
+      - gex_network
+    healthcheck:
+      test: ["CMD-SHELL", "python -c 'import sys; sys.exit(0)'"]
+      interval: 60s
+      timeout: 10s
+      retries: 3
+
+volumes:
+  postgres_data:
+    driver: local
+  pgadmin_data:
+    driver: local
+  gex_logs:
+    driver: local
+
+networks:
+  gex_network:
+    driver: bridge

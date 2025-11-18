@@ -1,44 +1,21 @@
-Day Trading Strategy
-
-Markets:
-    
+Markets:  
     SPX index options
-
     NDX index options
-
 Data Sources:
-
     Tradier API (used for persisting realtime market data)
-
     Schwab API? (trading account funded, but API integration incomplete)
-
-Signals:
-
-    Classical technical analysis of candlestick patterns on weekly, daily, and hourly timeframes
-            
+Edge Sources:
+    Classical technical analysis
         Weekly-Daily-Hourly timeframe candles are scored on bullish-ness/bearish-ness and entered as environment variables when analyzing shorter timeframes
-        
-        Minor support and resistance are defined based on trendlines calculated using candle highs and lows. Trendlines include a measure of average change over time (mu(t)) and volatility of change over time (sigma_mu(t))
-
-        Major support and resistance are based on exponential moving averages calculated using Fibonnacci numbers (particularly, the 8, 21, and 55 EMAs)
-
+        Minor support and resistance are based on trendlines calculated using candle highs and lows, including a measure of average change over time (mu(t)) and volatility of change over time (sigma_mu(t))
+        Major support and resistance are based on exponential moving averages using Fibonnacci numbers (particularly, the 8, 21, and 55 EMAs)
         Entry and exit points are highlighted on the 5 and 1 minute timeframes
-
-    Dealer/Market-Maker positioning as measured by gamma exposure on equity index options
-        
+    Dealer/Market-Maker positioning
         Next-day and intra-day dealer positioning in the major indexes is measured by Gamma exposure by strike per expiration date.
-
         Particular attention should be paid to near-term expiries, especially 0DTE contracts.
-
         Trading signals are derived based on net GEX per strike in addition to intraday changes to GEX as measured by the "greeks_update_at" timestamp
-
-    Measures of core market internal health
-
+    Market internals
         Breadth
-
         Advance/Decline
-
         Volume
-
-        Tick distribution    
-
+        Tick distribution

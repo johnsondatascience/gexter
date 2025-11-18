@@ -69,38 +69,81 @@ class GEXCollector:
     def get_latest_timestamp_from_db(self) -> Optional[str]:
         """Get the most recent timestamp from the database"""
         try:
-            conn = sqlite3.connect(self.db_path)
-            query = "SELECT MAX([greeks.updated_at]) AS max_updated_at FROM gex_table"
-            result = pd.read_sql(query, conn)
-            conn.close()
-            
+            if self.config.database_type == 'postgresql':
+                # Use PostgreSQL
+                import psycopg2
+                conn = psycopg2.connect(
+                    host=self.config.postgres_host,
+                    port=self.config.postgres_port,
+                    database=self.config.postgres_db,
+                    user=self.config.postgres_user,
+                    password=self.config.postgres_password
+                )
+                query = 'SELECT MAX("greeks.updated_at") AS max_updated_at FROM gex_table'
+                result = pd.read_sql(query, conn)
+                conn.close()
+            else:
+                # Use SQLite
+                conn = sqlite3.connect(self.db_path)
+                query = "SELECT MAX([greeks.updated_at]) AS max_updated_at FROM gex_table"
+                result = pd.read_sql(query, conn)
+                conn.close()
+
             if not result.empty and result['max_updated_at'].iloc[0]:
                 return result['max_updated_at'].iloc[0]
         except Exception as e:
             self.logger.log_error("getting latest timestamp from database", e)
-        
+
         return None
     
     def save_to_database(self, df: pd.DataFrame) -> bool:
-        """Save dataframe to SQLite database"""
+        """Save dataframe to database (SQLite or PostgreSQL)"""
         if df.empty:
             self.logger.logger.warning("No data to save to database")
             return False
-        
+
         try:
-            conn = sqlite3.connect(self.db_path)
-            
-            # Set index for proper database structure
-            index_columns = ["greeks.updated_at", "expiration_date", "option_type", "strike"]
-            df.set_index(index_columns, inplace=True)
-            
-            # Save to database
-            df.to_sql('gex_table', conn, if_exists='append', index=True)
-            conn.close()
-            
-            self.logger.logger.info(f"Saved {len(df)} records to database")
-            return True
-            
+            # Check database type
+            if self.config.database_type == 'postgresql':
+                # Use PostgreSQL
+                import psycopg2
+                from sqlalchemy import create_engine
+
+                # Create connection string
+                conn_string = f"postgresql://{self.config.postgres_user}:{self.config.postgres_password}@{self.config.postgres_host}:{self.config.postgres_port}/{self.config.postgres_db}"
+                engine = create_engine(conn_string)
+
+                # Remove duplicates before setting index
+                index_columns = ["greeks.updated_at", "expiration_date", "option_type", "strike"]
+                df_dedup = df.drop_duplicates(subset=index_columns, keep='last')
+
+                if len(df) != len(df_dedup):
+                    self.logger.logger.warning(f"Removed {len(df) - len(df_dedup)} duplicate records before saving")
+
+                # Set index for proper database structure
+                df_dedup.set_index(index_columns, inplace=True)
+
+                # Save to database
+                df_dedup.to_sql('gex_table', engine, if_exists='append', index=True)
+                engine.dispose()
+
+                self.logger.logger.info(f"Saved {len(df_dedup)} records to PostgreSQL database")
+                return True
+            else:
+                # Use SQLite (original code)
+                conn = sqlite3.connect(self.db_path)
+
+                # Set index for proper database structure
+                index_columns = ["greeks.updated_at", "expiration_date", "option_type", "strike"]
+                df.set_index(index_columns, inplace=True)
+
+                # Save to database
+                df.to_sql('gex_table', conn, if_exists='append', index=True)
+                conn.close()
+
+                self.logger.logger.info(f"Saved {len(df)} records to SQLite database")
+                return True
+
         except Exception as e:
             self.logger.log_error("saving data to database", e)
             return False
@@ -283,15 +326,38 @@ class GEXCollector:
             latest_db_timestamp = self.get_latest_timestamp_from_db()
             if not all_chains.empty:
                 latest_api_timestamp = all_chains['greeks.updated_at'].max()
-                
-                if latest_db_timestamp and pd.to_datetime(latest_db_timestamp) >= pd.to_datetime(latest_api_timestamp):
-                    self.logger.logger.info("No new data available, database is up to date")
-                    return True
+
+                if latest_db_timestamp:
+                    self.logger.logger.info(f"Latest DB timestamp: {latest_db_timestamp}")
+                    self.logger.logger.info(f"Latest API timestamp: {latest_api_timestamp}")
+
+                    if pd.to_datetime(latest_db_timestamp) >= pd.to_datetime(latest_api_timestamp):
+                        self.logger.logger.info("No new data available - greeks.updated_at has not changed. Skipping collection.")
+                        return True
+                    else:
+                        self.logger.logger.info("New data detected - greeks.updated_at has been updated. Proceeding with collection.")
+                else:
+                    self.logger.logger.info("No existing data in database. Proceeding with initial collection.")
             
+            # Add SPX price data to all records
+            if self.current_spx_price:
+                self.logger.logger.info("Adding SPX price data to option chains...")
+                all_chains['spx_price'] = self.current_spx_price.get('last')
+                all_chains['spx_open'] = self.current_spx_price.get('open')
+                all_chains['spx_high'] = self.current_spx_price.get('high')
+                all_chains['spx_low'] = self.current_spx_price.get('low')
+                all_chains['spx_close'] = self.current_spx_price.get('close')
+                all_chains['spx_bid'] = self.current_spx_price.get('bid')
+                all_chains['spx_ask'] = self.current_spx_price.get('ask')
+                all_chains['spx_change'] = self.current_spx_price.get('change')
+                all_chains['spx_change_pct'] = self.current_spx_price.get('change_percentage')
+                all_chains['spx_prevclose'] = self.current_spx_price.get('prevclose')
+                self.logger.logger.info(f"Added SPX price ${self.current_spx_price.get('last'):.2f} to {len(all_chains)} records")
+
             # Calculate Greek differences before saving
             self.logger.logger.info("Calculating Greek differences...")
             all_chains = self.greek_calculator.calculate_differences(all_chains)
-            
+
             # Log Greek difference statistics
             stats = self.greek_calculator.get_summary_statistics(all_chains)
             if stats:
@@ -299,10 +365,10 @@ class GEXCollector:
                 for greek, stat_data in stats.items():
                     if 'mean' in stat_data:
                         self.logger.logger.debug(f"{greek}: mean={stat_data['mean']:.4f}, std={stat_data['std']:.4f}")
-            
+
             # Export differences report
             self.greek_calculator.export_difference_report(all_chains, 'greek_differences_latest.csv')
-            
+
             # Save new data
             success = self.save_to_database(all_chains)
             if success:

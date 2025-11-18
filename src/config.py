@@ -10,11 +10,23 @@ class Config:
         # Load environment variables
         self.tradier_api_key = os.getenv('TRADIER_API_KEY')
         self.tradier_account_id = os.getenv('TRADIER_ACCOUNT_ID')
-        self.database_path = os.getenv('DATABASE_PATH', 'gex_data.db')
-        
+
+        # Database configuration
+        self.database_type = os.getenv('DATABASE_TYPE', 'sqlite').lower()
+        self.database_path = os.getenv('DATABASE_PATH', 'data/gex_data.db')
+
+        # PostgreSQL configuration (only used if database_type is 'postgresql')
+        self.postgres_host = os.getenv('POSTGRES_HOST', 'localhost')
+        self.postgres_port = int(os.getenv('POSTGRES_PORT', '5432'))
+        self.postgres_db = os.getenv('POSTGRES_DB', 'gexdb')
+        self.postgres_user = os.getenv('POSTGRES_USER', 'gexuser')
+        self.postgres_password = os.getenv('POSTGRES_PASSWORD', '')
+        self.postgres_pool_size = int(os.getenv('POSTGRES_POOL_SIZE', '5'))
+        self.postgres_max_overflow = int(os.getenv('POSTGRES_MAX_OVERFLOW', '10'))
+
         # Logging configuration
         self.log_level = os.getenv('LOG_LEVEL', 'INFO')
-        self.log_file = os.getenv('LOG_FILE', 'gex_collector.log')
+        self.log_file = os.getenv('LOG_FILE', 'logs/gex_collector.log')
         
         # Trading hours configuration
         self.trading_hours_start = self._parse_time(os.getenv('TRADING_HOURS_START', '09:30'))

@@ -1,0 +1,35 @@
+{
+  "timestamp": "2025-11-17 21:00:10",
+  "current_price": 6669.67,
+  "zero_gex_level": 6740.0,
+  "gex_levels": {
+    "resistance": [
+      6900.0,
+      6950.0,
+      7000.0
+    ],
+    "support": [
+      6660.0,
+      6650.0,
+      6600.0
+    ]
+  },
+  "net_gex_at_price": -11718347.538019998,
+  "individual_signals": [
+    {
+      "source": "GEX_POSITIONING",
+      "signal": "BUY",
+      "confidence": 0.7,
+      "reasoning": "Below zero GEX (6740), negative GEX at spot = put support. Expect volatile moves with momentum."
+    },
+    {
+      "source": "GEX_CHANGE",
+      "signal": "NEUTRAL",
+      "confidence": 0.3,
+      "reasoning": "Insufficient data for GEX change analysis"
+    }
+  ],
+  "composite_signal": "BUY",
+  "composite_confidence": 0.5,
+  "recommendation": "\ud83d\udfe2 BUY signal (Confidence: 50%)\nBullish bias. Consider long positions on pullbacks.\n\nCurrent SPX: 6669.67\nZero GEX: 6740.00 (SPX is below)\nResistance levels: 6900, 6950, 7000\nSupport levels: 6660, 6650, 6600"
+}

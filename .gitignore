@@ -13,9 +13,20 @@
 data/*.db
 data/*.db-shm
 data/*.db-wal
+data/*.backup*
+data/*.session.sql
+data/*.default
 output/*.csv
 !output/spx_indicators.csv
 !output/spx_intraday_prices.csv
+
+# Tableau workbooks (large binary files)
+docs/*.twbx
+
+# Docker volumes and data
+postgres_data/
+pgadmin_data/
+gex_logs/
 
 # Logs
 logs/*.log
