@@ -8,6 +8,9 @@
 
 # Environment and secrets
 .env
+.env.*
+.env.backup
+*.env
 
 # Large data files
 data/*.db
@@ -19,6 +22,14 @@ data/*.default
 output/*.csv
 !output/spx_indicators.csv
 !output/spx_intraday_prices.csv
+
+# Database backups and dumps
+backups/
+*.sql
+*.sql.gz
+*.sql.tar.gz
+*.dump
+gexdb_*.sql
 
 # Tableau workbooks (large binary files)
 docs/*.twbx

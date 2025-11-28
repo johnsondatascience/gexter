@@ -1,0 +1,100 @@
+{
+  "0dte": {
+    "timestamp": "2025-11-25 19:59:04",
+    "timeframe": "0DTE",
+    "max_days_to_expiry": 0,
+    "options_count": 492,
+    "current_price": 6770.89,
+    "zero_gex_level": 6825.0,
+    "gex_levels": {
+      "resistance": [
+        6775.0,
+        6780.0,
+        6785.0
+      ],
+      "support": [
+        6705.0,
+        6695.0,
+        6675.0
+      ]
+    },
+    "net_gex_at_price": 6823626.25,
+    "composite_signal": "SELL",
+    "composite_confidence": 0.6,
+    "reasoning": "Below zero GEX (6825), positive GEX at spot = call resistance. May face selling pressure."
+  },
+  "short_term": {
+    "timestamp": "2025-11-25 19:59:04",
+    "timeframe": "SHORT_TERM",
+    "max_days_to_expiry": 2,
+    "options_count": 984,
+    "current_price": 6770.89,
+    "zero_gex_level": 6685.0,
+    "gex_levels": {
+      "resistance": [
+        6775.0,
+        6780.0,
+        6800.0
+      ],
+      "support": [
+        6660.0,
+        6650.0,
+        6640.0
+      ]
+    },
+    "net_gex_at_price": 12580574.995000001,
+    "composite_signal": "NEUTRAL",
+    "composite_confidence": 0.6,
+    "reasoning": "Above zero GEX (6685), market likely to be pinned. Range-bound trading expected."
+  },
+  "weekly": {
+    "timestamp": "2025-11-25 19:59:04",
+    "timeframe": "WEEKLY",
+    "max_days_to_expiry": 7,
+    "options_count": 2738,
+    "current_price": 6770.89,
+    "zero_gex_level": 6735.0,
+    "gex_levels": {
+      "resistance": [
+        6775.0,
+        6790.0,
+        6800.0
+      ],
+      "support": [
+        6710.0,
+        6670.0,
+        6650.0
+      ]
+    },
+    "net_gex_at_price": 18096058.233000003,
+    "composite_signal": "NEUTRAL",
+    "composite_confidence": 0.8,
+    "reasoning": "Near zero GEX (6735), expect choppy price action."
+  },
+  "all": {
+    "timestamp": "2025-11-25 19:59:04",
+    "timeframe": "ALL",
+    "max_days_to_expiry": null,
+    "options_count": 9086,
+    "current_price": 6770.89,
+    "zero_gex_level": 6715.0,
+    "gex_levels": {
+      "resistance": [
+        6775.0,
+        6780.0,
+        6800.0
+      ],
+      "support": [
+        6670.0,
+        6600.0,
+        6500.0
+      ]
+    },
+    "net_gex_at_price": 21095917.6054,
+    "composite_signal": "NEUTRAL",
+    "composite_confidence": 0.8,
+    "reasoning": "Near zero GEX (6715), expect choppy price action."
+  },
+  "generated_at": "2025-11-26T08:19:02.198062",
+  "current_price": 6770.89
+}

@@ -15,6 +15,7 @@ from datetime import datetime, timedelta
 from typing import List, Optional, Dict
 import argparse
 from dotenv import load_dotenv
+from sqlalchemy import create_engine
 
 from .config import Config
 from .utils.logger import GEXLogger
@@ -25,13 +26,31 @@ from .indicators.technical_indicators import SPXIndicatorCalculator
 
 class GEXCollector:
     """Main GEX data collection and processing class"""
-    
+
     def __init__(self, config: Config):
         self.config = config
         self.logger = GEXLogger(config)
         self.api = TradierAPI(config.tradier_api_key)
         self.db_path = config.database_path
-        self.greek_calculator = GreekDifferenceCalculator(config.database_path)
+
+        # Initialize database engine/connection based on type
+        if config.database_type == 'postgresql':
+            conn_string = (
+                f"postgresql://{config.postgres_user}:{config.postgres_password}@"
+                f"{config.postgres_host}:{config.postgres_port}/{config.postgres_db}"
+            )
+            self.db_engine = create_engine(conn_string)
+            self.greek_calculator = GreekDifferenceCalculator(
+                db_engine=self.db_engine,
+                db_type='postgresql'
+            )
+        else:
+            self.db_engine = None
+            self.greek_calculator = GreekDifferenceCalculator(
+                db_path=config.database_path,
+                db_type='sqlite'
+            )
+
         self.indicator_calculator = SPXIndicatorCalculator(self.api)
         self.current_spx_price = None
         self.current_spx_indicators = None
@@ -70,18 +89,9 @@ class GEXCollector:
         """Get the most recent timestamp from the database"""
         try:
             if self.config.database_type == 'postgresql':
-                # Use PostgreSQL
-                import psycopg2
-                conn = psycopg2.connect(
-                    host=self.config.postgres_host,
-                    port=self.config.postgres_port,
-                    database=self.config.postgres_db,
-                    user=self.config.postgres_user,
-                    password=self.config.postgres_password
-                )
+                # Use PostgreSQL with SQLAlchemy
                 query = 'SELECT MAX("greeks.updated_at") AS max_updated_at FROM gex_table'
-                result = pd.read_sql(query, conn)
-                conn.close()
+                result = pd.read_sql(query, self.db_engine)
             else:
                 # Use SQLite
                 conn = sqlite3.connect(self.db_path)
@@ -103,18 +113,73 @@ class GEXCollector:
             return False
 
         try:
+            # Drop raw 'greeks' column if it exists (from json_normalize)
+            # We only want the individual greeks.* columns
+            if 'greeks' in df.columns:
+                df = df.drop(columns=['greeks'])
+                self.logger.logger.debug("Dropped raw 'greeks' column before database save")
+
+            index_columns = ["greeks.updated_at", "expiration_date", "option_type", "strike"]
+
             # Check database type
             if self.config.database_type == 'postgresql':
-                # Use PostgreSQL
-                import psycopg2
-                from sqlalchemy import create_engine
+                # Use PostgreSQL with existing engine
 
-                # Create connection string
-                conn_string = f"postgresql://{self.config.postgres_user}:{self.config.postgres_password}@{self.config.postgres_host}:{self.config.postgres_port}/{self.config.postgres_db}"
-                engine = create_engine(conn_string)
+                # Remove duplicates within the DataFrame
+                df_dedup = df.drop_duplicates(subset=index_columns, keep='last')
 
-                # Remove duplicates before setting index
-                index_columns = ["greeks.updated_at", "expiration_date", "option_type", "strike"]
+                if len(df) != len(df_dedup):
+                    self.logger.logger.warning(f"Removed {len(df) - len(df_dedup)} duplicate records before saving")
+
+                # Get existing records from database to avoid duplicates
+                try:
+                    existing_query = 'SELECT DISTINCT "greeks.updated_at", expiration_date, option_type, strike FROM gex_table'
+                    existing_df = pd.read_sql(existing_query, self.db_engine)
+
+                    if not existing_df.empty:
+                        # Create a set of existing keys for fast lookup
+                        existing_keys = set(
+                            existing_df.apply(
+                                lambda row: (row['greeks.updated_at'], row['expiration_date'],
+                                           row['option_type'], row['strike']),
+                                axis=1
+                            )
+                        )
+
+                        # Filter out records that already exist
+                        df_new = df_dedup[
+                            df_dedup.apply(
+                                lambda row: (row['greeks.updated_at'], row['expiration_date'],
+                                           row['option_type'], row['strike']) not in existing_keys,
+                                axis=1
+                            )
+                        ]
+
+                        if len(df_dedup) != len(df_new):
+                            self.logger.logger.warning(
+                                f"Filtered out {len(df_dedup) - len(df_new)} records that already exist in database"
+                            )
+                        df_dedup = df_new
+                except Exception as e:
+                    self.logger.logger.warning(f"Could not check for existing records: {e}. Proceeding with save.")
+
+                if df_dedup.empty:
+                    self.logger.logger.info("No new records to save after filtering")
+                    return True
+
+                # Set index for proper database structure
+                df_dedup.set_index(index_columns, inplace=True)
+
+                # Save to database
+                df_dedup.to_sql('gex_table', self.db_engine, if_exists='append', index=True)
+
+                self.logger.logger.info(f"Saved {len(df_dedup)} records to PostgreSQL database")
+                return True
+            else:
+                # Use SQLite (original code)
+                conn = sqlite3.connect(self.db_path)
+
+                # Remove duplicates within the DataFrame
                 df_dedup = df.drop_duplicates(subset=index_columns, keep='last')
 
                 if len(df) != len(df_dedup):
@@ -124,24 +189,10 @@ class GEXCollector:
                 df_dedup.set_index(index_columns, inplace=True)
 
                 # Save to database
-                df_dedup.to_sql('gex_table', engine, if_exists='append', index=True)
-                engine.dispose()
-
-                self.logger.logger.info(f"Saved {len(df_dedup)} records to PostgreSQL database")
-                return True
-            else:
-                # Use SQLite (original code)
-                conn = sqlite3.connect(self.db_path)
-
-                # Set index for proper database structure
-                index_columns = ["greeks.updated_at", "expiration_date", "option_type", "strike"]
-                df.set_index(index_columns, inplace=True)
-
-                # Save to database
-                df.to_sql('gex_table', conn, if_exists='append', index=True)
+                df_dedup.to_sql('gex_table', conn, if_exists='append', index=True)
                 conn.close()
 
-                self.logger.logger.info(f"Saved {len(df)} records to SQLite database")
+                self.logger.logger.info(f"Saved {len(df_dedup)} records to SQLite database")
                 return True
 
         except Exception as e:
@@ -151,19 +202,29 @@ class GEXCollector:
     def export_to_csv(self) -> bool:
         """Export current database snapshot to CSV for dashboard"""
         try:
-            conn = sqlite3.connect(self.db_path)
-            
             # Get the most recent complete snapshot
-            query = """
-            SELECT * FROM gex_table 
-            WHERE [greeks.updated_at] >= (
-                SELECT DATE(MAX([greeks.updated_at]), '-5 days') FROM gex_table
-            )
-            ORDER BY option_type, strike, expiration_date
-            """
-            
-            df = pd.read_sql(query, conn)
-            conn.close()
+            if self.config.database_type == 'postgresql':
+                # PostgreSQL query - last 5 days
+                query = """
+                SELECT * FROM gex_table
+                WHERE "greeks.updated_at" >= (
+                    SELECT MAX("greeks.updated_at") - INTERVAL '5 days' FROM gex_table
+                )
+                ORDER BY option_type, strike, expiration_date
+                """
+                df = pd.read_sql(query, self.db_engine)
+            else:
+                # SQLite query
+                conn = sqlite3.connect(self.db_path)
+                query = """
+                SELECT * FROM gex_table
+                WHERE [greeks.updated_at] >= (
+                    SELECT DATE(MAX([greeks.updated_at]), '-5 days') FROM gex_table
+                )
+                ORDER BY option_type, strike, expiration_date
+                """
+                df = pd.read_sql(query, conn)
+                conn.close()
             
             if df.empty:
                 self.logger.logger.warning("No data found for CSV export")
@@ -342,17 +403,35 @@ class GEXCollector:
             # Add SPX price data to all records
             if self.current_spx_price:
                 self.logger.logger.info("Adding SPX price data to option chains...")
+                # Current price
                 all_chains['spx_price'] = self.current_spx_price.get('last')
+
+                # Daily OHLC
+                all_chains['spx_daily_open'] = self.current_spx_price.get('daily_open')
+                all_chains['spx_daily_high'] = self.current_spx_price.get('daily_high')
+                all_chains['spx_daily_low'] = self.current_spx_price.get('daily_low')
+                all_chains['spx_daily_close'] = self.current_spx_price.get('daily_close')
+
+                # Intraday 15-min bar OHLC
+                all_chains['spx_intraday_open'] = self.current_spx_price.get('intraday_open')
+                all_chains['spx_intraday_high'] = self.current_spx_price.get('intraday_high')
+                all_chains['spx_intraday_low'] = self.current_spx_price.get('intraday_low')
+                all_chains['spx_intraday_close'] = self.current_spx_price.get('intraday_close')
+
+                # Legacy columns for backward compatibility
                 all_chains['spx_open'] = self.current_spx_price.get('open')
                 all_chains['spx_high'] = self.current_spx_price.get('high')
                 all_chains['spx_low'] = self.current_spx_price.get('low')
                 all_chains['spx_close'] = self.current_spx_price.get('close')
+
+                # Other SPX data
                 all_chains['spx_bid'] = self.current_spx_price.get('bid')
                 all_chains['spx_ask'] = self.current_spx_price.get('ask')
                 all_chains['spx_change'] = self.current_spx_price.get('change')
                 all_chains['spx_change_pct'] = self.current_spx_price.get('change_percentage')
                 all_chains['spx_prevclose'] = self.current_spx_price.get('prevclose')
-                self.logger.logger.info(f"Added SPX price ${self.current_spx_price.get('last'):.2f} to {len(all_chains)} records")
+
+                self.logger.logger.info(f"Added SPX price ${self.current_spx_price.get('last'):.2f} (daily & intraday OHLC) to {len(all_chains)} records")
 
             # Calculate Greek differences before saving
             self.logger.logger.info("Calculating Greek differences...")
@@ -416,25 +495,32 @@ class GEXCollector:
             return False
     
     def get_current_spx_price(self) -> Optional[Dict]:
-        """Get current SPX OHLC price data"""
+        """Get current SPX price data with both daily and intraday OHLC"""
         try:
             self.logger.logger.info("Fetching current SPX price data...")
-            
+
+            # Get current quote for daily OHLC and current price
             spx_quote = self.api.get_current_quote('SPX')
-            
+
             if spx_quote.empty:
                 self.logger.logger.warning("No SPX price data received")
                 return None
-            
-            # Extract OHLC data
+
+            # Extract daily OHLC data
             spx_data = spx_quote.iloc[0]
-            
+
             price_data = {
                 'symbol': 'SPX',
                 'timestamp': datetime.now(self.config.timezone).isoformat(),
                 'last': spx_data.get('last'),
+                # Daily OHLC
+                'daily_open': spx_data.get('open'),
+                'daily_high': spx_data.get('high'),
+                'daily_low': spx_data.get('low'),
+                'daily_close': spx_data.get('close'),
+                # Keep old keys for backward compatibility
                 'open': spx_data.get('open'),
-                'high': spx_data.get('high'), 
+                'high': spx_data.get('high'),
                 'low': spx_data.get('low'),
                 'close': spx_data.get('close'),
                 'volume': spx_data.get('volume', 0),
@@ -444,15 +530,39 @@ class GEXCollector:
                 'bid': spx_data.get('bid'),
                 'ask': spx_data.get('ask')
             }
-            
+
+            # Fetch recent intraday bar for 15-minute OHLC
+            try:
+                intraday_data = self.api.get_intraday_data('SPX', interval='15min', days_back=1)
+                if not intraday_data.empty:
+                    # Get the most recent bar
+                    latest_bar = intraday_data.iloc[-1]
+                    price_data['intraday_open'] = latest_bar.get('open')
+                    price_data['intraday_high'] = latest_bar.get('high')
+                    price_data['intraday_low'] = latest_bar.get('low')
+                    price_data['intraday_close'] = latest_bar.get('close')
+                    self.logger.logger.debug(f"Fetched intraday bar: {latest_bar['datetime']}")
+                else:
+                    self.logger.logger.warning("No intraday bar data available")
+                    price_data['intraday_open'] = None
+                    price_data['intraday_high'] = None
+                    price_data['intraday_low'] = None
+                    price_data['intraday_close'] = None
+            except Exception as e:
+                self.logger.logger.warning(f"Failed to fetch intraday bar: {e}")
+                price_data['intraday_open'] = None
+                price_data['intraday_high'] = None
+                price_data['intraday_low'] = None
+                price_data['intraday_close'] = None
+
             # Store for use in CSV exports
             self.current_spx_price = price_data
-            
+
             # Use the enhanced logging
             self.logger.log_spx_price(price_data)
-            
+
             return price_data
-            
+
         except Exception as e:
             self.logger.log_error("fetching SPX price data", e)
             return None

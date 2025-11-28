@@ -24,10 +24,21 @@ class Config:
         self.postgres_pool_size = int(os.getenv('POSTGRES_POOL_SIZE', '5'))
         self.postgres_max_overflow = int(os.getenv('POSTGRES_MAX_OVERFLOW', '10'))
 
+        # Underlying symbols configuration
+        self.collect_spx = os.getenv('COLLECT_SPX', 'true').lower() == 'true'
+        self.collect_xsp = os.getenv('COLLECT_XSP', 'false').lower() == 'true'
+
+        # Build list of symbols to collect
+        self.underlying_symbols = []
+        if self.collect_spx:
+            self.underlying_symbols.append('SPX')
+        if self.collect_xsp:
+            self.underlying_symbols.append('XSP')
+
         # Logging configuration
         self.log_level = os.getenv('LOG_LEVEL', 'INFO')
         self.log_file = os.getenv('LOG_FILE', 'logs/gex_collector.log')
-        
+
         # Trading hours configuration
         self.trading_hours_start = self._parse_time(os.getenv('TRADING_HOURS_START', '09:30'))
         self.trading_hours_end = self._parse_time(os.getenv('TRADING_HOURS_END', '16:00'))

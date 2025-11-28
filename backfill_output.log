@@ -1,0 +1,65 @@
+================================================================================
+SPX PRICE BACKFILL - INTRADAY DATA
+================================================================================
+
+Database Type: postgresql
+Interval: 15min
+PostgreSQL: 127.0.0.1:5432/gexdb
+
+1. [INFO] PostgreSQL detected - consider creating manual backup with pg_dump
+
+2. Analyzing timestamps that need backfilling...
+   Timestamps needing backfill: 60
+   Date range: 2025-03-24 14:59:06 to 2025-11-07 17:59:06
+
+3. Fetching SPX 15min intraday data from 2025-03-24 to 2025-11-07...
+   Fetching 229 days of 15min interval data...
+   Fetching chunk: 2025-03-24 to 2025-04-23 (248 days back)...
+   Fetching chunk: 2025-04-24 to 2025-05-24 (217 days back)...
+   Fetching chunk: 2025-05-25 to 2025-06-24 (186 days back)...
+   Fetching chunk: 2025-06-25 to 2025-07-25 (155 days back)...
+   Fetching chunk: 2025-07-26 to 2025-08-25 (124 days back)...
+   Fetching chunk: 2025-08-26 to 2025-09-25 (93 days back)...
+   Fetching chunk: 2025-09-26 to 2025-10-26 (62 days back)...
+   Fetching chunk: 2025-10-27 to 2025-11-07 (31 days back)...
+      Got 261 15min bars
+   [OK] Fetched 261 15min bars total
+   Time range: 2025-10-28 09:30:00 to 2025-11-07 16:30:00
+
+4. Matching SPX prices to Greek timestamps...
+   Using tolerance of 15 minutes for matching
+   Greek timestamps: 60
+   SPX data points: 261
+   Successful matches: 2/60
+   [WARNING] 58 timestamps could not be matched
+   Sample unmatched timestamps:
+     - 2025-03-24 14:59:06
+     - 2025-03-24 16:59:02
+     - 2025-03-24 18:59:10
+     - 2025-03-25 15:59:03
+     - 2025-03-25 16:59:06
+
+5. Updating database with SPX prices...
+   Processing 2 timestamps with valid SPX data...
+
+   [OK] Updated 2 timestamps (17,512 records)
+
+6. Verifying backfill...
+   Total records: 1,029,454
+   Records with SPX price: 688,372
+   Total timestamps: 152
+
+   [WARNING] 58 timestamps still missing SPX data
+
+   Sample missing timestamps:
+     - 2025-11-07 17:59:06
+     - 2025-06-09 16:59:09
+     - 2025-06-09 15:59:03
+     - 2025-06-05 20:00:06
+     - 2025-06-05 16:59:05
+
+================================================================================
+[PARTIAL] SPX PRICE BACKFILL PARTIALLY COMPLETE
+================================================================================
+Records updated: 17,512
+Interval used: 15min

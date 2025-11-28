@@ -1,69 +1,102 @@
 """
 Greek Difference Calculator
 
-Calculates differences between current Greeks and the most recent available 
+Calculates differences between current Greeks and the most recent available
 for each option type/strike/expiration combination.
 """
 
 import pandas as pd
 import sqlite3
 import logging
-from typing import Dict, List, Optional
+from typing import Dict, List, Optional, Union
 from datetime import datetime
+from sqlalchemy import create_engine
+from sqlalchemy.engine import Engine
 
 logger = logging.getLogger('gex_collector')
 
 
 class GreekDifferenceCalculator:
     """Calculate Greek differences for option data"""
-    
+
     GREEK_COLUMNS = [
-        'greeks.delta', 'greeks.gamma', 'greeks.theta', 'greeks.vega', 
-        'greeks.rho', 'greeks.phi', 'greeks.bid_iv', 'greeks.mid_iv', 
+        'greeks.delta', 'greeks.gamma', 'greeks.theta', 'greeks.vega',
+        'greeks.rho', 'greeks.phi', 'greeks.bid_iv', 'greeks.mid_iv',
         'greeks.ask_iv', 'greeks.smv_vol', 'gex'
     ]
-    
-    def __init__(self, db_path: str):
+
+    def __init__(self, db_path: str = None, db_engine: Engine = None, db_type: str = 'sqlite'):
+        """
+        Initialize calculator with either SQLite path or SQLAlchemy engine
+
+        Args:
+            db_path: Path to SQLite database (legacy)
+            db_engine: SQLAlchemy engine for PostgreSQL
+            db_type: 'sqlite' or 'postgresql'
+        """
         self.db_path = db_path
+        self.db_engine = db_engine
+        self.db_type = db_type
     
     def get_previous_data(self, current_timestamp: str) -> pd.DataFrame:
         """Get the most recent data before the current timestamp for each option"""
         try:
-            conn = sqlite3.connect(self.db_path)
-            
-            # Query to get the most recent previous data for each option
-            query = """
-            WITH previous_data AS (
-                SELECT 
-                    option_type,
-                    strike,
-                    expiration_date,
-                    MAX([greeks.updated_at]) as prev_timestamp
-                FROM gex_table 
-                WHERE [greeks.updated_at] < ?
-                GROUP BY option_type, strike, expiration_date
-            )
-            SELECT g.*
-            FROM gex_table g
-            INNER JOIN previous_data p ON 
-                g.option_type = p.option_type AND
-                g.strike = p.strike AND
-                g.expiration_date = p.expiration_date AND
-                g.[greeks.updated_at] = p.prev_timestamp
-            """
-            
             # Convert timestamp to string if it's a pandas Timestamp
             if hasattr(current_timestamp, 'isoformat'):
                 current_timestamp = current_timestamp.isoformat()
             elif not isinstance(current_timestamp, str):
                 current_timestamp = str(current_timestamp)
 
-            previous_df = pd.read_sql(query, conn, params=[current_timestamp])
-            conn.close()
-            
+            if self.db_type == 'postgresql' and self.db_engine:
+                # PostgreSQL query with proper column quoting and parameter syntax
+                query = """
+                WITH previous_data AS (
+                    SELECT
+                        option_type,
+                        strike,
+                        expiration_date,
+                        MAX("greeks.updated_at") as prev_timestamp
+                    FROM gex_table
+                    WHERE "greeks.updated_at" < %(timestamp)s
+                    GROUP BY option_type, strike, expiration_date
+                )
+                SELECT g.*
+                FROM gex_table g
+                INNER JOIN previous_data p ON
+                    g.option_type = p.option_type AND
+                    g.strike = p.strike AND
+                    g.expiration_date = p.expiration_date AND
+                    g."greeks.updated_at" = p.prev_timestamp
+                """
+                previous_df = pd.read_sql(query, self.db_engine, params={'timestamp': current_timestamp})
+            else:
+                # SQLite query with square bracket quoting and ? parameter
+                conn = sqlite3.connect(self.db_path)
+                query = """
+                WITH previous_data AS (
+                    SELECT
+                        option_type,
+                        strike,
+                        expiration_date,
+                        MAX([greeks.updated_at]) as prev_timestamp
+                    FROM gex_table
+                    WHERE [greeks.updated_at] < ?
+                    GROUP BY option_type, strike, expiration_date
+                )
+                SELECT g.*
+                FROM gex_table g
+                INNER JOIN previous_data p ON
+                    g.option_type = p.option_type AND
+                    g.strike = p.strike AND
+                    g.expiration_date = p.expiration_date AND
+                    g.[greeks.updated_at] = p.prev_timestamp
+                """
+                previous_df = pd.read_sql(query, conn, params=[current_timestamp])
+                conn.close()
+
             logger.info(f"Retrieved {len(previous_df)} previous records for comparison")
             return previous_df
-            
+
         except Exception as e:
             logger.error(f"Error retrieving previous data: {e}")
             return pd.DataFrame()
@@ -223,21 +256,31 @@ class GreekDifferenceCalculator:
         if df.empty:
             logger.warning("No data to export for differences report")
             return False
-        
+
         try:
             # Select relevant columns for the report
             report_columns = [
-                'greeks.updated_at', 'expiration_date', 'option_type', 'strike',
-                'prev_timestamp', 'has_previous_data'
+                'greeks.updated_at', 'expiration_date', 'option_type', 'strike'
             ]
-            
+
+            # Add prev_timestamp and has_previous_data if they exist
+            if 'prev_timestamp' in df.columns:
+                report_columns.append('prev_timestamp')
+            if 'has_previous_data' in df.columns:
+                report_columns.append('has_previous_data')
+
             # Add all Greek columns and their differences
             for col in self.GREEK_COLUMNS:
                 if col in df.columns:
-                    report_columns.extend([col, f'{col}_diff', f'{col}_pct_change'])
-            
-            # Create report dataframe
-            report_df = df[report_columns].copy()
+                    report_columns.append(col)
+                    if f'{col}_diff' in df.columns:
+                        report_columns.append(f'{col}_diff')
+                    if f'{col}_pct_change' in df.columns:
+                        report_columns.append(f'{col}_pct_change')
+
+            # Create report dataframe with only existing columns
+            available_columns = [col for col in report_columns if col in df.columns]
+            report_df = df[available_columns].copy()
             
             # Sort by absolute GEX change (descending)
             if 'gex_pct_change' in report_df.columns:

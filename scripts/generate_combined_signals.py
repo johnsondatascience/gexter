@@ -21,7 +21,7 @@ if sys.platform == 'win32':
 # Add parent directory to path
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-import psycopg2
+from sqlalchemy import create_engine
 from dotenv import load_dotenv
 from src.api.tradier_api import TradierAPI
 from src.signals.trading_signals import TradingSignalGenerator
@@ -55,35 +55,65 @@ def main():
     print(f"Generated at: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
 
     try:
-        # Connect to database
-        conn = psycopg2.connect(
-            host=os.getenv('POSTGRES_HOST', 'localhost'),
-            port=os.getenv('POSTGRES_PORT', 5432),
-            database=os.getenv('POSTGRES_DB', 'gexdb'),
-            user=os.getenv('POSTGRES_USER', 'gexuser'),
-            password=os.getenv('POSTGRES_PASSWORD')
+        # Connect to database using SQLAlchemy
+        db_url = (
+            f"postgresql://{os.getenv('POSTGRES_USER', 'gexuser')}:"
+            f"{os.getenv('POSTGRES_PASSWORD')}@"
+            f"{os.getenv('POSTGRES_HOST', 'localhost')}:"
+            f"{os.getenv('POSTGRES_PORT', 5432)}/"
+            f"{os.getenv('POSTGRES_DB', 'gexdb')}"
         )
+        engine = create_engine(db_url)
         print("✓ Connected to PostgreSQL database\n")
 
         # Initialize API
         api_key = os.getenv('TRADIER_API_KEY')
         api = TradierAPI(api_key)
 
-        # Step 1: Generate GEX Signals
+        # Step 1: Generate Multi-Timeframe GEX Signals
         print("=" * 80)
-        print("📊 STEP 1: GENERATING GEX SIGNALS")
+        print("📊 STEP 1: GENERATING MULTI-TIMEFRAME GEX SIGNALS")
         print("=" * 80)
-        gex_generator = TradingSignalGenerator(conn)
+        gex_generator = TradingSignalGenerator(engine)
+
+        # Generate 0DTE-focused multi-timeframe signals
+        multiframe_signals = gex_generator.generate_multi_timeframe_signals()
+
+        # Also generate comprehensive signals for backward compatibility
         gex_signals = gex_generator.generate_comprehensive_signals()
 
         if 'error' in gex_signals:
             print(f"❌ Error generating GEX signals: {gex_signals['error']}")
             sys.exit(1)
 
-        print(f"✓ GEX Signal: {gex_signals['composite_signal']}")
-        print(f"✓ Confidence: {gex_signals['composite_confidence']:.0%}")
-        print(f"✓ SPX Price: ${gex_signals['current_price']:.2f}")
-        print(f"✓ Zero GEX: ${gex_signals['zero_gex_level']:.2f}" if gex_signals['zero_gex_level'] else "✓ Zero GEX: N/A")
+        # Display 0DTE signals
+        print("\n🎯 0DTE Signals (Same-Day Expiration):")
+        if 'error' not in multiframe_signals['0dte']:
+            dte_0 = multiframe_signals['0dte']
+            print(f"  Signal: {dte_0['composite_signal']} (Confidence: {dte_0['composite_confidence']:.0%})")
+            print(f"  Options: {dte_0['options_count']:,} | Zero GEX: ${dte_0['zero_gex_level']:.2f}" if dte_0['zero_gex_level'] else f"  Options: {dte_0['options_count']:,}")
+            if dte_0['gex_levels']['resistance']:
+                print(f"  Resistance: {', '.join(f'${x:.0f}' for x in dte_0['gex_levels']['resistance'][:2])}")
+            if dte_0['gex_levels']['support']:
+                print(f"  Support: {', '.join(f'${x:.0f}' for x in dte_0['gex_levels']['support'][:2])}")
+        else:
+            print(f"  ❌ {multiframe_signals['0dte']['error']}")
+
+        # Display short-term signals
+        print("\n📈 Short-Term Signals (0-2 Days):")
+        if 'error' not in multiframe_signals['short_term']:
+            dte_short = multiframe_signals['short_term']
+            print(f"  Signal: {dte_short['composite_signal']} (Confidence: {dte_short['composite_confidence']:.0%})")
+            print(f"  Options: {dte_short['options_count']:,}")
+        else:
+            print(f"  ❌ {multiframe_signals['short_term']['error']}")
+
+        # Display all expirations (comprehensive)
+        print("\n🌐 All Expirations (Full Context):")
+        print(f"  Signal: {gex_signals['composite_signal']}")
+        print(f"  Confidence: {gex_signals['composite_confidence']:.0%}")
+        print(f"  SPX Price: ${gex_signals['current_price']:.2f}")
+        print(f"  Zero GEX: ${gex_signals['zero_gex_level']:.2f}" if gex_signals['zero_gex_level'] else "  Zero GEX: N/A")
 
         # Step 2: Generate Market Internals Signals
         print("\n" + "=" * 80)
@@ -174,11 +204,63 @@ def main():
             print(f"  Strongest Sector: {sb['strongest_sector']}")
             print(f"  Weakest Sector: {sb['weakest_sector']}")
 
+        # Signal Divergence Analysis
+        print("\n" + "=" * 80)
+        print("🔍 SIGNAL DIVERGENCE ANALYSIS")
+        print("=" * 80)
+
+        if 'error' not in multiframe_signals['0dte']:
+            dte_0_signal = multiframe_signals['0dte']['composite_signal']
+            combined_signal = combined_signals['combined_signal']
+
+            if dte_0_signal == combined_signal:
+                print(f"✅ ALIGNMENT: 0DTE and Combined signals agree ({dte_0_signal})")
+                print("   → High conviction setup across all timeframes")
+                print("   → Consider standard position sizing")
+            else:
+                print(f"⚠️ DIVERGENCE: 0DTE={dte_0_signal}, Combined={combined_signal}")
+                print("   → Mixed signals across timeframes")
+                print("   → Reduce position size or wait for alignment")
+
+                # Explain the divergence
+                if 'BUY' in dte_0_signal and 'SELL' in combined_signal:
+                    print("   → 0DTE showing intraday bullish pressure")
+                    print("   → Longer-term structure bearish - caution on holding overnight")
+                elif 'SELL' in dte_0_signal and 'BUY' in combined_signal:
+                    print("   → 0DTE showing intraday bearish pressure")
+                    print("   → Longer-term structure bullish - may be short-term dip")
+                elif 'NEUTRAL' in dte_0_signal or 'NEUTRAL' in combined_signal:
+                    print("   → One timeframe neutral - wait for clearer setup")
+
+            # Compare with all expirations GEX
+            all_gex_signal = gex_signals['composite_signal']
+            if dte_0_signal != all_gex_signal:
+                print(f"\n📊 0DTE vs All Expirations GEX: {dte_0_signal} vs {all_gex_signal}")
+                print(f"   → 0DTE has {multiframe_signals['0dte']['options_count']:,} options ({multiframe_signals['0dte']['options_count']/multiframe_signals['all']['options_count']*100:.1f}% of total)")
+                print("   → Consider that longer-dated options may be dominating the full picture")
+        else:
+            print(f"⚠️ 0DTE signals unavailable: {multiframe_signals['0dte']['error']}")
+
         # Display Recommendation
         print("\n" + "=" * 80)
         print("💡 TRADING RECOMMENDATION")
         print("=" * 80)
         print(combined_signals['recommendation'])
+
+        # Add 0DTE-specific recommendation if available
+        if 'error' not in multiframe_signals['0dte']:
+            print("\n🎯 0DTE Intraday Focus:")
+            dte_0 = multiframe_signals['0dte']
+            if 'BUY' in dte_0['composite_signal']:
+                print("   → Look for LONG entries near support levels")
+                if dte_0['gex_levels']['support']:
+                    print(f"   → Entry zones: {', '.join(f'${x:.0f}' for x in dte_0['gex_levels']['support'][:2])}")
+            elif 'SELL' in dte_0['composite_signal']:
+                print("   → Look for SHORT entries near resistance levels")
+                if dte_0['gex_levels']['resistance']:
+                    print(f"   → Entry zones: {', '.join(f'${x:.0f}' for x in dte_0['gex_levels']['resistance'][:2])}")
+            else:
+                print("   → NEUTRAL - Trade the range or wait for clearer setup")
 
         # Save to JSON
         import numpy as np
@@ -204,14 +286,19 @@ def main():
         os.makedirs(output_dir, exist_ok=True)
         output_file = os.path.join(output_dir, 'combined_signals.json')
 
-        output_data = convert_to_serializable(combined_signals)
+        # Create comprehensive output with both multi-timeframe and combined signals
+        output_data = {
+            'generated_at': datetime.now().isoformat(),
+            'multi_timeframe_gex': convert_to_serializable(multiframe_signals),
+            'combined_signals': convert_to_serializable(combined_signals)
+        }
 
         with open(output_file, 'w') as f:
             json.dump(output_data, f, indent=2)
 
         print(f"\n💾 Combined signals saved to: {output_file}")
 
-        conn.close()
+        engine.dispose()
 
         print("\n" + "=" * 80)
 

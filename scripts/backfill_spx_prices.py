@@ -4,9 +4,12 @@ Backfill SPX Prices for Historical GEX Data
 
 This script backfills SPX spot prices for existing GEX records by:
 1. Identifying all timestamps that need SPX price data
-2. Fetching historical intraday SPX data from Tradier API
+2. Fetching historical 15-minute intraday SPX data from Tradier API
 3. Matching the closest SPX price to each Greek calculation timestamp
 4. Updating the database with SPX price data
+
+Updated to use 15-minute intraday data to match Greek collection interval
+and support both SQLite and PostgreSQL databases.
 """
 
 import sqlite3
@@ -17,6 +20,7 @@ import shutil
 import os
 import sys
 from dotenv import load_dotenv
+from sqlalchemy import create_engine, text
 
 # Add parent directory to path to import from src
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -39,7 +43,7 @@ def create_backup(db_path: str) -> str:
     else:
         raise Exception("Backup creation failed!")
 
-def get_timestamps_to_backfill(conn: sqlite3.Connection):
+def get_timestamps_to_backfill(conn_or_engine):
     """Get all unique timestamps that need SPX price data"""
     print("\n2. Analyzing timestamps that need backfilling...")
 
@@ -50,7 +54,7 @@ def get_timestamps_to_backfill(conn: sqlite3.Connection):
     ORDER BY "greeks.updated_at"
     """
 
-    df = pd.read_sql(query, conn)
+    df = pd.read_sql(query, conn_or_engine)
     df['timestamp'] = pd.to_datetime(df['timestamp'])
 
     print(f"   Timestamps needing backfill: {len(df)}")
@@ -60,35 +64,67 @@ def get_timestamps_to_backfill(conn: sqlite3.Connection):
 
     return df
 
-def fetch_spx_historical_data(api: TradierAPI, start_date: str, end_date: str):
-    """Fetch historical SPX data (daily OHLC)"""
-    print(f"\n3. Fetching SPX historical data from {start_date} to {end_date}...")
+def fetch_spx_historical_data(api: TradierAPI, start_date: str, end_date: str, interval: str = '15min'):
+    """Fetch historical SPX data at 15-minute intervals"""
+    print(f"\n3. Fetching SPX {interval} intraday data from {start_date} to {end_date}...")
 
     # Calculate number of days
     start = datetime.strptime(start_date, '%Y-%m-%d')
     end = datetime.strptime(end_date, '%Y-%m-%d')
     total_days = (end - start).days + 1
 
-    print(f"   Fetching {total_days} days of daily OHLC data...")
+    print(f"   Fetching {total_days} days of {interval} interval data...")
+
+    # Tradier's intraday API has limits, so we need to fetch in chunks
+    # The API supports up to ~30 days at a time for intraday data
+    all_data = []
+    chunk_days = 30
+    current_start = start
 
     try:
-        # Use the historical quotes API which supports date ranges
-        historical_data = api.get_historical_quote('SPX', start_date, end_date, 'daily')
+        while current_start <= end:
+            current_end = min(current_start + timedelta(days=chunk_days), end)
+            days_back = (datetime.now() - current_start).days + 1
 
-        if not historical_data.empty:
-            # Convert date to datetime for matching
-            historical_data['timestamp'] = pd.to_datetime(historical_data['date'])
+            print(f"   Fetching chunk: {current_start.strftime('%Y-%m-%d')} to {current_end.strftime('%Y-%m-%d')} ({days_back} days back)...")
 
-            # Use close as the primary price
+            # Use get_intraday_data method
+            chunk_data = api.get_intraday_data('SPX', interval=interval, days_back=min(days_back, 30))
+
+            if not chunk_data.empty:
+                # Filter to the specific date range for this chunk
+                chunk_data = chunk_data[
+                    (chunk_data['datetime'] >= pd.Timestamp(current_start)) &
+                    (chunk_data['datetime'] <= pd.Timestamp(current_end) + timedelta(days=1))
+                ]
+
+                if len(chunk_data) > 0:
+                    all_data.append(chunk_data)
+                    print(f"      Got {len(chunk_data)} {interval} bars")
+            else:
+                print(f"      [WARNING] No data for this chunk")
+
+            # Move to next chunk
+            current_start = current_end + timedelta(days=1)
+
+        if all_data:
+            # Combine all chunks
+            historical_data = pd.concat(all_data, ignore_index=True)
+            historical_data = historical_data.drop_duplicates(subset=['datetime']).sort_values('datetime')
+
+            # Rename datetime to timestamp for consistency
+            historical_data['timestamp'] = historical_data['datetime']
+
+            # Use close as the primary price (last)
             historical_data['last'] = historical_data['close']
 
-            # Calculate change from previous day
+            # Calculate change from previous bar
             historical_data['prev_close'] = historical_data['close'].shift(1)
             historical_data['change'] = historical_data['close'] - historical_data['prev_close']
             historical_data['change_pct'] = (historical_data['change'] / historical_data['prev_close']) * 100
 
-            print(f"   [OK] Fetched {len(historical_data)} days of data")
-            print(f"   Date range: {historical_data['date'].min()} to {historical_data['date'].max()}")
+            print(f"   [OK] Fetched {len(historical_data)} {interval} bars total")
+            print(f"   Time range: {historical_data['timestamp'].min()} to {historical_data['timestamp'].max()}")
 
             return historical_data
         else:
@@ -101,9 +137,10 @@ def fetch_spx_historical_data(api: TradierAPI, start_date: str, end_date: str):
         traceback.print_exc()
         return pd.DataFrame()
 
-def match_prices_to_timestamps(timestamps_df: pd.DataFrame, spx_data: pd.DataFrame):
-    """Match SPX prices to Greek calculation timestamps by date"""
+def match_prices_to_timestamps(timestamps_df: pd.DataFrame, spx_data: pd.DataFrame, tolerance_minutes: int = 15):
+    """Match SPX prices to Greek calculation timestamps using nearest-time matching"""
     print("\n4. Matching SPX prices to Greek timestamps...")
+    print(f"   Using tolerance of {tolerance_minutes} minutes for matching")
 
     if spx_data.empty:
         print("   [ERROR] No SPX data available for matching")
@@ -113,24 +150,22 @@ def match_prices_to_timestamps(timestamps_df: pd.DataFrame, spx_data: pd.DataFra
     timestamps_df['timestamp'] = pd.to_datetime(timestamps_df['timestamp'])
     spx_data['timestamp'] = pd.to_datetime(spx_data['timestamp'])
 
-    # Extract date for matching (since we have daily data)
-    timestamps_df['date'] = timestamps_df['timestamp'].dt.date
-    spx_data['date'] = spx_data['timestamp'].dt.date
-
     print(f"   Greek timestamps: {len(timestamps_df)}")
     print(f"   SPX data points: {len(spx_data)}")
 
-    # Merge on date to match daily SPX data to intraday Greek timestamps
-    matched = timestamps_df.merge(
+    # Sort both dataframes by timestamp
+    timestamps_df = timestamps_df.sort_values('timestamp')
+    spx_data = spx_data.sort_values('timestamp')
+
+    # Use merge_asof to find nearest SPX price within tolerance
+    matched = pd.merge_asof(
+        timestamps_df,
         spx_data,
-        on='date',
-        how='left',
+        on='timestamp',
+        direction='nearest',
+        tolerance=pd.Timedelta(minutes=tolerance_minutes),
         suffixes=('', '_spx')
     )
-
-    # Drop the extra timestamp column from SPX data
-    if 'timestamp_spx' in matched.columns:
-        matched = matched.drop('timestamp_spx', axis=1)
 
     # Count successful matches
     matched_count = matched['last'].notna().sum()
@@ -138,16 +173,27 @@ def match_prices_to_timestamps(timestamps_df: pd.DataFrame, spx_data: pd.DataFra
 
     if matched_count < len(matched):
         unmatched = len(matched) - matched_count
-        print(f"   [WARNING] {unmatched} timestamps could not be matched (likely weekends/holidays)")
+        print(f"   [WARNING] {unmatched} timestamps could not be matched")
 
-        # Show sample of unmatched dates
-        unmatched_dates = matched[matched['last'].isna()]['date'].unique()[:5]
-        if len(unmatched_dates) > 0:
-            print(f"   Sample unmatched dates: {', '.join(str(d) for d in unmatched_dates)}")
+        # Show sample of unmatched timestamps
+        unmatched_times = matched[matched['last'].isna()]['timestamp'].head(5)
+        if len(unmatched_times) > 0:
+            print(f"   Sample unmatched timestamps:")
+            for ts in unmatched_times:
+                print(f"     - {ts}")
+
+    # Calculate match quality statistics
+    matched_with_price = matched[matched['last'].notna()].copy()
+    if len(matched_with_price) > 0:
+        if 'timestamp_spx' in matched_with_price.columns:
+            time_diffs = (matched_with_price['timestamp'] - matched_with_price['timestamp_spx']).abs()
+            avg_diff = time_diffs.mean()
+            max_diff = time_diffs.max()
+            print(f"   Match quality: avg difference {avg_diff}, max difference {max_diff}")
 
     return matched
 
-def update_database(conn: sqlite3.Connection, matched_data: pd.DataFrame):
+def update_database(conn_or_engine, matched_data: pd.DataFrame, db_type: str = 'sqlite'):
     """Update gex_table with matched SPX prices"""
     print("\n5. Updating database with SPX prices...")
 
@@ -155,12 +201,63 @@ def update_database(conn: sqlite3.Connection, matched_data: pd.DataFrame):
         print("   [ERROR] No data to update")
         return 0
 
-    cursor = conn.cursor()
     updated_timestamps = 0
     updated_records = 0
 
-    for idx, row in matched_data.iterrows():
-        if pd.notna(row['last']):  # Only update if we have a price
+    # Filter to only rows with valid price data
+    valid_data = matched_data[matched_data['last'].notna()].copy()
+    print(f"   Processing {len(valid_data)} timestamps with valid SPX data...")
+
+    if db_type == 'postgresql':
+        # PostgreSQL update using SQLAlchemy
+        with conn_or_engine.begin() as conn:
+            for idx, row in valid_data.iterrows():
+                timestamp_str = row['timestamp'].strftime('%Y-%m-%d %H:%M:%S')
+
+                # Update all records with this timestamp
+                update_query = text("""
+                UPDATE gex_table
+                SET
+                    spx_price = :last,
+                    spx_intraday_open = :open,
+                    spx_intraday_high = :high,
+                    spx_intraday_low = :low,
+                    spx_intraday_close = :close,
+                    spx_open = :open,
+                    spx_high = :high,
+                    spx_low = :low,
+                    spx_close = :close,
+                    spx_change = :change,
+                    spx_change_pct = :change_pct,
+                    spx_prevclose = :prev_close
+                WHERE "greeks.updated_at" = :timestamp
+                AND spx_price IS NULL
+                """)
+
+                result = conn.execute(update_query, {
+                    'last': float(row['last']) if pd.notna(row['last']) else None,
+                    'open': float(row.get('open')) if pd.notna(row.get('open')) else None,
+                    'high': float(row.get('high')) if pd.notna(row.get('high')) else None,
+                    'low': float(row.get('low')) if pd.notna(row.get('low')) else None,
+                    'close': float(row.get('close')) if pd.notna(row.get('close')) else None,
+                    'change': float(row.get('change')) if pd.notna(row.get('change')) else None,
+                    'change_pct': float(row.get('change_pct')) if pd.notna(row.get('change_pct')) else None,
+                    'prev_close': float(row.get('prev_close')) if pd.notna(row.get('prev_close')) else None,
+                    'timestamp': timestamp_str
+                })
+
+                rows_affected = result.rowcount
+                if rows_affected > 0:
+                    updated_timestamps += 1
+                    updated_records += rows_affected
+
+                    if (updated_timestamps % 10 == 0):
+                        print(f"   Progress: {updated_timestamps}/{len(valid_data)} timestamps, {updated_records:,} records updated")
+
+    else:
+        # SQLite update
+        cursor = conn_or_engine.cursor()
+        for idx, row in valid_data.iterrows():
             timestamp_str = row['timestamp'].strftime('%Y-%m-%d %H:%M:%S')
 
             # Update all records with this timestamp
@@ -197,14 +294,14 @@ def update_database(conn: sqlite3.Connection, matched_data: pd.DataFrame):
                 updated_records += rows_affected
 
                 if (updated_timestamps % 10 == 0):
-                    print(f"   Progress: {updated_timestamps}/{len(matched_data)} timestamps, {updated_records:,} records updated")
+                    print(f"   Progress: {updated_timestamps}/{len(valid_data)} timestamps, {updated_records:,} records updated")
 
-    conn.commit()
+        conn_or_engine.commit()
 
     print(f"\n   [OK] Updated {updated_timestamps} timestamps ({updated_records:,} records)")
     return updated_records
 
-def verify_backfill(conn: sqlite3.Connection):
+def verify_backfill(conn_or_engine):
     """Verify the backfill was successful"""
     print("\n6. Verifying backfill...")
 
@@ -212,13 +309,11 @@ def verify_backfill(conn: sqlite3.Connection):
     SELECT
         COUNT(*) as total_records,
         COUNT(spx_price) as with_spx_price,
-        COUNT(DISTINCT "greeks.updated_at") as total_timestamps,
-        SUM(CASE WHEN spx_price IS NOT NULL THEN 1 ELSE 0 END) /
-            COUNT(DISTINCT "greeks.updated_at") as timestamps_with_spx
+        COUNT(DISTINCT "greeks.updated_at") as total_timestamps
     FROM gex_table
     """
 
-    result = pd.read_sql(query, conn)
+    result = pd.read_sql(query, conn_or_engine)
 
     print(f"   Total records: {result.iloc[0]['total_records']:,}")
     print(f"   Records with SPX price: {result.iloc[0]['with_spx_price']:,}")
@@ -231,7 +326,7 @@ def verify_backfill(conn: sqlite3.Connection):
     WHERE spx_price IS NULL
     """
 
-    missing = pd.read_sql(missing_query, conn)
+    missing = pd.read_sql(missing_query, conn_or_engine)
     missing_count = missing.iloc[0]['count']
 
     if missing_count == 0:
@@ -248,63 +343,80 @@ def verify_backfill(conn: sqlite3.Connection):
         ORDER BY "greeks.updated_at" DESC
         LIMIT 5
         """
-        samples = pd.read_sql(sample_query, conn)
+        samples = pd.read_sql(sample_query, conn_or_engine)
         print("\n   Sample missing timestamps:")
         for ts in samples['greeks.updated_at']:
             print(f"     - {ts}")
 
         return False
 
-def main():
-    db_path = 'data/gex_data.db'
-
-    print("=" * 80)
-    print("SPX PRICE BACKFILL")
-    print("=" * 80)
-    print(f"\nDatabase: {db_path}")
-
-    # Load environment and initialize API
+def main(interval: str = '15min'):
+    # Load environment and initialize config
     load_dotenv()
     config = Config()
     api = TradierAPI(config.tradier_api_key)
 
-    try:
-        # Create backup
-        backup_path = create_backup(db_path)
+    print("=" * 80)
+    print("SPX PRICE BACKFILL - INTRADAY DATA")
+    print("=" * 80)
+    print(f"\nDatabase Type: {config.database_type}")
+    print(f"Interval: {interval}")
 
-        # Connect to database
-        conn = sqlite3.connect(db_path)
+    try:
+        # Initialize database connection based on type
+        if config.database_type == 'postgresql':
+            print(f"PostgreSQL: {config.postgres_host}:{config.postgres_port}/{config.postgres_db}")
+            conn_string = (
+                f"postgresql://{config.postgres_user}:{config.postgres_password}@"
+                f"{config.postgres_host}:{config.postgres_port}/{config.postgres_db}"
+            )
+            db_engine = create_engine(conn_string)
+            conn_or_engine = db_engine
+            db_type = 'postgresql'
+
+            # Create backup for PostgreSQL (using pg_dump would be better, but for now we'll proceed)
+            print("\n1. [INFO] PostgreSQL detected - consider creating manual backup with pg_dump")
+            backup_path = None
+        else:
+            print(f"SQLite: {config.database_path}")
+            db_path = config.database_path
+            backup_path = create_backup(db_path)
+            conn_or_engine = sqlite3.connect(db_path)
+            db_type = 'sqlite'
 
         # Get timestamps to backfill
-        timestamps_df = get_timestamps_to_backfill(conn)
+        timestamps_df = get_timestamps_to_backfill(conn_or_engine)
 
         if timestamps_df.empty:
             print("\n[INFO] No timestamps need backfilling!")
-            conn.close()
+            if db_type == 'sqlite':
+                conn_or_engine.close()
             return True
 
         # Determine date range
         start_date = timestamps_df['timestamp'].min().strftime('%Y-%m-%d')
         end_date = timestamps_df['timestamp'].max().strftime('%Y-%m-%d')
 
-        # Fetch historical SPX data
-        spx_data = fetch_spx_historical_data(api, start_date, end_date)
+        # Fetch historical SPX intraday data
+        spx_data = fetch_spx_historical_data(api, start_date, end_date, interval=interval)
 
         if spx_data.empty:
             print("\n[ERROR] Could not fetch SPX historical data")
-            conn.close()
+            if db_type == 'sqlite':
+                conn_or_engine.close()
             return False
 
         # Match prices to timestamps
-        matched_data = match_prices_to_timestamps(timestamps_df, spx_data)
+        matched_data = match_prices_to_timestamps(timestamps_df, spx_data, tolerance_minutes=15)
 
         # Update database
-        records_updated = update_database(conn, matched_data)
+        records_updated = update_database(conn_or_engine, matched_data, db_type=db_type)
 
         # Verify
-        success = verify_backfill(conn)
+        success = verify_backfill(conn_or_engine)
 
-        conn.close()
+        if db_type == 'sqlite':
+            conn_or_engine.close()
 
         print("\n" + "=" * 80)
         if success:
@@ -312,8 +424,10 @@ def main():
         else:
             print("[PARTIAL] SPX PRICE BACKFILL PARTIALLY COMPLETE")
         print("=" * 80)
-        print(f"\nBackup saved to: {backup_path}")
+        if backup_path:
+            print(f"\nBackup saved to: {backup_path}")
         print(f"Records updated: {records_updated:,}")
+        print(f"Interval used: {interval}")
 
         return success
 
@@ -327,17 +441,23 @@ if __name__ == "__main__":
     import sys
     import argparse
 
-    parser = argparse.ArgumentParser(description='Backfill SPX prices for historical GEX data')
+    parser = argparse.ArgumentParser(
+        description='Backfill SPX prices for historical GEX data using intraday intervals'
+    )
     parser.add_argument('--yes', '-y', action='store_true',
                        help='Skip confirmation prompt')
     parser.add_argument('--dry-run', action='store_true',
                        help='Show what would be done without making changes')
+    parser.add_argument('--interval', default='15min',
+                       choices=['15min', '30min', '1hour'],
+                       help='Intraday interval to use (default: 15min)')
     args = parser.parse_args()
 
     if not args.yes and not args.dry_run:
         print("\nThis script will backfill SPX prices for all historical GEX records.")
-        print("It will fetch historical intraday data from the Tradier API.")
-        print("A backup will be created automatically.")
+        print(f"It will fetch historical {args.interval} intraday data from the Tradier API.")
+        print("For PostgreSQL: Consider creating a manual backup with pg_dump first.")
+        print("For SQLite: A backup will be created automatically.")
         try:
             response = input("\nProceed? (yes/no): ")
         except EOFError:
@@ -348,5 +468,5 @@ if __name__ == "__main__":
             print("Backfill cancelled.")
             sys.exit(0)
 
-    success = main()
+    success = main(interval=args.interval)
     sys.exit(0 if success else 1)

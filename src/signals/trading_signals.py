@@ -79,18 +79,33 @@ class TradingSignalGenerator:
         """
         return pd.read_sql(query, self.db, params=(lookback_hours,))
 
-    def calculate_net_gex_by_strike(self, df: pd.DataFrame) -> pd.DataFrame:
+    def calculate_net_gex_by_strike(self, df: pd.DataFrame,
+                                   max_days_to_expiry: Optional[int] = None) -> pd.DataFrame:
         """
         Calculate net GEX per strike (calls - puts)
 
         Args:
             df: DataFrame with GEX data
+            max_days_to_expiry: Only include options expiring within N days (None = all expirations)
+                               0 = 0DTE only, 1 = 0-1 DTE, etc.
 
         Returns:
             DataFrame with net GEX by strike
         """
         latest_timestamp = df['greeks.updated_at'].max()
         latest_df = df[df['greeks.updated_at'] == latest_timestamp].copy()
+
+        # Filter by expiration if specified
+        if max_days_to_expiry is not None:
+            current_date = pd.to_datetime(latest_timestamp).date()
+            latest_df['expiration_date'] = pd.to_datetime(latest_df['expiration_date'])
+            # Calculate days to expiry
+            latest_df['days_to_expiry'] = (latest_df['expiration_date'].dt.date - current_date).apply(lambda x: x.days)
+            latest_df = latest_df[latest_df['days_to_expiry'] <= max_days_to_expiry].copy()
+
+            if latest_df.empty:
+                self.logger.warning(f"No options found with max_days_to_expiry={max_days_to_expiry}")
+                return pd.DataFrame(columns=['strike', 'net_gex'])
 
         # Pivot to get calls and puts by strike
         pivot = latest_df.pivot_table(
@@ -130,7 +145,7 @@ class TradingSignalGenerator:
 
             # Find where net_gex crosses zero
             sorted_df['sign_change'] = np.sign(sorted_df['net_gex']).diff()
-            zero_crosses = sorted_df[sorted_df['sign_change'] != 0]
+            zero_crosses = sorted_df[sorted_df['sign_change'] != 0].copy()
 
             if len(zero_crosses) == 0:
                 return None
@@ -569,6 +584,109 @@ class TradingSignalGenerator:
             rec.append(f"Support levels: {', '.join(f'{x:.0f}' for x in gex_levels['support'])}")
 
         return '\n'.join(rec)
+
+    def generate_signals_for_timeframe(self, max_days_to_expiry: Optional[int] = None,
+                                      timeframe_label: str = "ALL") -> Dict:
+        """
+        Generate trading signals for a specific expiration timeframe
+
+        Args:
+            max_days_to_expiry: Maximum days to expiration (None = all, 0 = 0DTE only, etc.)
+            timeframe_label: Label for this timeframe (for logging/output)
+
+        Returns:
+            Dict with signals and key levels for this timeframe
+        """
+        self.logger.info(f"Generating {timeframe_label} signals (max_days_to_expiry={max_days_to_expiry})...")
+
+        # Get data
+        gex_df = self.get_latest_gex_data(lookback_hours=24)
+
+        if gex_df.empty:
+            return {
+                'error': 'No GEX data available',
+                'timestamp': datetime.now(),
+                'timeframe': timeframe_label
+            }
+
+        # Get current price
+        current_price = float(gex_df['spx_price'].iloc[0])
+        latest_timestamp = gex_df['greeks.updated_at'].max()
+
+        # Calculate GEX metrics with expiration filter
+        net_gex_df = self.calculate_net_gex_by_strike(gex_df, max_days_to_expiry=max_days_to_expiry)
+
+        if net_gex_df.empty:
+            return {
+                'error': f'No options found for timeframe {timeframe_label}',
+                'timestamp': latest_timestamp,
+                'timeframe': timeframe_label
+            }
+
+        zero_gex = self.find_zero_gex_level(net_gex_df, current_price)
+        gex_levels = self.find_max_gex_levels(net_gex_df, current_price)
+
+        # Get net GEX near current price
+        near_price = net_gex_df[
+            (net_gex_df['strike'] >= current_price - 5) &
+            (net_gex_df['strike'] <= current_price + 5)
+        ]
+        net_gex_at_price = float(near_price['net_gex'].mean()) if not near_price.empty else 0
+
+        # Generate GEX positioning signal
+        gex_pos_signal, gex_pos_conf, gex_pos_reason = self.calculate_gex_positioning_signal(
+            current_price, zero_gex, net_gex_at_price
+        )
+
+        # Count options in this timeframe
+        if max_days_to_expiry is not None:
+            current_date = pd.to_datetime(latest_timestamp).date()
+            latest_df = gex_df[gex_df['greeks.updated_at'] == latest_timestamp].copy()
+            latest_df['expiration_date'] = pd.to_datetime(latest_df['expiration_date'])
+            latest_df['days_to_expiry'] = (latest_df['expiration_date'].dt.date - current_date).apply(lambda x: x.days)
+            options_count = len(latest_df[latest_df['days_to_expiry'] <= max_days_to_expiry])
+        else:
+            options_count = len(gex_df[gex_df['greeks.updated_at'] == latest_timestamp])
+
+        return {
+            'timestamp': latest_timestamp,
+            'timeframe': timeframe_label,
+            'max_days_to_expiry': max_days_to_expiry,
+            'options_count': options_count,
+            'current_price': current_price,
+            'zero_gex_level': zero_gex,
+            'gex_levels': gex_levels,
+            'net_gex_at_price': net_gex_at_price,
+            'composite_signal': gex_pos_signal.value,
+            'composite_confidence': gex_pos_conf,
+            'reasoning': gex_pos_reason
+        }
+
+    def generate_multi_timeframe_signals(self) -> Dict:
+        """
+        Generate signals for multiple expiration timeframes
+
+        Returns:
+            Dict with signals for different timeframes:
+            - 0DTE: Same day expiration only
+            - short_term: 0-2 days (for swing trades)
+            - weekly: 0-7 days (weekly positioning)
+            - all: All expirations (full market context)
+        """
+        self.logger.info("Generating multi-timeframe GEX signals...")
+
+        signals = {
+            '0dte': self.generate_signals_for_timeframe(max_days_to_expiry=0, timeframe_label="0DTE"),
+            'short_term': self.generate_signals_for_timeframe(max_days_to_expiry=2, timeframe_label="SHORT_TERM"),
+            'weekly': self.generate_signals_for_timeframe(max_days_to_expiry=7, timeframe_label="WEEKLY"),
+            'all': self.generate_signals_for_timeframe(max_days_to_expiry=None, timeframe_label="ALL")
+        }
+
+        # Add summary information
+        signals['generated_at'] = datetime.now().isoformat()
+        signals['current_price'] = signals['0dte'].get('current_price') or signals['all'].get('current_price')
+
+        return signals
 
 
 def main():
