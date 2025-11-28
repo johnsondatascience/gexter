@@ -8,7 +8,6 @@
 
 # Environment and secrets
 .env
-.env.*
 .env.backup
 *.env
 # Allow example environment files
