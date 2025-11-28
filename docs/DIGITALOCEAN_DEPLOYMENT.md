@@ -47,13 +47,13 @@ ssh root@YOUR_DROPLET_IP
 apt-get update && apt-get upgrade -y
 
 # Create deployment directory
-mkdir -p /opt/gextr
-cd /opt/gextr
+mkdir -p /opt/gexter
+cd /opt/gexter
 
 # Download the setup script from your repo
 # Option A: If you have the script in your repo
-git clone https://github.com/johnsondatascience/gexter.git /opt/gextr
-chmod +x /opt/gextr/deploy_to_digitalocean.sh
+git clone https://github.com/johnsondatascience/gexter.git /opt/gexter
+chmod +x /opt/gexter/deploy_to_digitalocean.sh
 ./deploy_to_digitalocean.sh
 
 # Option B: Manual setup (see Manual Setup section below)
@@ -74,7 +74,7 @@ The script will automatically:
 ### 3.1 Edit Environment File
 
 ```bash
-cd /opt/gextr
+cd /opt/gexter
 nano .env
 ```
 
@@ -98,7 +98,7 @@ PGADMIN_PASSWORD=AnotherSecurePassword456!
 ### 3.2 Secure the Environment File
 
 ```bash
-chmod 600 /opt/gextr/.env
+chmod 600 /opt/gexter/.env
 ```
 
 ## Step 4: Start the Application
@@ -106,7 +106,7 @@ chmod 600 /opt/gextr/.env
 ### 4.1 Build and Start Services
 
 ```bash
-cd /opt/gextr
+cd /opt/gexter
 docker-compose up -d
 ```
 
@@ -234,17 +234,17 @@ Automatic daily backups are configured via cron:
 /usr/local/bin/backup-gex.sh
 
 # View backup files
-ls -lh /opt/gextr/backups/
+ls -lh /opt/gexter/backups/
 
 # Restore from backup
-gunzip < /opt/gextr/backups/gexdb_20250128_020000.sql.gz | \
+gunzip < /opt/gexter/backups/gexdb_20250128_020000.sql.gz | \
   docker exec -i gex_postgres psql -U gexuser -d gexdb
 ```
 
 ### 8.3 Update Application
 
 ```bash
-cd /opt/gextr
+cd /opt/gexter
 
 # Pull latest code
 git pull origin main
@@ -269,7 +269,7 @@ htop
 
 # Disk usage
 df -h
-du -sh /opt/gextr/
+du -sh /opt/gexter/
 ```
 
 ## Troubleshooting
@@ -389,11 +389,11 @@ exit
 
 ```bash
 # Create directory
-sudo mkdir -p /opt/gextr
-sudo chown $USER:$USER /opt/gextr
+sudo mkdir -p /opt/gexter
+sudo chown $USER:$USER /opt/gexter
 
 # Clone repo
-cd /opt/gextr
+cd /opt/gexter
 git clone https://github.com/johnsondatascience/gexter.git .
 
 # Copy and edit environment file

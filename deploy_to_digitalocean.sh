@@ -59,15 +59,15 @@ sudo apt-get install -y \
 
 # Create application directory
 echo "📁 Setting up application directory..."
-sudo mkdir -p /opt/gextr
-sudo chown $USER:$USER /opt/gextr
+sudo mkdir -p /opt/gexter
+sudo chown $USER:$USER /opt/gexter
 
 # Clone repository (you'll need to provide the repo URL)
 echo "📥 Cloning repository..."
 read -p "Enter your GitHub repository URL (https://github.com/johnsondatascience/gexter.git): " REPO_URL
 REPO_URL=${REPO_URL:-https://github.com/johnsondatascience/gexter.git}
 
-cd /opt/gextr
+cd /opt/gexter
 git clone $REPO_URL .
 
 # Create .env file from template
@@ -97,8 +97,8 @@ LOG_LEVEL=INFO
 POSTGRES_POOL_SIZE=5
 POSTGRES_MAX_OVERFLOW=10
 EOF
-    echo "⚠️  IMPORTANT: Edit /opt/gextr/.env with your actual credentials!"
-    echo "    Run: nano /opt/gextr/.env"
+    echo "⚠️  IMPORTANT: Edit /opt/gexter/.env with your actual credentials!"
+    echo "    Run: nano /opt/gexter/.env"
 else
     echo ".env file already exists, skipping..."
 fi
@@ -114,7 +114,7 @@ Requires=docker.service
 [Service]
 Type=oneshot
 RemainAfterExit=yes
-WorkingDirectory=/opt/gextr
+WorkingDirectory=/opt/gexter
 ExecStart=/usr/local/bin/docker-compose up -d
 ExecStop=/usr/local/bin/docker-compose down
 TimeoutStartSec=0
@@ -141,7 +141,7 @@ sudo ufw status
 # Set up log rotation
 echo "📝 Setting up log rotation..."
 sudo tee /etc/logrotate.d/gex-collector > /dev/null << EOF
-/opt/gextr/logs/*.log {
+/opt/gexter/logs/*.log {
     daily
     rotate 30
     compress
@@ -150,7 +150,7 @@ sudo tee /etc/logrotate.d/gex-collector > /dev/null << EOF
     create 0644 $USER $USER
     sharedscripts
     postrotate
-        docker-compose -f /opt/gextr/docker-compose.yml restart gex_collector > /dev/null 2>&1 || true
+        docker-compose -f /opt/gexter/docker-compose.yml restart gex_collector > /dev/null 2>&1 || true
     endscript
 }
 EOF
@@ -161,7 +161,7 @@ sudo tee /usr/local/bin/backup-gex.sh > /dev/null << 'EOF'
 #!/bin/bash
 # Backup script for GEX database
 
-BACKUP_DIR="/opt/gextr/backups"
+BACKUP_DIR="/opt/gexter/backups"
 TIMESTAMP=$(date +%Y%m%d_%H%M%S)
 BACKUP_FILE="gexdb_${TIMESTAMP}.sql.gz"
 
@@ -189,10 +189,10 @@ echo "======================================"
 echo ""
 echo "Next steps:"
 echo "1. Edit environment variables:"
-echo "   nano /opt/gextr/.env"
+echo "   nano /opt/gexter/.env"
 echo ""
 echo "2. Start the application:"
-echo "   cd /opt/gextr"
+echo "   cd /opt/gexter"
 echo "   docker-compose up -d"
 echo ""
 echo "3. Check status:"
