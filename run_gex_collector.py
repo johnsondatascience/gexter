@@ -18,8 +18,8 @@ from src.gex_collector import GEXCollector
 
 def main():
     """Main entry point for GEX data collection"""
-    # Load environment variables
-    load_dotenv()
+    # Load environment variables (override any existing env vars)
+    load_dotenv(override=True)
     
     # Initialize configuration and collector
     config = Config()

@@ -349,35 +349,78 @@ class GEXCollector:
             #     return True
         
         try:
-            # Get current SPX price data first
-            spx_price_data = self.get_current_spx_price()
-            if spx_price_data:
-                self.save_spx_price_to_csv(spx_price_data)
-                
-                # Calculate technical indicators
-                self.logger.logger.info("Calculating SPX technical indicators...")
-                spx_indicators = self.indicator_calculator.calculate_spx_indicators(spx_price_data['last'])
-                self.current_spx_indicators = spx_indicators
-                
-                # Save indicators to dedicated CSV
-                self.indicator_calculator.save_indicators_to_csv(spx_indicators)
-            
+            # Get current price data for all configured underlying symbols
+            underlying_prices = {}
+            for symbol in self.config.underlying_symbols:
+                price_data = self.get_current_underlying_price(symbol)
+                if price_data:
+                    underlying_prices[symbol] = price_data
+                    self.save_spx_price_to_csv(price_data)
+
+                    # Calculate technical indicators (SPX only for now)
+                    if symbol == 'SPX':
+                        self.logger.logger.info("Calculating SPX technical indicators...")
+                        spx_indicators = self.indicator_calculator.calculate_spx_indicators(price_data['last'])
+                        self.current_spx_indicators = spx_indicators
+
+                        # Save indicators to dedicated CSV
+                        self.indicator_calculator.save_indicators_to_csv(spx_indicators)
+
             # Get expiration dates for the next 30 days
             expiration_dates = self.get_trading_days_ahead(30)
             self.logger.logger.info(f"Collecting data for {len(expiration_dates)} expiration dates")
-            
+
             all_chains = pd.DataFrame()
-            
-            for date in expiration_dates:
-                self.logger.logger.debug(f"Fetching option chain for {date}")
-                chains = self.api.get_chains("SPX", date)
+
+            # Collect option chains for each underlying symbol
+            for symbol in self.config.underlying_symbols:
+                self.logger.logger.info(f"Collecting {symbol} option chains...")
+
+                for date in expiration_dates:
+                    self.logger.logger.debug(f"Fetching option chain for {symbol} {date}")
+                    chains = self.api.get_chains(symbol, date)
                 
-                if not chains.empty:
-                    # Calculate GEX
-                    chains = self.calculate_gex(chains)
-                    all_chains = pd.concat([all_chains, chains], ignore_index=True)
-                else:
-                    self.logger.logger.warning(f"No option chain data for {date}")
+                    if not chains.empty:
+                        # Add underlying symbol to identify the source
+                        chains['underlying_symbol'] = symbol
+
+                        # Calculate GEX
+                        chains = self.calculate_gex(chains)
+
+                        # Add price data for this underlying
+                        price_data = underlying_prices.get(symbol)
+                        if price_data:
+                            # Current price
+                            chains['spx_price'] = price_data.get('last')
+
+                            # Daily OHLC
+                            chains['spx_daily_open'] = price_data.get('daily_open')
+                            chains['spx_daily_high'] = price_data.get('daily_high')
+                            chains['spx_daily_low'] = price_data.get('daily_low')
+                            chains['spx_daily_close'] = price_data.get('daily_close')
+
+                            # Intraday 15-min bar OHLC
+                            chains['spx_intraday_open'] = price_data.get('intraday_open')
+                            chains['spx_intraday_high'] = price_data.get('intraday_high')
+                            chains['spx_intraday_low'] = price_data.get('intraday_low')
+                            chains['spx_intraday_close'] = price_data.get('intraday_close')
+
+                            # Legacy columns for backward compatibility
+                            chains['spx_open'] = price_data.get('open')
+                            chains['spx_high'] = price_data.get('high')
+                            chains['spx_low'] = price_data.get('low')
+                            chains['spx_close'] = price_data.get('close')
+
+                            # Other data
+                            chains['spx_bid'] = price_data.get('bid')
+                            chains['spx_ask'] = price_data.get('ask')
+                            chains['spx_change'] = price_data.get('change')
+                            chains['spx_change_pct'] = price_data.get('change_percentage')
+                            chains['spx_prevclose'] = price_data.get('prevclose')
+
+                        all_chains = pd.concat([all_chains, chains], ignore_index=True)
+                    else:
+                        self.logger.logger.warning(f"No option chain data for {symbol} {date}")
             
             if all_chains.empty:
                 self.logger.logger.warning("No option chain data collected")
@@ -399,39 +442,8 @@ class GEXCollector:
                         self.logger.logger.info("New data detected - greeks.updated_at has been updated. Proceeding with collection.")
                 else:
                     self.logger.logger.info("No existing data in database. Proceeding with initial collection.")
-            
-            # Add SPX price data to all records
-            if self.current_spx_price:
-                self.logger.logger.info("Adding SPX price data to option chains...")
-                # Current price
-                all_chains['spx_price'] = self.current_spx_price.get('last')
 
-                # Daily OHLC
-                all_chains['spx_daily_open'] = self.current_spx_price.get('daily_open')
-                all_chains['spx_daily_high'] = self.current_spx_price.get('daily_high')
-                all_chains['spx_daily_low'] = self.current_spx_price.get('daily_low')
-                all_chains['spx_daily_close'] = self.current_spx_price.get('daily_close')
-
-                # Intraday 15-min bar OHLC
-                all_chains['spx_intraday_open'] = self.current_spx_price.get('intraday_open')
-                all_chains['spx_intraday_high'] = self.current_spx_price.get('intraday_high')
-                all_chains['spx_intraday_low'] = self.current_spx_price.get('intraday_low')
-                all_chains['spx_intraday_close'] = self.current_spx_price.get('intraday_close')
-
-                # Legacy columns for backward compatibility
-                all_chains['spx_open'] = self.current_spx_price.get('open')
-                all_chains['spx_high'] = self.current_spx_price.get('high')
-                all_chains['spx_low'] = self.current_spx_price.get('low')
-                all_chains['spx_close'] = self.current_spx_price.get('close')
-
-                # Other SPX data
-                all_chains['spx_bid'] = self.current_spx_price.get('bid')
-                all_chains['spx_ask'] = self.current_spx_price.get('ask')
-                all_chains['spx_change'] = self.current_spx_price.get('change')
-                all_chains['spx_change_pct'] = self.current_spx_price.get('change_percentage')
-                all_chains['spx_prevclose'] = self.current_spx_price.get('prevclose')
-
-                self.logger.logger.info(f"Added SPX price ${self.current_spx_price.get('last'):.2f} (daily & intraday OHLC) to {len(all_chains)} records")
+            # Note: Price data for each underlying is now added in the collection loop above
 
             # Calculate Greek differences before saving
             self.logger.logger.info("Calculating Greek differences...")
@@ -495,45 +507,60 @@ class GEXCollector:
             return False
     
     def get_current_spx_price(self) -> Optional[Dict]:
-        """Get current SPX price data with both daily and intraday OHLC"""
+        """Get current SPX price data with both daily and intraday OHLC
+
+        Note: This method is maintained for backward compatibility.
+        Use get_current_underlying_price('SPX') for new code.
+        """
+        return self.get_current_underlying_price('SPX')
+
+    def get_current_underlying_price(self, symbol: str) -> Optional[Dict]:
+        """Get current underlying price data with both daily and intraday OHLC
+
+        Args:
+            symbol: The underlying symbol (e.g., 'SPX', 'XSP')
+
+        Returns:
+            Dictionary containing price data
+        """
         try:
-            self.logger.logger.info("Fetching current SPX price data...")
+            self.logger.logger.info(f"Fetching current {symbol} price data...")
 
             # Get current quote for daily OHLC and current price
-            spx_quote = self.api.get_current_quote('SPX')
+            quote = self.api.get_current_quote(symbol)
 
-            if spx_quote.empty:
-                self.logger.logger.warning("No SPX price data received")
+            if quote.empty:
+                self.logger.logger.warning(f"No {symbol} price data received")
                 return None
 
             # Extract daily OHLC data
-            spx_data = spx_quote.iloc[0]
+            quote_data = quote.iloc[0]
 
             price_data = {
-                'symbol': 'SPX',
+                'symbol': symbol,
                 'timestamp': datetime.now(self.config.timezone).isoformat(),
-                'last': spx_data.get('last'),
+                'last': quote_data.get('last'),
                 # Daily OHLC
-                'daily_open': spx_data.get('open'),
-                'daily_high': spx_data.get('high'),
-                'daily_low': spx_data.get('low'),
-                'daily_close': spx_data.get('close'),
+                'daily_open': quote_data.get('open'),
+                'daily_high': quote_data.get('high'),
+                'daily_low': quote_data.get('low'),
+                'daily_close': quote_data.get('close'),
                 # Keep old keys for backward compatibility
-                'open': spx_data.get('open'),
-                'high': spx_data.get('high'),
-                'low': spx_data.get('low'),
-                'close': spx_data.get('close'),
-                'volume': spx_data.get('volume', 0),
-                'change': spx_data.get('change'),
-                'change_percentage': spx_data.get('change_percentage'),
-                'prevclose': spx_data.get('prevclose'),
-                'bid': spx_data.get('bid'),
-                'ask': spx_data.get('ask')
+                'open': quote_data.get('open'),
+                'high': quote_data.get('high'),
+                'low': quote_data.get('low'),
+                'close': quote_data.get('close'),
+                'volume': quote_data.get('volume', 0),
+                'change': quote_data.get('change'),
+                'change_percentage': quote_data.get('change_percentage'),
+                'prevclose': quote_data.get('prevclose'),
+                'bid': quote_data.get('bid'),
+                'ask': quote_data.get('ask')
             }
 
             # Fetch recent intraday bar for 15-minute OHLC
             try:
-                intraday_data = self.api.get_intraday_data('SPX', interval='15min', days_back=1)
+                intraday_data = self.api.get_intraday_data(symbol, interval='15min', days_back=1)
                 if not intraday_data.empty:
                     # Get the most recent bar
                     latest_bar = intraday_data.iloc[-1]
@@ -555,8 +582,9 @@ class GEXCollector:
                 price_data['intraday_low'] = None
                 price_data['intraday_close'] = None
 
-            # Store for use in CSV exports
-            self.current_spx_price = price_data
+            # Store for use in CSV exports (maintain backward compatibility)
+            if symbol == 'SPX':
+                self.current_spx_price = price_data
 
             # Use the enhanced logging
             self.logger.log_spx_price(price_data)
@@ -564,7 +592,7 @@ class GEXCollector:
             return price_data
 
         except Exception as e:
-            self.logger.log_error("fetching SPX price data", e)
+            self.logger.log_error(f"fetching {symbol} price data", e)
             return None
     
     def save_spx_price_to_csv(self, price_data: Dict) -> bool:
