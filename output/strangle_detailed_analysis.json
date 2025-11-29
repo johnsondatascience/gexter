@@ -1,0 +1,136 @@
+{
+  "summary_statistics": {
+    "total_trades": 42,
+    "winning_trades": 34,
+    "losing_trades": 8,
+    "breakeven_trades": 0,
+    "win_rate": 0.8095238095238095,
+    "loss_rate": 0.19047619047619047,
+    "total_pnl": 838.075,
+    "total_pnl_pct": 162.5747522723677,
+    "avg_pnl_per_trade": 19.95416666666667,
+    "median_pnl_per_trade": 9.4,
+    "total_premium_deployed": 792.0,
+    "avg_premium_per_trade": 18.857142857142858,
+    "return_on_premium": 1.058175505050505
+  },
+  "risk_metrics": {
+    "average_win": 25.524264705882356,
+    "average_loss": -3.71875,
+    "largest_win": 140.00000000000003,
+    "largest_loss": -11.375,
+    "profit_factor": 29.17058823529412,
+    "expectancy": 19.95416666666667,
+    "sharpe_ratio": 0.6109291637100951,
+    "sortino_ratio": 5.711367191760626,
+    "win_loss_ratio": 6.863667820069205
+  },
+  "trade_analysis": {
+    "avg_call_otm_pct": 1.2605450913133822,
+    "avg_put_otm_pct": 1.401833140775509,
+    "premium_stats": {
+      "min_premium": 1.7,
+      "max_premium": 46.95,
+      "avg_premium": 18.857142857142858,
+      "median_premium": 17.049999999999997
+    },
+    "hold_period": {
+      "avg_hold_days": 1.0,
+      "min_hold_days": "1",
+      "max_hold_days": "1"
+    }
+  },
+  "win_loss_analysis": {
+    "winning_trades": {
+      "count": 34,
+      "avg_pnl": 25.524264705882356,
+      "avg_pnl_pct": 205.87887292079645,
+      "avg_premium": 18.858823529411765
+    },
+    "losing_trades": {
+      "count": 8,
+      "avg_pnl": -3.71875,
+      "avg_pnl_pct": -21.467760483454384,
+      "avg_premium": 18.85
+    }
+  },
+  "gex_signal_analysis": {
+    "BUY": {
+      "trade_count": 42,
+      "win_rate": 0.8095238095238095,
+      "avg_pnl": 19.95416666666667,
+      "total_pnl": 838.075,
+      "avg_pnl_pct": 162.5747522723677
+    }
+  },
+  "time_analysis": {
+    "monthly_performance": {
+      "month_3": {
+        "trade_count": 8,
+        "total_pnl": 91.025,
+        "avg_pnl": 11.378125
+      },
+      "month_4": {
+        "trade_count": 8,
+        "total_pnl": 348.77500000000003,
+        "avg_pnl": 43.596875000000004
+      },
+      "month_5": {
+        "trade_count": 12,
+        "total_pnl": 171.575,
+        "avg_pnl": 14.297916666666666
+      },
+      "month_6": {
+        "trade_count": 4,
+        "total_pnl": 33.65,
+        "avg_pnl": 8.4125
+      },
+      "month_10": {
+        "trade_count": 1,
+        "total_pnl": 6.549999999999997,
+        "avg_pnl": 6.549999999999997
+      },
+      "month_11": {
+        "trade_count": 9,
+        "total_pnl": 186.5,
+        "avg_pnl": 20.72222222222222
+      }
+    },
+    "day_of_week_performance": {
+      "Monday": {
+        "trade_count": 8,
+        "total_pnl": 92.35000000000001,
+        "avg_pnl": 11.543750000000001
+      },
+      "Tuesday": {
+        "trade_count": 12,
+        "total_pnl": 83.775,
+        "avg_pnl": 6.98125
+      },
+      "Wednesday": {
+        "trade_count": 12,
+        "total_pnl": 264.025,
+        "avg_pnl": 22.00208333333333
+      },
+      "Thursday": {
+        "trade_count": 10,
+        "total_pnl": 397.925,
+        "avg_pnl": 39.792500000000004
+      }
+    }
+  },
+  "drawdown_analysis": {
+    "max_drawdown": -11.375,
+    "max_drawdown_pct": -1.3572770933389018,
+    "longest_drawdown_trades": 4,
+    "current_drawdown": 0.0
+  },
+  "recommendations": [
+    "STRONG STRATEGY: Win rate above 75% indicates robust strategy. Consider scaling position sizes gradually.",
+    "EXCELLENT PROFIT FACTOR: Wins significantly outweigh losses. Strategy demonstrates good risk/reward.",
+    "HIGH PERFORMANCE ON BUY SIGNALS: 81.0% win rate. Consider filtering for BUY signals only.",
+    "STRONG RETURNS: Average P&L is 105.8% of premium deployed. Strategy delivers good returns relative to capital risked.",
+    "RISK MANAGEMENT: Always use position sizing that limits each trade to 1-2% of portfolio.",
+    "MONITOR MARKET CONDITIONS: GEX signals work best in normal market conditions. Reduce position sizes during FOMC, earnings, and major economic releases."
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "profile": {
+    "id": "id-sb-txuqlfoy",
+    "name": "Michael Johnson",
+    "account": {
+      "account_number": "VA86061098",
+      "classification": "individual",
+      "date_created": "2025-03-19T08:18:19.000Z",
+      "day_trader": false,
+      "option_level": 6,
+      "status": "active",
+      "type": "margin",
+      "last_update_date": "2025-03-19T08:18:19.000Z"
+    }
+  }
+}

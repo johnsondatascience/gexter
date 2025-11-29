@@ -1,0 +1,3792 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<!-- build 20252.25.0818.1050                               -->
+<workbook original-version='18.1' source-build='2025.2.2 (20252.25.0818.1050)' source-platform='win' version='18.1' xmlns:user='http://www.tableausoftware.com/xml/user'>
+  <document-format-change-manifest>
+    <AnimationOnByDefault />
+    <ISO8601PeriodTypes />
+    <MarkAnimation />
+    <ObjectModelEncapsulateLegacy />
+    <ObjectModelTableType />
+    <SchemaViewerObjectModel />
+    <SheetIdentifierTracking />
+    <SortTagCleanup />
+    <WindowsPersistSimpleIdentifiers />
+  </document-format-change-manifest>
+  <preferences>
+    <preference name='ui.encoding.shelf.height' value='24' />
+    <preference name='ui.shelf.height' value='26' />
+  </preferences>
+  <datasources>
+    <datasource caption='gex_table (gexdb)' inline='true' name='federated.1okw98w1c3nc5r168ipkq0khzmd7' version='18.1'>
+      <connection class='federated'>
+        <named-connections>
+          <named-connection caption='127.0.0.1' name='postgres.1p8srsk0e2idhs1fo1ptc15uprsj'>
+            <connection authentication='username-password' class='postgres' dbname='gexdb' one-time-sql='' port='5432' server='127.0.0.1' username='gexuser' />
+          </named-connection>
+        </named-connections>
+        <relation connection='postgres.1p8srsk0e2idhs1fo1ptc15uprsj' name='gex_table' table='[public].[gex_table]' type='table' />
+        <metadata-records>
+          <metadata-record class='column'>
+            <remote-name>greeks.updated_at</remote-name>
+            <remote-type>135</remote-type>
+            <local-name>[greeks.updated_at]</local-name>
+            <parent-name>[gex_table]</parent-name>
+            <remote-alias>greeks.updated_at</remote-alias>
+            <ordinal>1</ordinal>
+            <local-type>datetime</local-type>
+            <aggregation>Year</aggregation>
+            <contains-null>false</contains-null>
+            <object-id>[gex_table_54AC125016824D4D86AC836C07B149E0]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>expiration_date</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[expiration_date]</local-name>
+            <parent-name>[gex_table]</parent-name>
+            <remote-alias>expiration_date</remote-alias>
+            <ordinal>2</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>2147483647</width>
+            <contains-null>false</contains-null>
+            <cast-to-local-type>true</cast-to-local-type>
+            <collation flag='0' name='LEN_RUS' />
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[gex_table_54AC125016824D4D86AC836C07B149E0]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>option_type</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[option_type]</local-name>
+            <parent-name>[gex_table]</parent-name>
+            <remote-alias>option_type</remote-alias>
+            <ordinal>3</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>2147483647</width>
+            <contains-null>false</contains-null>
+            <cast-to-local-type>true</cast-to-local-type>
+            <collation flag='0' name='LEN_RUS' />
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[gex_table_54AC125016824D4D86AC836C07B149E0]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>strike</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[strike]</local-name>
+            <parent-name>[gex_table]</parent-name>
+            <remote-alias>strike</remote-alias>
+            <ordinal>4</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>8</precision>
+            <contains-null>false</contains-null>
+            <object-id>[gex_table_54AC125016824D4D86AC836C07B149E0]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>symbol</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[symbol]</local-name>
+            <parent-name>[gex_table]</parent-name>
+            <remote-alias>symbol</remote-alias>
+            <ordinal>5</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>2147483647</width>
+            <contains-null>true</contains-null>
+            <cast-to-local-type>true</cast-to-local-type>
+            <collation flag='0' name='LEN_RUS' />
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[gex_table_54AC125016824D4D86AC836C07B149E0]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>description</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[description]</local-name>
+            <parent-name>[gex_table]</parent-name>
+            <remote-alias>description</remote-alias>
+            <ordinal>6</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>2147483647</width>
+            <contains-null>true</contains-null>
+            <cast-to-local-type>true</cast-to-local-type>
+            <collation flag='0' name='LEN_RUS' />
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[gex_table_54AC125016824D4D86AC836C07B149E0]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>exch</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[exch]</local-name>
+            <parent-name>[gex_table]</parent-name>
+            <remote-alias>exch</remote-alias>
+            <ordinal>7</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>2147483647</width>
+            <contains-null>true</contains-null>
+            <cast-to-local-type>true</cast-to-local-type>
+            <collation flag='0' name='LEN_RUS' />
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[gex_table_54AC125016824D4D86AC836C07B149E0]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>type</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[type]</local-name>
+            <parent-name>[gex_table]</parent-name>
+            <remote-alias>type</remote-alias>
+            <ordinal>8</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>2147483647</width>
+            <contains-null>true</contains-null>
+            <cast-to-local-type>true</cast-to-local-type>
+            <collation flag='0' name='LEN_RUS' />
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[gex_table_54AC125016824D4D86AC836C07B149E0]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>underlying</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[underlying]</local-name>
+            <parent-name>[gex_table]</parent-name>
+            <remote-alias>underlying</remote-alias>
+            <ordinal>9</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>2147483647</width>
+            <contains-null>true</contains-null>
+            <cast-to-local-type>true</cast-to-local-type>
+            <collation flag='0' name='LEN_RUS' />
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[gex_table_54AC125016824D4D86AC836C07B149E0]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>expiration_type</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[expiration_type]</local-name>
+            <parent-name>[gex_table]</parent-name>
+            <remote-alias>expiration_type</remote-alias>
+            <ordinal>10</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>2147483647</width>
+            <contains-null>true</contains-null>
+            <cast-to-local-type>true</cast-to-local-type>
+            <collation flag='0' name='LEN_RUS' />
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[gex_table_54AC125016824D4D86AC836C07B149E0]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>root_symbol</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[root_symbol]</local-name>
+            <parent-name>[gex_table]</parent-name>
+            <remote-alias>root_symbol</remote-alias>
+            <ordinal>11</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>2147483647</width>
+            <contains-null>true</contains-null>
+            <cast-to-local-type>true</cast-to-local-type>
+            <collation flag='0' name='LEN_RUS' />
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[gex_table_54AC125016824D4D86AC836C07B149E0]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>last</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[last]</local-name>
+            <parent-name>[gex_table]</parent-name>
+            <remote-alias>last</remote-alias>
+            <ordinal>12</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>8</precision>
+            <contains-null>true</contains-null>
+            <object-id>[gex_table_54AC125016824D4D86AC836C07B149E0]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>change</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[change]</local-name>
+            <parent-name>[gex_table]</parent-name>
+            <remote-alias>change</remote-alias>
+            <ordinal>13</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>8</precision>
+            <contains-null>true</contains-null>
+            <object-id>[gex_table_54AC125016824D4D86AC836C07B149E0]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>open</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[open]</local-name>
+            <parent-name>[gex_table]</parent-name>
+            <remote-alias>open</remote-alias>
+            <ordinal>14</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>2147483647</width>
+            <contains-null>true</contains-null>
+            <cast-to-local-type>true</cast-to-local-type>
+            <collation flag='0' name='LEN_RUS' />
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[gex_table_54AC125016824D4D86AC836C07B149E0]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>high</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[high]</local-name>
+            <parent-name>[gex_table]</parent-name>
+            <remote-alias>high</remote-alias>
+            <ordinal>15</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>2147483647</width>
+            <contains-null>true</contains-null>
+            <cast-to-local-type>true</cast-to-local-type>
+            <collation flag='0' name='LEN_RUS' />
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[gex_table_54AC125016824D4D86AC836C07B149E0]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>low</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[low]</local-name>
+            <parent-name>[gex_table]</parent-name>
+            <remote-alias>low</remote-alias>
+            <ordinal>16</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>2147483647</width>
+            <contains-null>true</contains-null>
+            <cast-to-local-type>true</cast-to-local-type>
+            <collation flag='0' name='LEN_RUS' />
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[gex_table_54AC125016824D4D86AC836C07B149E0]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>close</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[close]</local-name>
+            <parent-name>[gex_table]</parent-name>
+            <remote-alias>close</remote-alias>
+            <ordinal>17</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>2147483647</width>
+            <contains-null>true</contains-null>
+            <cast-to-local-type>true</cast-to-local-type>
+            <collation flag='0' name='LEN_RUS' />
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[gex_table_54AC125016824D4D86AC836C07B149E0]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>bid</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[bid]</local-name>
+            <parent-name>[gex_table]</parent-name>
+            <remote-alias>bid</remote-alias>
+            <ordinal>18</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>8</precision>
+            <contains-null>true</contains-null>
+            <object-id>[gex_table_54AC125016824D4D86AC836C07B149E0]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>ask</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[ask]</local-name>
+            <parent-name>[gex_table]</parent-name>
+            <remote-alias>ask</remote-alias>
+            <ordinal>19</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>8</precision>
+            <contains-null>true</contains-null>
+            <object-id>[gex_table_54AC125016824D4D86AC836C07B149E0]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>prevclose</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[prevclose]</local-name>
+            <parent-name>[gex_table]</parent-name>
+            <remote-alias>prevclose</remote-alias>
+            <ordinal>20</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>8</precision>
+            <contains-null>true</contains-null>
+            <object-id>[gex_table_54AC125016824D4D86AC836C07B149E0]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>change_percentage</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[change_percentage]</local-name>
+            <parent-name>[gex_table]</parent-name>
+            <remote-alias>change_percentage</remote-alias>
+            <ordinal>21</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>8</precision>
+            <contains-null>true</contains-null>
+            <object-id>[gex_table_54AC125016824D4D86AC836C07B149E0]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>week_52_high</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[week_52_high]</local-name>
+            <parent-name>[gex_table]</parent-name>
+            <remote-alias>week_52_high</remote-alias>
+            <ordinal>22</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>8</precision>
+            <contains-null>true</contains-null>
+            <object-id>[gex_table_54AC125016824D4D86AC836C07B149E0]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>week_52_low</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[week_52_low]</local-name>
+            <parent-name>[gex_table]</parent-name>
+            <remote-alias>week_52_low</remote-alias>
+            <ordinal>23</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>8</precision>
+            <contains-null>true</contains-null>
+            <object-id>[gex_table_54AC125016824D4D86AC836C07B149E0]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>volume</remote-name>
+            <remote-type>3</remote-type>
+            <local-name>[volume]</local-name>
+            <parent-name>[gex_table]</parent-name>
+            <remote-alias>volume</remote-alias>
+            <ordinal>24</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>10</precision>
+            <contains-null>true</contains-null>
+            <object-id>[gex_table_54AC125016824D4D86AC836C07B149E0]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>average_volume</remote-name>
+            <remote-type>3</remote-type>
+            <local-name>[average_volume]</local-name>
+            <parent-name>[gex_table]</parent-name>
+            <remote-alias>average_volume</remote-alias>
+            <ordinal>25</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>10</precision>
+            <contains-null>true</contains-null>
+            <object-id>[gex_table_54AC125016824D4D86AC836C07B149E0]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>last_volume</remote-name>
+            <remote-type>3</remote-type>
+            <local-name>[last_volume]</local-name>
+            <parent-name>[gex_table]</parent-name>
+            <remote-alias>last_volume</remote-alias>
+            <ordinal>26</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>10</precision>
+            <contains-null>true</contains-null>
+            <object-id>[gex_table_54AC125016824D4D86AC836C07B149E0]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>open_interest</remote-name>
+            <remote-type>3</remote-type>
+            <local-name>[open_interest]</local-name>
+            <parent-name>[gex_table]</parent-name>
+            <remote-alias>open_interest</remote-alias>
+            <ordinal>27</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>10</precision>
+            <contains-null>true</contains-null>
+            <object-id>[gex_table_54AC125016824D4D86AC836C07B149E0]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>bidsize</remote-name>
+            <remote-type>3</remote-type>
+            <local-name>[bidsize]</local-name>
+            <parent-name>[gex_table]</parent-name>
+            <remote-alias>bidsize</remote-alias>
+            <ordinal>28</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>10</precision>
+            <contains-null>true</contains-null>
+            <object-id>[gex_table_54AC125016824D4D86AC836C07B149E0]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>bidexch</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[bidexch]</local-name>
+            <parent-name>[gex_table]</parent-name>
+            <remote-alias>bidexch</remote-alias>
+            <ordinal>29</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>2147483647</width>
+            <contains-null>true</contains-null>
+            <cast-to-local-type>true</cast-to-local-type>
+            <collation flag='0' name='LEN_RUS' />
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[gex_table_54AC125016824D4D86AC836C07B149E0]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>bid_date</remote-name>
+            <remote-type>135</remote-type>
+            <local-name>[bid_date]</local-name>
+            <parent-name>[gex_table]</parent-name>
+            <remote-alias>bid_date</remote-alias>
+            <ordinal>30</ordinal>
+            <local-type>datetime</local-type>
+            <aggregation>Year</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[gex_table_54AC125016824D4D86AC836C07B149E0]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>asksize</remote-name>
+            <remote-type>3</remote-type>
+            <local-name>[asksize]</local-name>
+            <parent-name>[gex_table]</parent-name>
+            <remote-alias>asksize</remote-alias>
+            <ordinal>31</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>10</precision>
+            <contains-null>true</contains-null>
+            <object-id>[gex_table_54AC125016824D4D86AC836C07B149E0]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>askexch</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[askexch]</local-name>
+            <parent-name>[gex_table]</parent-name>
+            <remote-alias>askexch</remote-alias>
+            <ordinal>32</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>2147483647</width>
+            <contains-null>true</contains-null>
+            <cast-to-local-type>true</cast-to-local-type>
+            <collation flag='0' name='LEN_RUS' />
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[gex_table_54AC125016824D4D86AC836C07B149E0]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>ask_date</remote-name>
+            <remote-type>135</remote-type>
+            <local-name>[ask_date]</local-name>
+            <parent-name>[gex_table]</parent-name>
+            <remote-alias>ask_date</remote-alias>
+            <ordinal>33</ordinal>
+            <local-type>datetime</local-type>
+            <aggregation>Year</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[gex_table_54AC125016824D4D86AC836C07B149E0]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>trade_date</remote-name>
+            <remote-type>135</remote-type>
+            <local-name>[trade_date]</local-name>
+            <parent-name>[gex_table]</parent-name>
+            <remote-alias>trade_date</remote-alias>
+            <ordinal>34</ordinal>
+            <local-type>datetime</local-type>
+            <aggregation>Year</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[gex_table_54AC125016824D4D86AC836C07B149E0]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>contract_size</remote-name>
+            <remote-type>3</remote-type>
+            <local-name>[contract_size]</local-name>
+            <parent-name>[gex_table]</parent-name>
+            <remote-alias>contract_size</remote-alias>
+            <ordinal>35</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>10</precision>
+            <contains-null>true</contains-null>
+            <object-id>[gex_table_54AC125016824D4D86AC836C07B149E0]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>greeks.delta</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[greeks.delta]</local-name>
+            <parent-name>[gex_table]</parent-name>
+            <remote-alias>greeks.delta</remote-alias>
+            <ordinal>36</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>8</precision>
+            <contains-null>true</contains-null>
+            <object-id>[gex_table_54AC125016824D4D86AC836C07B149E0]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>greeks.gamma</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[greeks.gamma]</local-name>
+            <parent-name>[gex_table]</parent-name>
+            <remote-alias>greeks.gamma</remote-alias>
+            <ordinal>37</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>8</precision>
+            <contains-null>true</contains-null>
+            <object-id>[gex_table_54AC125016824D4D86AC836C07B149E0]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>greeks.theta</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[greeks.theta]</local-name>
+            <parent-name>[gex_table]</parent-name>
+            <remote-alias>greeks.theta</remote-alias>
+            <ordinal>38</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>8</precision>
+            <contains-null>true</contains-null>
+            <object-id>[gex_table_54AC125016824D4D86AC836C07B149E0]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>greeks.vega</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[greeks.vega]</local-name>
+            <parent-name>[gex_table]</parent-name>
+            <remote-alias>greeks.vega</remote-alias>
+            <ordinal>39</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>8</precision>
+            <contains-null>true</contains-null>
+            <object-id>[gex_table_54AC125016824D4D86AC836C07B149E0]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>greeks.rho</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[greeks.rho]</local-name>
+            <parent-name>[gex_table]</parent-name>
+            <remote-alias>greeks.rho</remote-alias>
+            <ordinal>40</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>8</precision>
+            <contains-null>true</contains-null>
+            <object-id>[gex_table_54AC125016824D4D86AC836C07B149E0]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>greeks.phi</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[greeks.phi]</local-name>
+            <parent-name>[gex_table]</parent-name>
+            <remote-alias>greeks.phi</remote-alias>
+            <ordinal>41</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>8</precision>
+            <contains-null>true</contains-null>
+            <object-id>[gex_table_54AC125016824D4D86AC836C07B149E0]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>greeks.bid_iv</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[greeks.bid_iv]</local-name>
+            <parent-name>[gex_table]</parent-name>
+            <remote-alias>greeks.bid_iv</remote-alias>
+            <ordinal>42</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>8</precision>
+            <contains-null>true</contains-null>
+            <object-id>[gex_table_54AC125016824D4D86AC836C07B149E0]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>greeks.mid_iv</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[greeks.mid_iv]</local-name>
+            <parent-name>[gex_table]</parent-name>
+            <remote-alias>greeks.mid_iv</remote-alias>
+            <ordinal>43</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>8</precision>
+            <contains-null>true</contains-null>
+            <object-id>[gex_table_54AC125016824D4D86AC836C07B149E0]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>greeks.ask_iv</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[greeks.ask_iv]</local-name>
+            <parent-name>[gex_table]</parent-name>
+            <remote-alias>greeks.ask_iv</remote-alias>
+            <ordinal>44</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>8</precision>
+            <contains-null>true</contains-null>
+            <object-id>[gex_table_54AC125016824D4D86AC836C07B149E0]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>greeks.smv_vol</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[greeks.smv_vol]</local-name>
+            <parent-name>[gex_table]</parent-name>
+            <remote-alias>greeks.smv_vol</remote-alias>
+            <ordinal>45</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>8</precision>
+            <contains-null>true</contains-null>
+            <object-id>[gex_table_54AC125016824D4D86AC836C07B149E0]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>gex</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[gex]</local-name>
+            <parent-name>[gex_table]</parent-name>
+            <remote-alias>gex</remote-alias>
+            <ordinal>46</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>8</precision>
+            <contains-null>true</contains-null>
+            <object-id>[gex_table_54AC125016824D4D86AC836C07B149E0]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>greeks.delta_diff</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[greeks.delta_diff]</local-name>
+            <parent-name>[gex_table]</parent-name>
+            <remote-alias>greeks.delta_diff</remote-alias>
+            <ordinal>47</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>8</precision>
+            <contains-null>true</contains-null>
+            <object-id>[gex_table_54AC125016824D4D86AC836C07B149E0]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>greeks.gamma_diff</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[greeks.gamma_diff]</local-name>
+            <parent-name>[gex_table]</parent-name>
+            <remote-alias>greeks.gamma_diff</remote-alias>
+            <ordinal>48</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>8</precision>
+            <contains-null>true</contains-null>
+            <object-id>[gex_table_54AC125016824D4D86AC836C07B149E0]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>greeks.theta_diff</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[greeks.theta_diff]</local-name>
+            <parent-name>[gex_table]</parent-name>
+            <remote-alias>greeks.theta_diff</remote-alias>
+            <ordinal>49</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>8</precision>
+            <contains-null>true</contains-null>
+            <object-id>[gex_table_54AC125016824D4D86AC836C07B149E0]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>greeks.vega_diff</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[greeks.vega_diff]</local-name>
+            <parent-name>[gex_table]</parent-name>
+            <remote-alias>greeks.vega_diff</remote-alias>
+            <ordinal>50</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>8</precision>
+            <contains-null>true</contains-null>
+            <object-id>[gex_table_54AC125016824D4D86AC836C07B149E0]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>greeks.rho_diff</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[greeks.rho_diff]</local-name>
+            <parent-name>[gex_table]</parent-name>
+            <remote-alias>greeks.rho_diff</remote-alias>
+            <ordinal>51</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>8</precision>
+            <contains-null>true</contains-null>
+            <object-id>[gex_table_54AC125016824D4D86AC836C07B149E0]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>greeks.phi_diff</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[greeks.phi_diff]</local-name>
+            <parent-name>[gex_table]</parent-name>
+            <remote-alias>greeks.phi_diff</remote-alias>
+            <ordinal>52</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>8</precision>
+            <contains-null>true</contains-null>
+            <object-id>[gex_table_54AC125016824D4D86AC836C07B149E0]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>greeks.bid_iv_diff</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[greeks.bid_iv_diff]</local-name>
+            <parent-name>[gex_table]</parent-name>
+            <remote-alias>greeks.bid_iv_diff</remote-alias>
+            <ordinal>53</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>8</precision>
+            <contains-null>true</contains-null>
+            <object-id>[gex_table_54AC125016824D4D86AC836C07B149E0]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>greeks.mid_iv_diff</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[greeks.mid_iv_diff]</local-name>
+            <parent-name>[gex_table]</parent-name>
+            <remote-alias>greeks.mid_iv_diff</remote-alias>
+            <ordinal>54</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>8</precision>
+            <contains-null>true</contains-null>
+            <object-id>[gex_table_54AC125016824D4D86AC836C07B149E0]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>greeks.ask_iv_diff</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[greeks.ask_iv_diff]</local-name>
+            <parent-name>[gex_table]</parent-name>
+            <remote-alias>greeks.ask_iv_diff</remote-alias>
+            <ordinal>55</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>8</precision>
+            <contains-null>true</contains-null>
+            <object-id>[gex_table_54AC125016824D4D86AC836C07B149E0]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>greeks.smv_vol_diff</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[greeks.smv_vol_diff]</local-name>
+            <parent-name>[gex_table]</parent-name>
+            <remote-alias>greeks.smv_vol_diff</remote-alias>
+            <ordinal>56</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>8</precision>
+            <contains-null>true</contains-null>
+            <object-id>[gex_table_54AC125016824D4D86AC836C07B149E0]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>gex_diff</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[gex_diff]</local-name>
+            <parent-name>[gex_table]</parent-name>
+            <remote-alias>gex_diff</remote-alias>
+            <ordinal>57</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>8</precision>
+            <contains-null>true</contains-null>
+            <object-id>[gex_table_54AC125016824D4D86AC836C07B149E0]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>greeks.delta_pct_change</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[greeks.delta_pct_change]</local-name>
+            <parent-name>[gex_table]</parent-name>
+            <remote-alias>greeks.delta_pct_change</remote-alias>
+            <ordinal>58</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>8</precision>
+            <contains-null>true</contains-null>
+            <object-id>[gex_table_54AC125016824D4D86AC836C07B149E0]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>greeks.gamma_pct_change</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[greeks.gamma_pct_change]</local-name>
+            <parent-name>[gex_table]</parent-name>
+            <remote-alias>greeks.gamma_pct_change</remote-alias>
+            <ordinal>59</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>8</precision>
+            <contains-null>true</contains-null>
+            <object-id>[gex_table_54AC125016824D4D86AC836C07B149E0]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>greeks.theta_pct_change</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[greeks.theta_pct_change]</local-name>
+            <parent-name>[gex_table]</parent-name>
+            <remote-alias>greeks.theta_pct_change</remote-alias>
+            <ordinal>60</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>8</precision>
+            <contains-null>true</contains-null>
+            <object-id>[gex_table_54AC125016824D4D86AC836C07B149E0]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>greeks.vega_pct_change</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[greeks.vega_pct_change]</local-name>
+            <parent-name>[gex_table]</parent-name>
+            <remote-alias>greeks.vega_pct_change</remote-alias>
+            <ordinal>61</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>8</precision>
+            <contains-null>true</contains-null>
+            <object-id>[gex_table_54AC125016824D4D86AC836C07B149E0]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>greeks.rho_pct_change</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[greeks.rho_pct_change]</local-name>
+            <parent-name>[gex_table]</parent-name>
+            <remote-alias>greeks.rho_pct_change</remote-alias>
+            <ordinal>62</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>8</precision>
+            <contains-null>true</contains-null>
+            <object-id>[gex_table_54AC125016824D4D86AC836C07B149E0]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>greeks.phi_pct_change</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[greeks.phi_pct_change]</local-name>
+            <parent-name>[gex_table]</parent-name>
+            <remote-alias>greeks.phi_pct_change</remote-alias>
+            <ordinal>63</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>8</precision>
+            <contains-null>true</contains-null>
+            <object-id>[gex_table_54AC125016824D4D86AC836C07B149E0]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>greeks.bid_iv_pct_change</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[greeks.bid_iv_pct_change]</local-name>
+            <parent-name>[gex_table]</parent-name>
+            <remote-alias>greeks.bid_iv_pct_change</remote-alias>
+            <ordinal>64</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>8</precision>
+            <contains-null>true</contains-null>
+            <object-id>[gex_table_54AC125016824D4D86AC836C07B149E0]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>greeks.mid_iv_pct_change</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[greeks.mid_iv_pct_change]</local-name>
+            <parent-name>[gex_table]</parent-name>
+            <remote-alias>greeks.mid_iv_pct_change</remote-alias>
+            <ordinal>65</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>8</precision>
+            <contains-null>true</contains-null>
+            <object-id>[gex_table_54AC125016824D4D86AC836C07B149E0]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>greeks.ask_iv_pct_change</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[greeks.ask_iv_pct_change]</local-name>
+            <parent-name>[gex_table]</parent-name>
+            <remote-alias>greeks.ask_iv_pct_change</remote-alias>
+            <ordinal>66</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>8</precision>
+            <contains-null>true</contains-null>
+            <object-id>[gex_table_54AC125016824D4D86AC836C07B149E0]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>greeks.smv_vol_pct_change</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[greeks.smv_vol_pct_change]</local-name>
+            <parent-name>[gex_table]</parent-name>
+            <remote-alias>greeks.smv_vol_pct_change</remote-alias>
+            <ordinal>67</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>8</precision>
+            <contains-null>true</contains-null>
+            <object-id>[gex_table_54AC125016824D4D86AC836C07B149E0]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>gex_pct_change</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[gex_pct_change]</local-name>
+            <parent-name>[gex_table]</parent-name>
+            <remote-alias>gex_pct_change</remote-alias>
+            <ordinal>68</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>8</precision>
+            <contains-null>true</contains-null>
+            <object-id>[gex_table_54AC125016824D4D86AC836C07B149E0]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>prev_timestamp</remote-name>
+            <remote-type>135</remote-type>
+            <local-name>[prev_timestamp]</local-name>
+            <parent-name>[gex_table]</parent-name>
+            <remote-alias>prev_timestamp</remote-alias>
+            <ordinal>69</ordinal>
+            <local-type>datetime</local-type>
+            <aggregation>Year</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[gex_table_54AC125016824D4D86AC836C07B149E0]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>has_previous_data</remote-name>
+            <remote-type>11</remote-type>
+            <local-name>[has_previous_data]</local-name>
+            <parent-name>[gex_table]</parent-name>
+            <remote-alias>has_previous_data</remote-alias>
+            <ordinal>70</ordinal>
+            <local-type>boolean</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[gex_table_54AC125016824D4D86AC836C07B149E0]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>spx_price</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[spx_price]</local-name>
+            <parent-name>[gex_table]</parent-name>
+            <remote-alias>spx_price</remote-alias>
+            <ordinal>71</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>8</precision>
+            <contains-null>true</contains-null>
+            <object-id>[gex_table_54AC125016824D4D86AC836C07B149E0]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>spx_open</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[spx_open]</local-name>
+            <parent-name>[gex_table]</parent-name>
+            <remote-alias>spx_open</remote-alias>
+            <ordinal>72</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>8</precision>
+            <contains-null>true</contains-null>
+            <object-id>[gex_table_54AC125016824D4D86AC836C07B149E0]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>spx_high</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[spx_high]</local-name>
+            <parent-name>[gex_table]</parent-name>
+            <remote-alias>spx_high</remote-alias>
+            <ordinal>73</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>8</precision>
+            <contains-null>true</contains-null>
+            <object-id>[gex_table_54AC125016824D4D86AC836C07B149E0]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>spx_low</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[spx_low]</local-name>
+            <parent-name>[gex_table]</parent-name>
+            <remote-alias>spx_low</remote-alias>
+            <ordinal>74</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>8</precision>
+            <contains-null>true</contains-null>
+            <object-id>[gex_table_54AC125016824D4D86AC836C07B149E0]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>spx_close</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[spx_close]</local-name>
+            <parent-name>[gex_table]</parent-name>
+            <remote-alias>spx_close</remote-alias>
+            <ordinal>75</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>8</precision>
+            <contains-null>true</contains-null>
+            <object-id>[gex_table_54AC125016824D4D86AC836C07B149E0]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>spx_bid</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[spx_bid]</local-name>
+            <parent-name>[gex_table]</parent-name>
+            <remote-alias>spx_bid</remote-alias>
+            <ordinal>76</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>8</precision>
+            <contains-null>true</contains-null>
+            <object-id>[gex_table_54AC125016824D4D86AC836C07B149E0]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>spx_ask</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[spx_ask]</local-name>
+            <parent-name>[gex_table]</parent-name>
+            <remote-alias>spx_ask</remote-alias>
+            <ordinal>77</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>8</precision>
+            <contains-null>true</contains-null>
+            <object-id>[gex_table_54AC125016824D4D86AC836C07B149E0]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>spx_change</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[spx_change]</local-name>
+            <parent-name>[gex_table]</parent-name>
+            <remote-alias>spx_change</remote-alias>
+            <ordinal>78</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>8</precision>
+            <contains-null>true</contains-null>
+            <object-id>[gex_table_54AC125016824D4D86AC836C07B149E0]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>spx_change_pct</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[spx_change_pct]</local-name>
+            <parent-name>[gex_table]</parent-name>
+            <remote-alias>spx_change_pct</remote-alias>
+            <ordinal>79</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>8</precision>
+            <contains-null>true</contains-null>
+            <object-id>[gex_table_54AC125016824D4D86AC836C07B149E0]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>spx_prevclose</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[spx_prevclose]</local-name>
+            <parent-name>[gex_table]</parent-name>
+            <remote-alias>spx_prevclose</remote-alias>
+            <ordinal>80</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>8</precision>
+            <contains-null>true</contains-null>
+            <object-id>[gex_table_54AC125016824D4D86AC836C07B149E0]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>spx_daily_open</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[spx_daily_open]</local-name>
+            <parent-name>[gex_table]</parent-name>
+            <remote-alias>spx_daily_open</remote-alias>
+            <ordinal>81</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>8</precision>
+            <contains-null>true</contains-null>
+            <object-id>[gex_table_54AC125016824D4D86AC836C07B149E0]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>spx_daily_high</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[spx_daily_high]</local-name>
+            <parent-name>[gex_table]</parent-name>
+            <remote-alias>spx_daily_high</remote-alias>
+            <ordinal>82</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>8</precision>
+            <contains-null>true</contains-null>
+            <object-id>[gex_table_54AC125016824D4D86AC836C07B149E0]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>spx_daily_low</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[spx_daily_low]</local-name>
+            <parent-name>[gex_table]</parent-name>
+            <remote-alias>spx_daily_low</remote-alias>
+            <ordinal>83</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>8</precision>
+            <contains-null>true</contains-null>
+            <object-id>[gex_table_54AC125016824D4D86AC836C07B149E0]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>spx_daily_close</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[spx_daily_close]</local-name>
+            <parent-name>[gex_table]</parent-name>
+            <remote-alias>spx_daily_close</remote-alias>
+            <ordinal>84</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>8</precision>
+            <contains-null>true</contains-null>
+            <object-id>[gex_table_54AC125016824D4D86AC836C07B149E0]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>spx_intraday_open</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[spx_intraday_open]</local-name>
+            <parent-name>[gex_table]</parent-name>
+            <remote-alias>spx_intraday_open</remote-alias>
+            <ordinal>85</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>8</precision>
+            <contains-null>true</contains-null>
+            <object-id>[gex_table_54AC125016824D4D86AC836C07B149E0]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>spx_intraday_high</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[spx_intraday_high]</local-name>
+            <parent-name>[gex_table]</parent-name>
+            <remote-alias>spx_intraday_high</remote-alias>
+            <ordinal>86</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>8</precision>
+            <contains-null>true</contains-null>
+            <object-id>[gex_table_54AC125016824D4D86AC836C07B149E0]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>spx_intraday_low</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[spx_intraday_low]</local-name>
+            <parent-name>[gex_table]</parent-name>
+            <remote-alias>spx_intraday_low</remote-alias>
+            <ordinal>87</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>8</precision>
+            <contains-null>true</contains-null>
+            <object-id>[gex_table_54AC125016824D4D86AC836C07B149E0]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>spx_intraday_close</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[spx_intraday_close]</local-name>
+            <parent-name>[gex_table]</parent-name>
+            <remote-alias>spx_intraday_close</remote-alias>
+            <ordinal>88</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>8</precision>
+            <contains-null>true</contains-null>
+            <object-id>[gex_table_54AC125016824D4D86AC836C07B149E0]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>underlying_symbol</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[underlying_symbol]</local-name>
+            <parent-name>[gex_table]</parent-name>
+            <remote-alias>underlying_symbol</remote-alias>
+            <ordinal>89</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>10</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[gex_table_54AC125016824D4D86AC836C07B149E0]</object-id>
+          </metadata-record>
+        </metadata-records>
+      </connection>
+      <aliases enabled='yes' />
+      <column caption='SPX Price ' datatype='integer' name='[Calculation_1823676380616044544]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='if [spx_price] &gt;= [strike] - 2.5 &#13;&#10;and [spx_price] &lt; [strike] + 2.5&#13;&#10;then 1 else 0 end' />
+      </column>
+      <column caption='SPX Close' datatype='integer' name='[Calculation_2196349250826502146]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='if [spx_close] &gt;= [strike] - 2.5 &#13;&#10;and [spx_close] &lt; [strike] + 2.5&#13;&#10;then 1 else 0 end' />
+      </column>
+      <column caption='SPX Low' datatype='integer' name='[SPX Close (copy)_2196349250826919939]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='if [spx_low] &gt;= [strike] - 2.5 &#13;&#10;and [spx_low] &lt; [strike] + 2.5&#13;&#10;then 1 else 0 end' />
+      </column>
+      <column caption='SPX High' datatype='integer' name='[SPX Close (copy)_2196349250827182084]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='if [spx_high] &gt;= [strike] - 2.5 &#13;&#10;and [spx_high] &lt; [strike] + 2.5&#13;&#10;then 1 else 0 end' />
+      </column>
+      <column caption='SPX Open' datatype='integer' name='[SPX Low (copy)_2196349250827530245]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='if [spx_open] &gt;= [strike] - 2.5 &#13;&#10;and [spx_open] &lt; [strike] + 2.5&#13;&#10;then 1 else 0 end' />
+      </column>
+      <column aggregation='None' datatype='integer' name='[Spx Close (bin)]' role='dimension' type='quantitative'>
+        <calculation class='bin' decimals='2' formula='[spx_close]' peg='0' size='134' />
+      </column>
+      <column caption='Strike ' datatype='real' name='[Strike (copy)_1880252850928431104]' role='dimension' type='ordinal'>
+        <calculation class='tableau' formula='[strike]' />
+      </column>
+      <column caption='gex_table' datatype='table' name='[__tableau_internal_object_id__].[gex_table_54AC125016824D4D86AC836C07B149E0]' role='measure' type='quantitative' />
+      <column caption='Ask' datatype='real' name='[ask]' role='measure' type='quantitative' />
+      <column caption='Ask Date' datatype='datetime' name='[ask_date]' role='dimension' type='ordinal' />
+      <column caption='Askexch' datatype='string' name='[askexch]' role='dimension' type='nominal' />
+      <column caption='Asksize' datatype='integer' name='[asksize]' role='measure' type='quantitative' />
+      <column caption='Average Volume' datatype='integer' name='[average_volume]' role='measure' type='quantitative' />
+      <column caption='Bid' datatype='real' name='[bid]' role='measure' type='quantitative' />
+      <column caption='Bid Date' datatype='datetime' name='[bid_date]' role='dimension' type='ordinal' />
+      <column caption='Bidexch' datatype='string' name='[bidexch]' role='dimension' type='nominal' />
+      <column caption='Bidsize' datatype='integer' name='[bidsize]' role='measure' type='quantitative' />
+      <column caption='Change' datatype='real' name='[change]' role='measure' type='quantitative' />
+      <column caption='Change Percentage' datatype='real' name='[change_percentage]' role='measure' type='quantitative' />
+      <column caption='Close' datatype='string' name='[close]' role='dimension' type='nominal' />
+      <column caption='Contract Size' datatype='integer' name='[contract_size]' role='measure' type='quantitative' />
+      <column caption='Description' datatype='string' name='[description]' role='dimension' type='nominal' />
+      <column caption='Exch' datatype='string' name='[exch]' role='dimension' type='nominal' />
+      <column caption='Expiration Date' datatype='date' datatype-customized='true' name='[expiration_date]' role='dimension' type='ordinal' />
+      <column caption='Expiration Type' datatype='string' name='[expiration_type]' role='dimension' type='nominal' />
+      <column caption='Gex' datatype='real' name='[gex]' role='measure' type='quantitative' />
+      <column caption='Gex Diff' datatype='real' name='[gex_diff]' role='measure' type='quantitative' />
+      <column caption='Gex Pct Change' datatype='real' name='[gex_pct_change]' role='measure' type='quantitative' />
+      <column caption='Greeks.Ask Iv' datatype='real' name='[greeks.ask_iv]' role='measure' type='quantitative' />
+      <column caption='Greeks.Ask Iv Diff' datatype='real' name='[greeks.ask_iv_diff]' role='measure' type='quantitative' />
+      <column caption='Greeks.Ask Iv Pct Change' datatype='real' name='[greeks.ask_iv_pct_change]' role='measure' type='quantitative' />
+      <column caption='Greeks.Bid Iv' datatype='real' name='[greeks.bid_iv]' role='measure' type='quantitative' />
+      <column caption='Greeks.Bid Iv Diff' datatype='real' name='[greeks.bid_iv_diff]' role='measure' type='quantitative' />
+      <column caption='Greeks.Bid Iv Pct Change' datatype='real' name='[greeks.bid_iv_pct_change]' role='measure' type='quantitative' />
+      <column caption='Greeks.Delta' datatype='real' name='[greeks.delta]' role='measure' type='quantitative' />
+      <column caption='Greeks.Delta Diff' datatype='real' name='[greeks.delta_diff]' role='measure' type='quantitative' />
+      <column caption='Greeks.Delta Pct Change' datatype='real' name='[greeks.delta_pct_change]' role='measure' type='quantitative' />
+      <column caption='Greeks.Gamma' datatype='real' name='[greeks.gamma]' role='measure' type='quantitative' />
+      <column caption='Greeks.Gamma Diff' datatype='real' name='[greeks.gamma_diff]' role='measure' type='quantitative' />
+      <column caption='Greeks.Gamma Pct Change' datatype='real' name='[greeks.gamma_pct_change]' role='measure' type='quantitative' />
+      <column caption='Greeks.Mid Iv' datatype='real' name='[greeks.mid_iv]' role='measure' type='quantitative' />
+      <column caption='Greeks.Mid Iv Diff' datatype='real' name='[greeks.mid_iv_diff]' role='measure' type='quantitative' />
+      <column caption='Greeks.Mid Iv Pct Change' datatype='real' name='[greeks.mid_iv_pct_change]' role='measure' type='quantitative' />
+      <column caption='Greeks.Phi' datatype='real' name='[greeks.phi]' role='measure' type='quantitative' />
+      <column caption='Greeks.Phi Diff' datatype='real' name='[greeks.phi_diff]' role='measure' type='quantitative' />
+      <column caption='Greeks.Phi Pct Change' datatype='real' name='[greeks.phi_pct_change]' role='measure' type='quantitative' />
+      <column caption='Greeks.Rho' datatype='real' name='[greeks.rho]' role='measure' type='quantitative' />
+      <column caption='Greeks.Rho Diff' datatype='real' name='[greeks.rho_diff]' role='measure' type='quantitative' />
+      <column caption='Greeks.Rho Pct Change' datatype='real' name='[greeks.rho_pct_change]' role='measure' type='quantitative' />
+      <column caption='Greeks.Smv Vol' datatype='real' name='[greeks.smv_vol]' role='measure' type='quantitative' />
+      <column caption='Greeks.Smv Vol Diff' datatype='real' name='[greeks.smv_vol_diff]' role='measure' type='quantitative' />
+      <column caption='Greeks.Smv Vol Pct Change' datatype='real' name='[greeks.smv_vol_pct_change]' role='measure' type='quantitative' />
+      <column caption='Greeks.Theta' datatype='real' name='[greeks.theta]' role='measure' type='quantitative' />
+      <column caption='Greeks.Theta Diff' datatype='real' name='[greeks.theta_diff]' role='measure' type='quantitative' />
+      <column caption='Greeks.Theta Pct Change' datatype='real' name='[greeks.theta_pct_change]' role='measure' type='quantitative' />
+      <column caption='Greeks.Updated At' datatype='datetime' name='[greeks.updated_at]' role='dimension' type='ordinal' />
+      <column caption='Greeks.Vega' datatype='real' name='[greeks.vega]' role='measure' type='quantitative' />
+      <column caption='Greeks.Vega Diff' datatype='real' name='[greeks.vega_diff]' role='measure' type='quantitative' />
+      <column caption='Greeks.Vega Pct Change' datatype='real' name='[greeks.vega_pct_change]' role='measure' type='quantitative' />
+      <column caption='Has Previous Data' datatype='boolean' name='[has_previous_data]' role='dimension' type='nominal' />
+      <column caption='High' datatype='string' name='[high]' role='dimension' type='nominal' />
+      <column caption='Last' datatype='real' name='[last]' role='measure' type='quantitative' />
+      <column caption='Last Volume' datatype='integer' name='[last_volume]' role='measure' type='quantitative' />
+      <column caption='Low' datatype='string' name='[low]' role='dimension' type='nominal' />
+      <column caption='Open' datatype='string' name='[open]' role='dimension' type='nominal' />
+      <column caption='Open Interest' datatype='integer' name='[open_interest]' role='measure' type='quantitative' />
+      <column caption='Option Type' datatype='string' name='[option_type]' role='dimension' type='nominal' />
+      <column caption='Prev Timestamp' datatype='datetime' name='[prev_timestamp]' role='dimension' type='ordinal' />
+      <column caption='Prevclose' datatype='real' name='[prevclose]' role='measure' type='quantitative' />
+      <column caption='Root Symbol' datatype='string' name='[root_symbol]' role='dimension' type='nominal' />
+      <column caption='Spx Ask' datatype='real' name='[spx_ask]' role='measure' type='quantitative' />
+      <column caption='Spx Bid' datatype='real' name='[spx_bid]' role='measure' type='quantitative' />
+      <column caption='Spx Change' datatype='real' name='[spx_change]' role='measure' type='quantitative' />
+      <column caption='Spx Change Pct' datatype='real' name='[spx_change_pct]' role='measure' type='quantitative' />
+      <column caption='Spx Close' datatype='real' name='[spx_close]' role='measure' type='quantitative' />
+      <column caption='Spx Daily Close' datatype='real' name='[spx_daily_close]' role='measure' type='quantitative' />
+      <column caption='Spx Daily High' datatype='real' name='[spx_daily_high]' role='measure' type='quantitative' />
+      <column caption='Spx Daily Low' datatype='real' name='[spx_daily_low]' role='measure' type='quantitative' />
+      <column caption='Spx Daily Open' datatype='real' name='[spx_daily_open]' role='measure' type='quantitative' />
+      <column caption='Spx High' datatype='real' name='[spx_high]' role='measure' type='quantitative' />
+      <column caption='Spx Intraday Close' datatype='real' name='[spx_intraday_close]' role='measure' type='quantitative' />
+      <column caption='Spx Intraday High' datatype='real' name='[spx_intraday_high]' role='measure' type='quantitative' />
+      <column caption='Spx Intraday Low' datatype='real' name='[spx_intraday_low]' role='measure' type='quantitative' />
+      <column caption='Spx Intraday Open' datatype='real' name='[spx_intraday_open]' role='measure' type='quantitative' />
+      <column caption='Spx Low' datatype='real' name='[spx_low]' role='measure' type='quantitative' />
+      <column caption='Spx Open' datatype='real' name='[spx_open]' role='measure' type='quantitative' />
+      <column caption='Spx Prevclose' datatype='real' name='[spx_prevclose]' role='measure' type='quantitative' />
+      <column caption='Spx Price' datatype='real' name='[spx_price]' role='measure' type='quantitative' />
+      <column caption='Strike' datatype='real' name='[strike]' role='measure' type='quantitative' />
+      <column caption='Symbol' datatype='string' name='[symbol]' role='dimension' type='nominal' />
+      <column caption='Trade Date' datatype='datetime' name='[trade_date]' role='dimension' type='ordinal' />
+      <column caption='Type' datatype='string' name='[type]' role='dimension' type='nominal' />
+      <column caption='Underlying' datatype='string' name='[underlying]' role='dimension' type='nominal' />
+      <column caption='Volume' datatype='integer' name='[volume]' role='measure' type='quantitative' />
+      <column caption='Week 52 High' datatype='real' name='[week_52_high]' role='dimension' type='quantitative' />
+      <column caption='Week 52 Low' datatype='real' name='[week_52_low]' role='dimension' type='quantitative' />
+      <column-instance column='[last]' derivation='Avg' name='[avg:last:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[gex]' derivation='Sum' name='[cum:sum:gex:qk]' pivot='key' type='quantitative'>
+        <table-calc aggregation='Sum' ordering-type='Rows' type='CumTotal' />
+      </column-instance>
+      <column-instance column='[greeks.updated_at]' derivation='Day' name='[dy:greeks.updated_at:ok]' pivot='key' type='ordinal' />
+      <column-instance column='[Strike (copy)_1880252850928431104]' derivation='None' name='[none:Strike (copy)_1880252850928431104:ok]' pivot='key' type='ordinal' />
+      <column-instance column='[option_type]' derivation='None' name='[none:option_type:nk]' pivot='key' type='nominal' />
+      <column-instance column='[Calculation_1823676380616044544]' derivation='Sum' name='[sum:Calculation_1823676380616044544:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[Calculation_2196349250826502146]' derivation='Sum' name='[sum:Calculation_2196349250826502146:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[SPX Close (copy)_2196349250826919939]' derivation='Sum' name='[sum:SPX Close (copy)_2196349250826919939:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[SPX Close (copy)_2196349250827182084]' derivation='Sum' name='[sum:SPX Close (copy)_2196349250827182084:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[SPX Low (copy)_2196349250827530245]' derivation='Sum' name='[sum:SPX Low (copy)_2196349250827530245:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[ask]' derivation='Sum' name='[sum:ask:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[asksize]' derivation='Sum' name='[sum:asksize:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[average_volume]' derivation='Sum' name='[sum:average_volume:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[bid]' derivation='Sum' name='[sum:bid:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[bidsize]' derivation='Sum' name='[sum:bidsize:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[change]' derivation='Sum' name='[sum:change:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[change_percentage]' derivation='Sum' name='[sum:change_percentage:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[contract_size]' derivation='Sum' name='[sum:contract_size:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[gex]' derivation='Sum' name='[sum:gex:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[gex_diff]' derivation='Sum' name='[sum:gex_diff:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[gex_pct_change]' derivation='Sum' name='[sum:gex_pct_change:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[greeks.ask_iv]' derivation='Sum' name='[sum:greeks.ask_iv:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[greeks.ask_iv_diff]' derivation='Sum' name='[sum:greeks.ask_iv_diff:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[greeks.ask_iv_pct_change]' derivation='Sum' name='[sum:greeks.ask_iv_pct_change:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[greeks.bid_iv]' derivation='Sum' name='[sum:greeks.bid_iv:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[greeks.bid_iv_diff]' derivation='Sum' name='[sum:greeks.bid_iv_diff:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[greeks.bid_iv_pct_change]' derivation='Sum' name='[sum:greeks.bid_iv_pct_change:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[greeks.delta]' derivation='Sum' name='[sum:greeks.delta:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[greeks.delta_diff]' derivation='Sum' name='[sum:greeks.delta_diff:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[greeks.delta_pct_change]' derivation='Sum' name='[sum:greeks.delta_pct_change:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[greeks.gamma]' derivation='Sum' name='[sum:greeks.gamma:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[greeks.gamma_diff]' derivation='Sum' name='[sum:greeks.gamma_diff:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[greeks.gamma_pct_change]' derivation='Sum' name='[sum:greeks.gamma_pct_change:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[greeks.mid_iv]' derivation='Sum' name='[sum:greeks.mid_iv:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[greeks.mid_iv_diff]' derivation='Sum' name='[sum:greeks.mid_iv_diff:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[greeks.mid_iv_pct_change]' derivation='Sum' name='[sum:greeks.mid_iv_pct_change:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[greeks.phi]' derivation='Sum' name='[sum:greeks.phi:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[greeks.phi_diff]' derivation='Sum' name='[sum:greeks.phi_diff:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[greeks.phi_pct_change]' derivation='Sum' name='[sum:greeks.phi_pct_change:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[greeks.rho]' derivation='Sum' name='[sum:greeks.rho:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[greeks.rho_diff]' derivation='Sum' name='[sum:greeks.rho_diff:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[greeks.rho_pct_change]' derivation='Sum' name='[sum:greeks.rho_pct_change:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[greeks.smv_vol]' derivation='Sum' name='[sum:greeks.smv_vol:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[greeks.smv_vol_diff]' derivation='Sum' name='[sum:greeks.smv_vol_diff:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[greeks.smv_vol_pct_change]' derivation='Sum' name='[sum:greeks.smv_vol_pct_change:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[greeks.theta]' derivation='Sum' name='[sum:greeks.theta:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[greeks.theta_diff]' derivation='Sum' name='[sum:greeks.theta_diff:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[greeks.theta_pct_change]' derivation='Sum' name='[sum:greeks.theta_pct_change:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[greeks.vega]' derivation='Sum' name='[sum:greeks.vega:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[greeks.vega_diff]' derivation='Sum' name='[sum:greeks.vega_diff:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[greeks.vega_pct_change]' derivation='Sum' name='[sum:greeks.vega_pct_change:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[last]' derivation='Sum' name='[sum:last:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[last_volume]' derivation='Sum' name='[sum:last_volume:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[open_interest]' derivation='Sum' name='[sum:open_interest:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[prevclose]' derivation='Sum' name='[sum:prevclose:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[spx_ask]' derivation='Sum' name='[sum:spx_ask:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[spx_bid]' derivation='Sum' name='[sum:spx_bid:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[spx_change]' derivation='Sum' name='[sum:spx_change:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[spx_change_pct]' derivation='Sum' name='[sum:spx_change_pct:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[spx_close]' derivation='Sum' name='[sum:spx_close:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[spx_high]' derivation='Sum' name='[sum:spx_high:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[spx_intraday_close]' derivation='Sum' name='[sum:spx_intraday_close:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[spx_low]' derivation='Sum' name='[sum:spx_low:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[spx_open]' derivation='Sum' name='[sum:spx_open:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[spx_prevclose]' derivation='Sum' name='[sum:spx_prevclose:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[spx_price]' derivation='Sum' name='[sum:spx_price:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[strike]' derivation='Sum' name='[sum:strike:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[volume]' derivation='Sum' name='[sum:volume:qk]' pivot='key' type='quantitative' />
+      <layout dim-ordering='alphabetic' measure-ordering='alphabetic' show-structure='true' />
+      <style>
+        <style-rule element='mark'>
+          <encoding attr='color' field='[dy:greeks.updated_at:ok]' type='palette'>
+            <map to='#4e79a7'>
+              <bucket>26</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>28</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>25</bucket>
+            </map>
+          </encoding>
+          <encoding attr='color' field='[:Measure Names]' palette='traffic_light_10_0' type='palette'>
+            <map to='#499894'>
+              <bucket>&quot;[federated.1okw98w1c3nc5r168ipkq0khzmd7].[__tableau_internal_object_id__].[cnt:gex_table_04D18F6878AC42218F11DBA65E0C79DA:qk]&quot;</bucket>
+            </map>
+            <map to='#499894'>
+              <bucket>&quot;[federated.1okw98w1c3nc5r168ipkq0khzmd7].[sum:change_percentage:qk]&quot;</bucket>
+            </map>
+            <map to='#499894'>
+              <bucket>&quot;[federated.1okw98w1c3nc5r168ipkq0khzmd7].[sum:spx_ask:qk]&quot;</bucket>
+            </map>
+            <map to='#4e79a7'>
+              <bucket>&quot;[federated.1okw98w1c3nc5r168ipkq0khzmd7].[cum:sum:gex:qk]&quot;</bucket>
+            </map>
+            <map to='#4e79a7'>
+              <bucket>&quot;[federated.1okw98w1c3nc5r168ipkq0khzmd7].[sum:gex:qk]&quot;</bucket>
+            </map>
+            <map to='#4e79a7'>
+              <bucket>&quot;[federated.1okw98w1c3nc5r168ipkq0khzmd7].[sum:greeks.vega_diff:qk]&quot;</bucket>
+            </map>
+            <map to='#4e79a7'>
+              <bucket>&quot;[federated.1okw98w1c3nc5r168ipkq0khzmd7].[sum:greeks.vega:qk]&quot;</bucket>
+            </map>
+            <map to='#51b364'>
+              <bucket>&quot;[federated.1okw98w1c3nc5r168ipkq0khzmd7].[sum:SPX Close (copy)_2196349250827182084:qk]&quot;</bucket>
+            </map>
+            <map to='#59a14f'>
+              <bucket>&quot;[federated.1okw98w1c3nc5r168ipkq0khzmd7].[sum:average_volume:qk]&quot;</bucket>
+            </map>
+            <map to='#59a14f'>
+              <bucket>&quot;[federated.1okw98w1c3nc5r168ipkq0khzmd7].[sum:greeks.mid_iv:qk]&quot;</bucket>
+            </map>
+            <map to='#59a14f'>
+              <bucket>&quot;[federated.1okw98w1c3nc5r168ipkq0khzmd7].[sum:open_interest:qk]&quot;</bucket>
+            </map>
+            <map to='#79706e'>
+              <bucket>&quot;[federated.1okw98w1c3nc5r168ipkq0khzmd7].[sum:greeks.ask_iv:qk]&quot;</bucket>
+            </map>
+            <map to='#79706e'>
+              <bucket>&quot;[federated.1okw98w1c3nc5r168ipkq0khzmd7].[sum:greeks.rho_diff:qk]&quot;</bucket>
+            </map>
+            <map to='#86bcb6'>
+              <bucket>&quot;[federated.1okw98w1c3nc5r168ipkq0khzmd7].[sum:contract_size:qk]&quot;</bucket>
+            </map>
+            <map to='#86bcb6'>
+              <bucket>&quot;[federated.1okw98w1c3nc5r168ipkq0khzmd7].[sum:greeks.phi_diff:qk]&quot;</bucket>
+            </map>
+            <map to='#86bcb6'>
+              <bucket>&quot;[federated.1okw98w1c3nc5r168ipkq0khzmd7].[sum:spx_bid:qk]&quot;</bucket>
+            </map>
+            <map to='#8cd17d'>
+              <bucket>&quot;[federated.1okw98w1c3nc5r168ipkq0khzmd7].[sum:bid:qk]&quot;</bucket>
+            </map>
+            <map to='#8cd17d'>
+              <bucket>&quot;[federated.1okw98w1c3nc5r168ipkq0khzmd7].[sum:greeks.mid_iv_diff:qk]&quot;</bucket>
+            </map>
+            <map to='#8cd17d'>
+              <bucket>&quot;[federated.1okw98w1c3nc5r168ipkq0khzmd7].[sum:prevclose:qk]&quot;</bucket>
+            </map>
+            <map to='#9d7660'>
+              <bucket>&quot;[federated.1okw98w1c3nc5r168ipkq0khzmd7].[sum:greeks.delta:qk]&quot;</bucket>
+            </map>
+            <map to='#9d7660'>
+              <bucket>&quot;[federated.1okw98w1c3nc5r168ipkq0khzmd7].[sum:greeks.theta_diff:qk]&quot;</bucket>
+            </map>
+            <map to='#9d7660'>
+              <bucket>&quot;[federated.1okw98w1c3nc5r168ipkq0khzmd7].[sum:strike:qk]&quot;</bucket>
+            </map>
+            <map to='#a0cbe8'>
+              <bucket>&quot;[federated.1okw98w1c3nc5r168ipkq0khzmd7].[sum:ask:qk]&quot;</bucket>
+            </map>
+            <map to='#a0cbe8'>
+              <bucket>&quot;[federated.1okw98w1c3nc5r168ipkq0khzmd7].[sum:greeks.gamma:qk]&quot;</bucket>
+            </map>
+            <map to='#a0cbe8'>
+              <bucket>&quot;[federated.1okw98w1c3nc5r168ipkq0khzmd7].[sum:greeks.vega_pct_change:qk]&quot;</bucket>
+            </map>
+            <map to='#b07aa1'>
+              <bucket>&quot;[federated.1okw98w1c3nc5r168ipkq0khzmd7].[sum:greeks.bid_iv_diff:qk]&quot;</bucket>
+            </map>
+            <map to='#b07aa1'>
+              <bucket>&quot;[federated.1okw98w1c3nc5r168ipkq0khzmd7].[sum:greeks.smv_vol_pct_change:qk]&quot;</bucket>
+            </map>
+            <map to='#b07aa1'>
+              <bucket>&quot;[federated.1okw98w1c3nc5r168ipkq0khzmd7].[sum:spx_prevclose:qk]&quot;</bucket>
+            </map>
+            <map to='#b60a1c'>
+              <bucket>&quot;[federated.1okw98w1c3nc5r168ipkq0khzmd7]&quot;</bucket>
+            </map>
+            <map to='#b60a1c'>
+              <bucket>&quot;[federated.1okw98w1c3nc5r168ipkq0khzmd7].[sum:SPX Close (copy)_2196349250826919939:qk]&quot;</bucket>
+            </map>
+            <map to='#b6992d'>
+              <bucket>&quot;[federated.1okw98w1c3nc5r168ipkq0khzmd7].[sum:bidsize:qk]&quot;</bucket>
+            </map>
+            <map to='#b6992d'>
+              <bucket>&quot;[federated.1okw98w1c3nc5r168ipkq0khzmd7].[sum:greeks.mid_iv_pct_change:qk]&quot;</bucket>
+            </map>
+            <map to='#bab0ac'>
+              <bucket>&quot;[federated.1okw98w1c3nc5r168ipkq0khzmd7].[sum:greeks.ask_iv_diff:qk]&quot;</bucket>
+            </map>
+            <map to='#bab0ac'>
+              <bucket>&quot;[federated.1okw98w1c3nc5r168ipkq0khzmd7].[sum:greeks.rho_pct_change:qk]&quot;</bucket>
+            </map>
+            <map to='#bab0ac'>
+              <bucket>&quot;[federated.1okw98w1c3nc5r168ipkq0khzmd7].[sum:spx_high:qk]&quot;</bucket>
+            </map>
+            <map to='#d37295'>
+              <bucket>&quot;[federated.1okw98w1c3nc5r168ipkq0khzmd7].[sum:greeks.ask_iv_pct_change:qk]&quot;</bucket>
+            </map>
+            <map to='#d37295'>
+              <bucket>&quot;[federated.1okw98w1c3nc5r168ipkq0khzmd7].[sum:greeks.smv_vol:qk]&quot;</bucket>
+            </map>
+            <map to='#d37295'>
+              <bucket>&quot;[federated.1okw98w1c3nc5r168ipkq0khzmd7].[sum:spx_low:qk]&quot;</bucket>
+            </map>
+            <map to='#d4a6c8'>
+              <bucket>&quot;[federated.1okw98w1c3nc5r168ipkq0khzmd7].[sum:greeks.bid_iv_pct_change:qk]&quot;</bucket>
+            </map>
+            <map to='#d4a6c8'>
+              <bucket>&quot;[federated.1okw98w1c3nc5r168ipkq0khzmd7].[sum:greeks.theta:qk]&quot;</bucket>
+            </map>
+            <map to='#d4a6c8'>
+              <bucket>&quot;[federated.1okw98w1c3nc5r168ipkq0khzmd7].[sum:spx_price:qk]&quot;</bucket>
+            </map>
+            <map to='#d7b5a6'>
+              <bucket>&quot;[federated.1okw98w1c3nc5r168ipkq0khzmd7].[sum:greeks.delta_diff:qk]&quot;</bucket>
+            </map>
+            <map to='#d7b5a6'>
+              <bucket>&quot;[federated.1okw98w1c3nc5r168ipkq0khzmd7].[sum:greeks.delta_pct_change:qk]&quot;</bucket>
+            </map>
+            <map to='#d7b5a6'>
+              <bucket>&quot;[federated.1okw98w1c3nc5r168ipkq0khzmd7].[sum:greeks.theta_pct_change:qk]&quot;</bucket>
+            </map>
+            <map to='#d7b5a6'>
+              <bucket>&quot;[federated.1okw98w1c3nc5r168ipkq0khzmd7].[sum:volume:qk]&quot;</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>&quot;[federated.1okw98w1c3nc5r168ipkq0khzmd7].[sum:gex_diff:qk]&quot;</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>&quot;[federated.1okw98w1c3nc5r168ipkq0khzmd7].[sum:greeks.phi_pct_change:qk]&quot;</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>&quot;[federated.1okw98w1c3nc5r168ipkq0khzmd7].[sum:spx_change:qk]&quot;</bucket>
+            </map>
+            <map to='#e39802'>
+              <bucket>&quot;[federated.1okw98w1c3nc5r168ipkq0khzmd7].[sum:SPX Low (copy)_2196349250827530245:qk]&quot;</bucket>
+            </map>
+            <map to='#f0bd27'>
+              <bucket>&quot;[federated.1okw98w1c3nc5r168ipkq0khzmd7].[sum:spx_intraday_close:qk]&quot;</bucket>
+            </map>
+            <map to='#f1ce63'>
+              <bucket>&quot;[federated.1okw98w1c3nc5r168ipkq0khzmd7].[sum:change:qk]&quot;</bucket>
+            </map>
+            <map to='#f1ce63'>
+              <bucket>&quot;[federated.1okw98w1c3nc5r168ipkq0khzmd7].[sum:greeks.phi:qk]&quot;</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>&quot;[federated.1okw98w1c3nc5r168ipkq0khzmd7].[avg:last:qk]&quot;</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>&quot;[federated.1okw98w1c3nc5r168ipkq0khzmd7].[sum:Calculation_1823676380616044544:qk]&quot;</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>&quot;[federated.1okw98w1c3nc5r168ipkq0khzmd7].[sum:greeks.gamma_diff:qk]&quot;</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>&quot;[federated.1okw98w1c3nc5r168ipkq0khzmd7].[sum:last:qk]&quot;</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>&quot;[federated.1okw98w1c3nc5r168ipkq0khzmd7].[sum:spx_close:qk]&quot;</bucket>
+            </map>
+            <map to='#fabfd2'>
+              <bucket>&quot;[federated.1okw98w1c3nc5r168ipkq0khzmd7].[sum:greeks.bid_iv:qk]&quot;</bucket>
+            </map>
+            <map to='#fabfd2'>
+              <bucket>&quot;[federated.1okw98w1c3nc5r168ipkq0khzmd7].[sum:greeks.smv_vol_diff:qk]&quot;</bucket>
+            </map>
+            <map to='#fabfd2'>
+              <bucket>&quot;[federated.1okw98w1c3nc5r168ipkq0khzmd7].[sum:spx_open:qk]&quot;</bucket>
+            </map>
+            <map to='#ff9d9a'>
+              <bucket>&quot;[federated.1okw98w1c3nc5r168ipkq0khzmd7].[sum:gex_pct_change:qk]&quot;</bucket>
+            </map>
+            <map to='#ff9d9a'>
+              <bucket>&quot;[federated.1okw98w1c3nc5r168ipkq0khzmd7].[sum:greeks.rho:qk]&quot;</bucket>
+            </map>
+            <map to='#ff9d9a'>
+              <bucket>&quot;[federated.1okw98w1c3nc5r168ipkq0khzmd7].[sum:spx_change_pct:qk]&quot;</bucket>
+            </map>
+            <map to='#ffbe7d'>
+              <bucket>&quot;[federated.1okw98w1c3nc5r168ipkq0khzmd7].[sum:asksize:qk]&quot;</bucket>
+            </map>
+            <map to='#ffbe7d'>
+              <bucket>&quot;[federated.1okw98w1c3nc5r168ipkq0khzmd7].[sum:greeks.gamma_pct_change:qk]&quot;</bucket>
+            </map>
+            <map to='#ffbe7d'>
+              <bucket>&quot;[federated.1okw98w1c3nc5r168ipkq0khzmd7].[sum:last_volume:qk]&quot;</bucket>
+            </map>
+            <map to='#ffda66'>
+              <bucket>&quot;[federated.1okw98w1c3nc5r168ipkq0khzmd7].[sum:Calculation_2196349250826502146:qk]&quot;</bucket>
+            </map>
+          </encoding>
+          <encoding attr='color' field='[none:option_type:nk]' type='palette'>
+            <map to='#4e79a7'>
+              <bucket>&quot;call&quot;</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>&quot;put&quot;</bucket>
+            </map>
+          </encoding>
+          <encoding attr='color' field='[none:Strike (copy)_1880252850928431104:ok]' type='palette'>
+            <map to='#499894'>
+              <bucket>3600.0</bucket>
+            </map>
+            <map to='#499894'>
+              <bucket>4900.0</bucket>
+            </map>
+            <map to='#499894'>
+              <bucket>5110.0</bucket>
+            </map>
+            <map to='#499894'>
+              <bucket>5275.0</bucket>
+            </map>
+            <map to='#499894'>
+              <bucket>5440.0</bucket>
+            </map>
+            <map to='#499894'>
+              <bucket>5610.0</bucket>
+            </map>
+            <map to='#499894'>
+              <bucket>5775.0</bucket>
+            </map>
+            <map to='#499894'>
+              <bucket>5940.0</bucket>
+            </map>
+            <map to='#499894'>
+              <bucket>6040.0</bucket>
+            </map>
+            <map to='#499894'>
+              <bucket>6140.0</bucket>
+            </map>
+            <map to='#499894'>
+              <bucket>6240.0</bucket>
+            </map>
+            <map to='#499894'>
+              <bucket>6340.0</bucket>
+            </map>
+            <map to='#499894'>
+              <bucket>6440.0</bucket>
+            </map>
+            <map to='#499894'>
+              <bucket>6540.0</bucket>
+            </map>
+            <map to='#499894'>
+              <bucket>6640.0</bucket>
+            </map>
+            <map to='#499894'>
+              <bucket>6740.0</bucket>
+            </map>
+            <map to='#499894'>
+              <bucket>6840.0</bucket>
+            </map>
+            <map to='#499894'>
+              <bucket>6940.0</bucket>
+            </map>
+            <map to='#499894'>
+              <bucket>7040.0</bucket>
+            </map>
+            <map to='#499894'>
+              <bucket>7170.0</bucket>
+            </map>
+            <map to='#499894'>
+              <bucket>7330.0</bucket>
+            </map>
+            <map to='#499894'>
+              <bucket>7675.0</bucket>
+            </map>
+            <map to='#4e79a7'>
+              <bucket>2000.0</bucket>
+            </map>
+            <map to='#4e79a7'>
+              <bucket>4600.0</bucket>
+            </map>
+            <map to='#4e79a7'>
+              <bucket>5040.0</bucket>
+            </map>
+            <map to='#4e79a7'>
+              <bucket>5210.0</bucket>
+            </map>
+            <map to='#4e79a7'>
+              <bucket>5375.0</bucket>
+            </map>
+            <map to='#4e79a7'>
+              <bucket>5540.0</bucket>
+            </map>
+            <map to='#4e79a7'>
+              <bucket>5710.0</bucket>
+            </map>
+            <map to='#4e79a7'>
+              <bucket>5875.0</bucket>
+            </map>
+            <map to='#4e79a7'>
+              <bucket>6000.0</bucket>
+            </map>
+            <map to='#4e79a7'>
+              <bucket>6100.0</bucket>
+            </map>
+            <map to='#4e79a7'>
+              <bucket>6200.0</bucket>
+            </map>
+            <map to='#4e79a7'>
+              <bucket>6300.0</bucket>
+            </map>
+            <map to='#4e79a7'>
+              <bucket>6400.0</bucket>
+            </map>
+            <map to='#4e79a7'>
+              <bucket>6500.0</bucket>
+            </map>
+            <map to='#4e79a7'>
+              <bucket>6600.0</bucket>
+            </map>
+            <map to='#4e79a7'>
+              <bucket>6700.0</bucket>
+            </map>
+            <map to='#4e79a7'>
+              <bucket>6800.0</bucket>
+            </map>
+            <map to='#4e79a7'>
+              <bucket>6900.0</bucket>
+            </map>
+            <map to='#4e79a7'>
+              <bucket>7000.0</bucket>
+            </map>
+            <map to='#4e79a7'>
+              <bucket>7100.0</bucket>
+            </map>
+            <map to='#4e79a7'>
+              <bucket>7270.0</bucket>
+            </map>
+            <map to='#4e79a7'>
+              <bucket>7430.0</bucket>
+            </map>
+            <map to='#59a14f'>
+              <bucket>2800.0</bucket>
+            </map>
+            <map to='#59a14f'>
+              <bucket>4800.0</bucket>
+            </map>
+            <map to='#59a14f'>
+              <bucket>5075.0</bucket>
+            </map>
+            <map to='#59a14f'>
+              <bucket>5240.0</bucket>
+            </map>
+            <map to='#59a14f'>
+              <bucket>5410.0</bucket>
+            </map>
+            <map to='#59a14f'>
+              <bucket>5575.0</bucket>
+            </map>
+            <map to='#59a14f'>
+              <bucket>5740.0</bucket>
+            </map>
+            <map to='#59a14f'>
+              <bucket>5910.0</bucket>
+            </map>
+            <map to='#59a14f'>
+              <bucket>6020.0</bucket>
+            </map>
+            <map to='#59a14f'>
+              <bucket>6120.0</bucket>
+            </map>
+            <map to='#59a14f'>
+              <bucket>6220.0</bucket>
+            </map>
+            <map to='#59a14f'>
+              <bucket>6320.0</bucket>
+            </map>
+            <map to='#59a14f'>
+              <bucket>6420.0</bucket>
+            </map>
+            <map to='#59a14f'>
+              <bucket>6520.0</bucket>
+            </map>
+            <map to='#59a14f'>
+              <bucket>6620.0</bucket>
+            </map>
+            <map to='#59a14f'>
+              <bucket>6720.0</bucket>
+            </map>
+            <map to='#59a14f'>
+              <bucket>6820.0</bucket>
+            </map>
+            <map to='#59a14f'>
+              <bucket>6920.0</bucket>
+            </map>
+            <map to='#59a14f'>
+              <bucket>7020.0</bucket>
+            </map>
+            <map to='#59a14f'>
+              <bucket>7130.0</bucket>
+            </map>
+            <map to='#59a14f'>
+              <bucket>7300.0</bucket>
+            </map>
+            <map to='#59a14f'>
+              <bucket>7525.0</bucket>
+            </map>
+            <map to='#79706e'>
+              <bucket>4000.0</bucket>
+            </map>
+            <map to='#79706e'>
+              <bucket>4975.0</bucket>
+            </map>
+            <map to='#79706e'>
+              <bucket>5140.0</bucket>
+            </map>
+            <map to='#79706e'>
+              <bucket>5310.0</bucket>
+            </map>
+            <map to='#79706e'>
+              <bucket>5475.0</bucket>
+            </map>
+            <map to='#79706e'>
+              <bucket>5640.0</bucket>
+            </map>
+            <map to='#79706e'>
+              <bucket>5810.0</bucket>
+            </map>
+            <map to='#79706e'>
+              <bucket>5960.0</bucket>
+            </map>
+            <map to='#79706e'>
+              <bucket>6060.0</bucket>
+            </map>
+            <map to='#79706e'>
+              <bucket>6160.0</bucket>
+            </map>
+            <map to='#79706e'>
+              <bucket>6260.0</bucket>
+            </map>
+            <map to='#79706e'>
+              <bucket>6360.0</bucket>
+            </map>
+            <map to='#79706e'>
+              <bucket>6460.0</bucket>
+            </map>
+            <map to='#79706e'>
+              <bucket>6560.0</bucket>
+            </map>
+            <map to='#79706e'>
+              <bucket>6660.0</bucket>
+            </map>
+            <map to='#79706e'>
+              <bucket>6760.0</bucket>
+            </map>
+            <map to='#79706e'>
+              <bucket>6860.0</bucket>
+            </map>
+            <map to='#79706e'>
+              <bucket>6960.0</bucket>
+            </map>
+            <map to='#79706e'>
+              <bucket>7060.0</bucket>
+            </map>
+            <map to='#79706e'>
+              <bucket>7200.0</bucket>
+            </map>
+            <map to='#79706e'>
+              <bucket>7370.0</bucket>
+            </map>
+            <map to='#79706e'>
+              <bucket>8000.0</bucket>
+            </map>
+            <map to='#86bcb6'>
+              <bucket>3700.0</bucket>
+            </map>
+            <map to='#86bcb6'>
+              <bucket>4925.0</bucket>
+            </map>
+            <map to='#86bcb6'>
+              <bucket>5120.0</bucket>
+            </map>
+            <map to='#86bcb6'>
+              <bucket>5280.0</bucket>
+            </map>
+            <map to='#86bcb6'>
+              <bucket>5450.0</bucket>
+            </map>
+            <map to='#86bcb6'>
+              <bucket>5620.0</bucket>
+            </map>
+            <map to='#86bcb6'>
+              <bucket>5780.0</bucket>
+            </map>
+            <map to='#86bcb6'>
+              <bucket>5945.0</bucket>
+            </map>
+            <map to='#86bcb6'>
+              <bucket>6045.0</bucket>
+            </map>
+            <map to='#86bcb6'>
+              <bucket>6145.0</bucket>
+            </map>
+            <map to='#86bcb6'>
+              <bucket>6245.0</bucket>
+            </map>
+            <map to='#86bcb6'>
+              <bucket>6345.0</bucket>
+            </map>
+            <map to='#86bcb6'>
+              <bucket>6445.0</bucket>
+            </map>
+            <map to='#86bcb6'>
+              <bucket>6545.0</bucket>
+            </map>
+            <map to='#86bcb6'>
+              <bucket>6645.0</bucket>
+            </map>
+            <map to='#86bcb6'>
+              <bucket>6745.0</bucket>
+            </map>
+            <map to='#86bcb6'>
+              <bucket>6845.0</bucket>
+            </map>
+            <map to='#86bcb6'>
+              <bucket>6945.0</bucket>
+            </map>
+            <map to='#86bcb6'>
+              <bucket>7045.0</bucket>
+            </map>
+            <map to='#86bcb6'>
+              <bucket>7175.0</bucket>
+            </map>
+            <map to='#86bcb6'>
+              <bucket>7340.0</bucket>
+            </map>
+            <map to='#86bcb6'>
+              <bucket>7700.0</bucket>
+            </map>
+            <map to='#8cd17d'>
+              <bucket>3000.0</bucket>
+            </map>
+            <map to='#8cd17d'>
+              <bucket>4825.0</bucket>
+            </map>
+            <map to='#8cd17d'>
+              <bucket>5080.0</bucket>
+            </map>
+            <map to='#8cd17d'>
+              <bucket>5250.0</bucket>
+            </map>
+            <map to='#8cd17d'>
+              <bucket>5420.0</bucket>
+            </map>
+            <map to='#8cd17d'>
+              <bucket>5580.0</bucket>
+            </map>
+            <map to='#8cd17d'>
+              <bucket>5750.0</bucket>
+            </map>
+            <map to='#8cd17d'>
+              <bucket>5920.0</bucket>
+            </map>
+            <map to='#8cd17d'>
+              <bucket>6025.0</bucket>
+            </map>
+            <map to='#8cd17d'>
+              <bucket>6125.0</bucket>
+            </map>
+            <map to='#8cd17d'>
+              <bucket>6225.0</bucket>
+            </map>
+            <map to='#8cd17d'>
+              <bucket>6325.0</bucket>
+            </map>
+            <map to='#8cd17d'>
+              <bucket>6425.0</bucket>
+            </map>
+            <map to='#8cd17d'>
+              <bucket>6525.0</bucket>
+            </map>
+            <map to='#8cd17d'>
+              <bucket>6625.0</bucket>
+            </map>
+            <map to='#8cd17d'>
+              <bucket>6725.0</bucket>
+            </map>
+            <map to='#8cd17d'>
+              <bucket>6825.0</bucket>
+            </map>
+            <map to='#8cd17d'>
+              <bucket>6925.0</bucket>
+            </map>
+            <map to='#8cd17d'>
+              <bucket>7025.0</bucket>
+            </map>
+            <map to='#8cd17d'>
+              <bucket>7140.0</bucket>
+            </map>
+            <map to='#8cd17d'>
+              <bucket>7310.0</bucket>
+            </map>
+            <map to='#8cd17d'>
+              <bucket>7550.0</bucket>
+            </map>
+            <map to='#9d7660'>
+              <bucket>4500.0</bucket>
+            </map>
+            <map to='#9d7660'>
+              <bucket>5025.0</bucket>
+            </map>
+            <map to='#9d7660'>
+              <bucket>5190.0</bucket>
+            </map>
+            <map to='#9d7660'>
+              <bucket>5360.0</bucket>
+            </map>
+            <map to='#9d7660'>
+              <bucket>5525.0</bucket>
+            </map>
+            <map to='#9d7660'>
+              <bucket>5690.0</bucket>
+            </map>
+            <map to='#9d7660'>
+              <bucket>5860.0</bucket>
+            </map>
+            <map to='#9d7660'>
+              <bucket>5990.0</bucket>
+            </map>
+            <map to='#9d7660'>
+              <bucket>6090.0</bucket>
+            </map>
+            <map to='#9d7660'>
+              <bucket>6190.0</bucket>
+            </map>
+            <map to='#9d7660'>
+              <bucket>6290.0</bucket>
+            </map>
+            <map to='#9d7660'>
+              <bucket>6390.0</bucket>
+            </map>
+            <map to='#9d7660'>
+              <bucket>6490.0</bucket>
+            </map>
+            <map to='#9d7660'>
+              <bucket>6590.0</bucket>
+            </map>
+            <map to='#9d7660'>
+              <bucket>6690.0</bucket>
+            </map>
+            <map to='#9d7660'>
+              <bucket>6790.0</bucket>
+            </map>
+            <map to='#9d7660'>
+              <bucket>6890.0</bucket>
+            </map>
+            <map to='#9d7660'>
+              <bucket>6990.0</bucket>
+            </map>
+            <map to='#9d7660'>
+              <bucket>7090.0</bucket>
+            </map>
+            <map to='#9d7660'>
+              <bucket>7250.0</bucket>
+            </map>
+            <map to='#9d7660'>
+              <bucket>7420.0</bucket>
+            </map>
+            <map to='#a0cbe8'>
+              <bucket>2200.0</bucket>
+            </map>
+            <map to='#a0cbe8'>
+              <bucket>4650.0</bucket>
+            </map>
+            <map to='#a0cbe8'>
+              <bucket>5050.0</bucket>
+            </map>
+            <map to='#a0cbe8'>
+              <bucket>5220.0</bucket>
+            </map>
+            <map to='#a0cbe8'>
+              <bucket>5380.0</bucket>
+            </map>
+            <map to='#a0cbe8'>
+              <bucket>5550.0</bucket>
+            </map>
+            <map to='#a0cbe8'>
+              <bucket>5720.0</bucket>
+            </map>
+            <map to='#a0cbe8'>
+              <bucket>5880.0</bucket>
+            </map>
+            <map to='#a0cbe8'>
+              <bucket>6005.0</bucket>
+            </map>
+            <map to='#a0cbe8'>
+              <bucket>6105.0</bucket>
+            </map>
+            <map to='#a0cbe8'>
+              <bucket>6205.0</bucket>
+            </map>
+            <map to='#a0cbe8'>
+              <bucket>6305.0</bucket>
+            </map>
+            <map to='#a0cbe8'>
+              <bucket>6405.0</bucket>
+            </map>
+            <map to='#a0cbe8'>
+              <bucket>6505.0</bucket>
+            </map>
+            <map to='#a0cbe8'>
+              <bucket>6605.0</bucket>
+            </map>
+            <map to='#a0cbe8'>
+              <bucket>6705.0</bucket>
+            </map>
+            <map to='#a0cbe8'>
+              <bucket>6805.0</bucket>
+            </map>
+            <map to='#a0cbe8'>
+              <bucket>6905.0</bucket>
+            </map>
+            <map to='#a0cbe8'>
+              <bucket>7005.0</bucket>
+            </map>
+            <map to='#a0cbe8'>
+              <bucket>7110.0</bucket>
+            </map>
+            <map to='#a0cbe8'>
+              <bucket>7275.0</bucket>
+            </map>
+            <map to='#a0cbe8'>
+              <bucket>7450.0</bucket>
+            </map>
+            <map to='#b07aa1'>
+              <bucket>4400.0</bucket>
+            </map>
+            <map to='#b07aa1'>
+              <bucket>5010.0</bucket>
+            </map>
+            <map to='#b07aa1'>
+              <bucket>5175.0</bucket>
+            </map>
+            <map to='#b07aa1'>
+              <bucket>5340.0</bucket>
+            </map>
+            <map to='#b07aa1'>
+              <bucket>5510.0</bucket>
+            </map>
+            <map to='#b07aa1'>
+              <bucket>5675.0</bucket>
+            </map>
+            <map to='#b07aa1'>
+              <bucket>5840.0</bucket>
+            </map>
+            <map to='#b07aa1'>
+              <bucket>5980.0</bucket>
+            </map>
+            <map to='#b07aa1'>
+              <bucket>6080.0</bucket>
+            </map>
+            <map to='#b07aa1'>
+              <bucket>6180.0</bucket>
+            </map>
+            <map to='#b07aa1'>
+              <bucket>6280.0</bucket>
+            </map>
+            <map to='#b07aa1'>
+              <bucket>6380.0</bucket>
+            </map>
+            <map to='#b07aa1'>
+              <bucket>6480.0</bucket>
+            </map>
+            <map to='#b07aa1'>
+              <bucket>6580.0</bucket>
+            </map>
+            <map to='#b07aa1'>
+              <bucket>6680.0</bucket>
+            </map>
+            <map to='#b07aa1'>
+              <bucket>6780.0</bucket>
+            </map>
+            <map to='#b07aa1'>
+              <bucket>6880.0</bucket>
+            </map>
+            <map to='#b07aa1'>
+              <bucket>6980.0</bucket>
+            </map>
+            <map to='#b07aa1'>
+              <bucket>7080.0</bucket>
+            </map>
+            <map to='#b07aa1'>
+              <bucket>7230.0</bucket>
+            </map>
+            <map to='#b07aa1'>
+              <bucket>7400.0</bucket>
+            </map>
+            <map to='#b07aa1'>
+              <bucket>8500.0</bucket>
+            </map>
+            <map to='#b6992d'>
+              <bucket>3200.0</bucket>
+            </map>
+            <map to='#b6992d'>
+              <bucket>4850.0</bucket>
+            </map>
+            <map to='#b6992d'>
+              <bucket>5090.0</bucket>
+            </map>
+            <map to='#b6992d'>
+              <bucket>5260.0</bucket>
+            </map>
+            <map to='#b6992d'>
+              <bucket>5425.0</bucket>
+            </map>
+            <map to='#b6992d'>
+              <bucket>5590.0</bucket>
+            </map>
+            <map to='#b6992d'>
+              <bucket>5760.0</bucket>
+            </map>
+            <map to='#b6992d'>
+              <bucket>5925.0</bucket>
+            </map>
+            <map to='#b6992d'>
+              <bucket>6030.0</bucket>
+            </map>
+            <map to='#b6992d'>
+              <bucket>6130.0</bucket>
+            </map>
+            <map to='#b6992d'>
+              <bucket>6230.0</bucket>
+            </map>
+            <map to='#b6992d'>
+              <bucket>6330.0</bucket>
+            </map>
+            <map to='#b6992d'>
+              <bucket>6430.0</bucket>
+            </map>
+            <map to='#b6992d'>
+              <bucket>6530.0</bucket>
+            </map>
+            <map to='#b6992d'>
+              <bucket>6630.0</bucket>
+            </map>
+            <map to='#b6992d'>
+              <bucket>6730.0</bucket>
+            </map>
+            <map to='#b6992d'>
+              <bucket>6830.0</bucket>
+            </map>
+            <map to='#b6992d'>
+              <bucket>6930.0</bucket>
+            </map>
+            <map to='#b6992d'>
+              <bucket>7030.0</bucket>
+            </map>
+            <map to='#b6992d'>
+              <bucket>7150.0</bucket>
+            </map>
+            <map to='#b6992d'>
+              <bucket>7320.0</bucket>
+            </map>
+            <map to='#b6992d'>
+              <bucket>7600.0</bucket>
+            </map>
+            <map to='#bab0ac'>
+              <bucket>4100.0</bucket>
+            </map>
+            <map to='#bab0ac'>
+              <bucket>4980.0</bucket>
+            </map>
+            <map to='#bab0ac'>
+              <bucket>5150.0</bucket>
+            </map>
+            <map to='#bab0ac'>
+              <bucket>5320.0</bucket>
+            </map>
+            <map to='#bab0ac'>
+              <bucket>5480.0</bucket>
+            </map>
+            <map to='#bab0ac'>
+              <bucket>5650.0</bucket>
+            </map>
+            <map to='#bab0ac'>
+              <bucket>5820.0</bucket>
+            </map>
+            <map to='#bab0ac'>
+              <bucket>5965.0</bucket>
+            </map>
+            <map to='#bab0ac'>
+              <bucket>6065.0</bucket>
+            </map>
+            <map to='#bab0ac'>
+              <bucket>6165.0</bucket>
+            </map>
+            <map to='#bab0ac'>
+              <bucket>6265.0</bucket>
+            </map>
+            <map to='#bab0ac'>
+              <bucket>6365.0</bucket>
+            </map>
+            <map to='#bab0ac'>
+              <bucket>6465.0</bucket>
+            </map>
+            <map to='#bab0ac'>
+              <bucket>6565.0</bucket>
+            </map>
+            <map to='#bab0ac'>
+              <bucket>6665.0</bucket>
+            </map>
+            <map to='#bab0ac'>
+              <bucket>6765.0</bucket>
+            </map>
+            <map to='#bab0ac'>
+              <bucket>6865.0</bucket>
+            </map>
+            <map to='#bab0ac'>
+              <bucket>6965.0</bucket>
+            </map>
+            <map to='#bab0ac'>
+              <bucket>7065.0</bucket>
+            </map>
+            <map to='#bab0ac'>
+              <bucket>7210.0</bucket>
+            </map>
+            <map to='#bab0ac'>
+              <bucket>7375.0</bucket>
+            </map>
+            <map to='#bab0ac'>
+              <bucket>8100.0</bucket>
+            </map>
+            <map to='#d37295'>
+              <bucket>4200.0</bucket>
+            </map>
+            <map to='#d37295'>
+              <bucket>4990.0</bucket>
+            </map>
+            <map to='#d37295'>
+              <bucket>5160.0</bucket>
+            </map>
+            <map to='#d37295'>
+              <bucket>5325.0</bucket>
+            </map>
+            <map to='#d37295'>
+              <bucket>5490.0</bucket>
+            </map>
+            <map to='#d37295'>
+              <bucket>5660.0</bucket>
+            </map>
+            <map to='#d37295'>
+              <bucket>5825.0</bucket>
+            </map>
+            <map to='#d37295'>
+              <bucket>5970.0</bucket>
+            </map>
+            <map to='#d37295'>
+              <bucket>6070.0</bucket>
+            </map>
+            <map to='#d37295'>
+              <bucket>6170.0</bucket>
+            </map>
+            <map to='#d37295'>
+              <bucket>6270.0</bucket>
+            </map>
+            <map to='#d37295'>
+              <bucket>6370.0</bucket>
+            </map>
+            <map to='#d37295'>
+              <bucket>6470.0</bucket>
+            </map>
+            <map to='#d37295'>
+              <bucket>6570.0</bucket>
+            </map>
+            <map to='#d37295'>
+              <bucket>6670.0</bucket>
+            </map>
+            <map to='#d37295'>
+              <bucket>6770.0</bucket>
+            </map>
+            <map to='#d37295'>
+              <bucket>6870.0</bucket>
+            </map>
+            <map to='#d37295'>
+              <bucket>6970.0</bucket>
+            </map>
+            <map to='#d37295'>
+              <bucket>7070.0</bucket>
+            </map>
+            <map to='#d37295'>
+              <bucket>7220.0</bucket>
+            </map>
+            <map to='#d37295'>
+              <bucket>7380.0</bucket>
+            </map>
+            <map to='#d37295'>
+              <bucket>8200.0</bucket>
+            </map>
+            <map to='#d4a6c8'>
+              <bucket>4450.0</bucket>
+            </map>
+            <map to='#d4a6c8'>
+              <bucket>5020.0</bucket>
+            </map>
+            <map to='#d4a6c8'>
+              <bucket>5180.0</bucket>
+            </map>
+            <map to='#d4a6c8'>
+              <bucket>5350.0</bucket>
+            </map>
+            <map to='#d4a6c8'>
+              <bucket>5520.0</bucket>
+            </map>
+            <map to='#d4a6c8'>
+              <bucket>5680.0</bucket>
+            </map>
+            <map to='#d4a6c8'>
+              <bucket>5850.0</bucket>
+            </map>
+            <map to='#d4a6c8'>
+              <bucket>5985.0</bucket>
+            </map>
+            <map to='#d4a6c8'>
+              <bucket>6085.0</bucket>
+            </map>
+            <map to='#d4a6c8'>
+              <bucket>6185.0</bucket>
+            </map>
+            <map to='#d4a6c8'>
+              <bucket>6285.0</bucket>
+            </map>
+            <map to='#d4a6c8'>
+              <bucket>6385.0</bucket>
+            </map>
+            <map to='#d4a6c8'>
+              <bucket>6485.0</bucket>
+            </map>
+            <map to='#d4a6c8'>
+              <bucket>6585.0</bucket>
+            </map>
+            <map to='#d4a6c8'>
+              <bucket>6685.0</bucket>
+            </map>
+            <map to='#d4a6c8'>
+              <bucket>6785.0</bucket>
+            </map>
+            <map to='#d4a6c8'>
+              <bucket>6885.0</bucket>
+            </map>
+            <map to='#d4a6c8'>
+              <bucket>6985.0</bucket>
+            </map>
+            <map to='#d4a6c8'>
+              <bucket>7085.0</bucket>
+            </map>
+            <map to='#d4a6c8'>
+              <bucket>7240.0</bucket>
+            </map>
+            <map to='#d4a6c8'>
+              <bucket>7410.0</bucket>
+            </map>
+            <map to='#d4a6c8'>
+              <bucket>8600.0</bucket>
+            </map>
+            <map to='#d7b5a6'>
+              <bucket>4550.0</bucket>
+            </map>
+            <map to='#d7b5a6'>
+              <bucket>5030.0</bucket>
+            </map>
+            <map to='#d7b5a6'>
+              <bucket>5200.0</bucket>
+            </map>
+            <map to='#d7b5a6'>
+              <bucket>5370.0</bucket>
+            </map>
+            <map to='#d7b5a6'>
+              <bucket>5530.0</bucket>
+            </map>
+            <map to='#d7b5a6'>
+              <bucket>5700.0</bucket>
+            </map>
+            <map to='#d7b5a6'>
+              <bucket>5870.0</bucket>
+            </map>
+            <map to='#d7b5a6'>
+              <bucket>5995.0</bucket>
+            </map>
+            <map to='#d7b5a6'>
+              <bucket>6095.0</bucket>
+            </map>
+            <map to='#d7b5a6'>
+              <bucket>6195.0</bucket>
+            </map>
+            <map to='#d7b5a6'>
+              <bucket>6295.0</bucket>
+            </map>
+            <map to='#d7b5a6'>
+              <bucket>6395.0</bucket>
+            </map>
+            <map to='#d7b5a6'>
+              <bucket>6495.0</bucket>
+            </map>
+            <map to='#d7b5a6'>
+              <bucket>6595.0</bucket>
+            </map>
+            <map to='#d7b5a6'>
+              <bucket>6695.0</bucket>
+            </map>
+            <map to='#d7b5a6'>
+              <bucket>6795.0</bucket>
+            </map>
+            <map to='#d7b5a6'>
+              <bucket>6895.0</bucket>
+            </map>
+            <map to='#d7b5a6'>
+              <bucket>6995.0</bucket>
+            </map>
+            <map to='#d7b5a6'>
+              <bucket>7095.0</bucket>
+            </map>
+            <map to='#d7b5a6'>
+              <bucket>7260.0</bucket>
+            </map>
+            <map to='#d7b5a6'>
+              <bucket>7425.0</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>3800.0</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>4950.0</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>5125.0</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>5290.0</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>5460.0</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>5625.0</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>5790.0</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>5950.0</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>6050.0</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>6150.0</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>6250.0</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>6350.0</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>6450.0</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>6550.0</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>6650.0</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>6750.0</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>6850.0</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>6950.0</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>7050.0</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>7180.0</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>7350.0</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>7800.0</bucket>
+            </map>
+            <map to='#f1ce63'>
+              <bucket>3400.0</bucket>
+            </map>
+            <map to='#f1ce63'>
+              <bucket>4875.0</bucket>
+            </map>
+            <map to='#f1ce63'>
+              <bucket>5100.0</bucket>
+            </map>
+            <map to='#f1ce63'>
+              <bucket>5270.0</bucket>
+            </map>
+            <map to='#f1ce63'>
+              <bucket>5430.0</bucket>
+            </map>
+            <map to='#f1ce63'>
+              <bucket>5600.0</bucket>
+            </map>
+            <map to='#f1ce63'>
+              <bucket>5770.0</bucket>
+            </map>
+            <map to='#f1ce63'>
+              <bucket>5930.0</bucket>
+            </map>
+            <map to='#f1ce63'>
+              <bucket>6035.0</bucket>
+            </map>
+            <map to='#f1ce63'>
+              <bucket>6135.0</bucket>
+            </map>
+            <map to='#f1ce63'>
+              <bucket>6235.0</bucket>
+            </map>
+            <map to='#f1ce63'>
+              <bucket>6335.0</bucket>
+            </map>
+            <map to='#f1ce63'>
+              <bucket>6435.0</bucket>
+            </map>
+            <map to='#f1ce63'>
+              <bucket>6535.0</bucket>
+            </map>
+            <map to='#f1ce63'>
+              <bucket>6635.0</bucket>
+            </map>
+            <map to='#f1ce63'>
+              <bucket>6735.0</bucket>
+            </map>
+            <map to='#f1ce63'>
+              <bucket>6835.0</bucket>
+            </map>
+            <map to='#f1ce63'>
+              <bucket>6935.0</bucket>
+            </map>
+            <map to='#f1ce63'>
+              <bucket>7035.0</bucket>
+            </map>
+            <map to='#f1ce63'>
+              <bucket>7160.0</bucket>
+            </map>
+            <map to='#f1ce63'>
+              <bucket>7325.0</bucket>
+            </map>
+            <map to='#f1ce63'>
+              <bucket>7650.0</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>2400.0</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>4700.0</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>5060.0</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>5225.0</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>5390.0</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>5560.0</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>5725.0</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>5890.0</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>6010.0</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>6110.0</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>6210.0</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>6310.0</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>6410.0</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>6510.0</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>6610.0</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>6710.0</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>6810.0</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>6910.0</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>7010.0</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>7120.0</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>7280.0</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>7475.0</bucket>
+            </map>
+            <map to='#fabfd2'>
+              <bucket>4300.0</bucket>
+            </map>
+            <map to='#fabfd2'>
+              <bucket>5000.0</bucket>
+            </map>
+            <map to='#fabfd2'>
+              <bucket>5170.0</bucket>
+            </map>
+            <map to='#fabfd2'>
+              <bucket>5330.0</bucket>
+            </map>
+            <map to='#fabfd2'>
+              <bucket>5500.0</bucket>
+            </map>
+            <map to='#fabfd2'>
+              <bucket>5670.0</bucket>
+            </map>
+            <map to='#fabfd2'>
+              <bucket>5830.0</bucket>
+            </map>
+            <map to='#fabfd2'>
+              <bucket>5975.0</bucket>
+            </map>
+            <map to='#fabfd2'>
+              <bucket>6075.0</bucket>
+            </map>
+            <map to='#fabfd2'>
+              <bucket>6175.0</bucket>
+            </map>
+            <map to='#fabfd2'>
+              <bucket>6275.0</bucket>
+            </map>
+            <map to='#fabfd2'>
+              <bucket>6375.0</bucket>
+            </map>
+            <map to='#fabfd2'>
+              <bucket>6475.0</bucket>
+            </map>
+            <map to='#fabfd2'>
+              <bucket>6575.0</bucket>
+            </map>
+            <map to='#fabfd2'>
+              <bucket>6675.0</bucket>
+            </map>
+            <map to='#fabfd2'>
+              <bucket>6775.0</bucket>
+            </map>
+            <map to='#fabfd2'>
+              <bucket>6875.0</bucket>
+            </map>
+            <map to='#fabfd2'>
+              <bucket>6975.0</bucket>
+            </map>
+            <map to='#fabfd2'>
+              <bucket>7075.0</bucket>
+            </map>
+            <map to='#fabfd2'>
+              <bucket>7225.0</bucket>
+            </map>
+            <map to='#fabfd2'>
+              <bucket>7390.0</bucket>
+            </map>
+            <map to='#fabfd2'>
+              <bucket>8400.0</bucket>
+            </map>
+            <map to='#ff9d9a'>
+              <bucket>3900.0</bucket>
+            </map>
+            <map to='#ff9d9a'>
+              <bucket>4970.0</bucket>
+            </map>
+            <map to='#ff9d9a'>
+              <bucket>5130.0</bucket>
+            </map>
+            <map to='#ff9d9a'>
+              <bucket>5300.0</bucket>
+            </map>
+            <map to='#ff9d9a'>
+              <bucket>5470.0</bucket>
+            </map>
+            <map to='#ff9d9a'>
+              <bucket>5630.0</bucket>
+            </map>
+            <map to='#ff9d9a'>
+              <bucket>5800.0</bucket>
+            </map>
+            <map to='#ff9d9a'>
+              <bucket>5955.0</bucket>
+            </map>
+            <map to='#ff9d9a'>
+              <bucket>6055.0</bucket>
+            </map>
+            <map to='#ff9d9a'>
+              <bucket>6155.0</bucket>
+            </map>
+            <map to='#ff9d9a'>
+              <bucket>6255.0</bucket>
+            </map>
+            <map to='#ff9d9a'>
+              <bucket>6355.0</bucket>
+            </map>
+            <map to='#ff9d9a'>
+              <bucket>6455.0</bucket>
+            </map>
+            <map to='#ff9d9a'>
+              <bucket>6555.0</bucket>
+            </map>
+            <map to='#ff9d9a'>
+              <bucket>6655.0</bucket>
+            </map>
+            <map to='#ff9d9a'>
+              <bucket>6755.0</bucket>
+            </map>
+            <map to='#ff9d9a'>
+              <bucket>6855.0</bucket>
+            </map>
+            <map to='#ff9d9a'>
+              <bucket>6955.0</bucket>
+            </map>
+            <map to='#ff9d9a'>
+              <bucket>7055.0</bucket>
+            </map>
+            <map to='#ff9d9a'>
+              <bucket>7190.0</bucket>
+            </map>
+            <map to='#ff9d9a'>
+              <bucket>7360.0</bucket>
+            </map>
+            <map to='#ff9d9a'>
+              <bucket>7900.0</bucket>
+            </map>
+            <map to='#ffbe7d'>
+              <bucket>2600.0</bucket>
+            </map>
+            <map to='#ffbe7d'>
+              <bucket>4750.0</bucket>
+            </map>
+            <map to='#ffbe7d'>
+              <bucket>5070.0</bucket>
+            </map>
+            <map to='#ffbe7d'>
+              <bucket>5230.0</bucket>
+            </map>
+            <map to='#ffbe7d'>
+              <bucket>5400.0</bucket>
+            </map>
+            <map to='#ffbe7d'>
+              <bucket>5570.0</bucket>
+            </map>
+            <map to='#ffbe7d'>
+              <bucket>5730.0</bucket>
+            </map>
+            <map to='#ffbe7d'>
+              <bucket>5900.0</bucket>
+            </map>
+            <map to='#ffbe7d'>
+              <bucket>6015.0</bucket>
+            </map>
+            <map to='#ffbe7d'>
+              <bucket>6115.0</bucket>
+            </map>
+            <map to='#ffbe7d'>
+              <bucket>6215.0</bucket>
+            </map>
+            <map to='#ffbe7d'>
+              <bucket>6315.0</bucket>
+            </map>
+            <map to='#ffbe7d'>
+              <bucket>6415.0</bucket>
+            </map>
+            <map to='#ffbe7d'>
+              <bucket>6515.0</bucket>
+            </map>
+            <map to='#ffbe7d'>
+              <bucket>6615.0</bucket>
+            </map>
+            <map to='#ffbe7d'>
+              <bucket>6715.0</bucket>
+            </map>
+            <map to='#ffbe7d'>
+              <bucket>6815.0</bucket>
+            </map>
+            <map to='#ffbe7d'>
+              <bucket>6915.0</bucket>
+            </map>
+            <map to='#ffbe7d'>
+              <bucket>7015.0</bucket>
+            </map>
+            <map to='#ffbe7d'>
+              <bucket>7125.0</bucket>
+            </map>
+            <map to='#ffbe7d'>
+              <bucket>7290.0</bucket>
+            </map>
+            <map to='#ffbe7d'>
+              <bucket>7500.0</bucket>
+            </map>
+          </encoding>
+        </style-rule>
+      </style>
+      <semantic-values>
+        <semantic-value key='[Country].[Name]' value='&quot;United States&quot;' />
+      </semantic-values>
+      <field-sort-info field-sort-order-type='custom-order'>
+        <field-sort-custom-order field='greeks.updated_at' />
+        <field-sort-custom-order field='expiration_date' />
+        <field-sort-custom-order field='option_type' />
+        <field-sort-custom-order field='strike' />
+        <field-sort-custom-order field='symbol' />
+        <field-sort-custom-order field='description' />
+        <field-sort-custom-order field='exch' />
+        <field-sort-custom-order field='type' />
+        <field-sort-custom-order field='underlying' />
+        <field-sort-custom-order field='expiration_type' />
+        <field-sort-custom-order field='root_symbol' />
+        <field-sort-custom-order field='last' />
+        <field-sort-custom-order field='change' />
+        <field-sort-custom-order field='open' />
+        <field-sort-custom-order field='high' />
+        <field-sort-custom-order field='low' />
+        <field-sort-custom-order field='close' />
+        <field-sort-custom-order field='bid' />
+        <field-sort-custom-order field='ask' />
+        <field-sort-custom-order field='prevclose' />
+        <field-sort-custom-order field='Calculation_1823676380616044544' />
+        <field-sort-custom-order field='change_percentage' />
+        <field-sort-custom-order field='week_52_high' />
+        <field-sort-custom-order field='week_52_low' />
+        <field-sort-custom-order field='volume' />
+        <field-sort-custom-order field='average_volume' />
+        <field-sort-custom-order field='last_volume' />
+        <field-sort-custom-order field='open_interest' />
+        <field-sort-custom-order field='bidsize' />
+        <field-sort-custom-order field='bidexch' />
+        <field-sort-custom-order field='bid_date' />
+        <field-sort-custom-order field='asksize' />
+        <field-sort-custom-order field='askexch' />
+        <field-sort-custom-order field='ask_date' />
+        <field-sort-custom-order field='trade_date' />
+        <field-sort-custom-order field='contract_size' />
+        <field-sort-custom-order field='greeks.delta' />
+        <field-sort-custom-order field='greeks.gamma' />
+        <field-sort-custom-order field='greeks.theta' />
+        <field-sort-custom-order field='greeks.vega' />
+        <field-sort-custom-order field='greeks.rho' />
+        <field-sort-custom-order field='greeks.phi' />
+        <field-sort-custom-order field='greeks.bid_iv' />
+        <field-sort-custom-order field='greeks.mid_iv' />
+        <field-sort-custom-order field='greeks.ask_iv' />
+        <field-sort-custom-order field='greeks.smv_vol' />
+        <field-sort-custom-order field='gex' />
+        <field-sort-custom-order field='greeks.delta_diff' />
+        <field-sort-custom-order field='greeks.gamma_diff' />
+        <field-sort-custom-order field='greeks.theta_diff' />
+        <field-sort-custom-order field='greeks.vega_diff' />
+        <field-sort-custom-order field='greeks.rho_diff' />
+        <field-sort-custom-order field='greeks.phi_diff' />
+        <field-sort-custom-order field='greeks.bid_iv_diff' />
+        <field-sort-custom-order field='greeks.mid_iv_diff' />
+        <field-sort-custom-order field='greeks.ask_iv_diff' />
+        <field-sort-custom-order field='greeks.smv_vol_diff' />
+        <field-sort-custom-order field='gex_diff' />
+        <field-sort-custom-order field='greeks.delta_pct_change' />
+        <field-sort-custom-order field='greeks.gamma_pct_change' />
+        <field-sort-custom-order field='greeks.theta_pct_change' />
+        <field-sort-custom-order field='greeks.vega_pct_change' />
+        <field-sort-custom-order field='greeks.rho_pct_change' />
+        <field-sort-custom-order field='greeks.phi_pct_change' />
+        <field-sort-custom-order field='greeks.bid_iv_pct_change' />
+        <field-sort-custom-order field='greeks.mid_iv_pct_change' />
+        <field-sort-custom-order field='greeks.ask_iv_pct_change' />
+        <field-sort-custom-order field='greeks.smv_vol_pct_change' />
+        <field-sort-custom-order field='gex_pct_change' />
+        <field-sort-custom-order field='prev_timestamp' />
+        <field-sort-custom-order field='has_previous_data' />
+        <field-sort-custom-order field='spx_price' />
+        <field-sort-custom-order field='spx_open' />
+        <field-sort-custom-order field='spx_high' />
+        <field-sort-custom-order field='spx_low' />
+        <field-sort-custom-order field='spx_close' />
+        <field-sort-custom-order field='Calculation_2196349250826502146' />
+        <field-sort-custom-order field='SPX Close (copy)_2196349250827182084' />
+        <field-sort-custom-order field='SPX Close (copy)_2196349250826919939' />
+        <field-sort-custom-order field='SPX Low (copy)_2196349250827530245' />
+        <field-sort-custom-order field='spx_bid' />
+        <field-sort-custom-order field='spx_ask' />
+        <field-sort-custom-order field='spx_change' />
+        <field-sort-custom-order field='spx_change_pct' />
+        <field-sort-custom-order field='spx_prevclose' />
+        <field-sort-custom-order field='Strike (copy)_1880252850928431104' />
+        <field-sort-custom-order field='Geometry (generated)' />
+        <field-sort-custom-order field='Latitude (generated)' />
+        <field-sort-custom-order field='Longitude (generated)' />
+        <field-sort-custom-order field=':Measure Names' />
+        <field-sort-custom-order field='Multiple Values' />
+      </field-sort-info>
+      <object-graph>
+        <objects>
+          <object caption='gex_table' id='gex_table_54AC125016824D4D86AC836C07B149E0'>
+            <properties context=''>
+              <relation connection='postgres.1p8srsk0e2idhs1fo1ptc15uprsj' name='gex_table' table='[public].[gex_table]' type='table' />
+            </properties>
+          </object>
+        </objects>
+      </object-graph>
+    </datasource>
+  </datasources>
+  <worksheets>
+    <worksheet name='Sheet 2 (2)'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='gex_table (gexdb)' name='federated.1okw98w1c3nc5r168ipkq0khzmd7' />
+          </datasources>
+          <datasource-dependencies datasource='federated.1okw98w1c3nc5r168ipkq0khzmd7'>
+            <column caption='SPX Close' datatype='integer' name='[Calculation_2196349250826502146]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='if [spx_close] &gt;= [strike] - 2.5 &#13;&#10;and [spx_close] &lt; [strike] + 2.5&#13;&#10;then 1 else 0 end' />
+            </column>
+            <column caption='ROUND([Strike ]/1)' datatype='real' name='[Calculation_3400499202229325824]' role='measure' type='quantitative' user:unnamed='Sheet 2 (2)'>
+              <calculation class='tableau' formula='ROUND([Strike (copy)_1880252850928431104]/1)' />
+            </column>
+            <column caption='SPX Low' datatype='integer' name='[SPX Close (copy)_2196349250826919939]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='if [spx_low] &gt;= [strike] - 2.5 &#13;&#10;and [spx_low] &lt; [strike] + 2.5&#13;&#10;then 1 else 0 end' />
+            </column>
+            <column caption='SPX High' datatype='integer' name='[SPX Close (copy)_2196349250827182084]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='if [spx_high] &gt;= [strike] - 2.5 &#13;&#10;and [spx_high] &lt; [strike] + 2.5&#13;&#10;then 1 else 0 end' />
+            </column>
+            <column caption='SPX Open' datatype='integer' name='[SPX Low (copy)_2196349250827530245]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='if [spx_open] &gt;= [strike] - 2.5 &#13;&#10;and [spx_open] &lt; [strike] + 2.5&#13;&#10;then 1 else 0 end' />
+            </column>
+            <column caption='Strike ' datatype='real' name='[Strike (copy)_1880252850928431104]' role='dimension' type='ordinal'>
+              <calculation class='tableau' formula='[strike]' />
+            </column>
+            <column-instance column='[greeks.updated_at]' derivation='Day' name='[dy:greeks.updated_at:ok]' pivot='key' type='ordinal' />
+            <column caption='Expiration Date' datatype='date' datatype-customized='true' name='[expiration_date]' role='dimension' type='ordinal' />
+            <column caption='Gex' datatype='real' name='[gex]' role='measure' type='quantitative' />
+            <column caption='Greeks.Updated At' datatype='datetime' name='[greeks.updated_at]' role='dimension' type='ordinal' />
+            <column-instance column='[Calculation_3400499202229325824]' derivation='None' name='[none:Calculation_3400499202229325824:ok]' pivot='key' type='ordinal' />
+            <column-instance column='[expiration_date]' derivation='None' name='[none:expiration_date:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[greeks.updated_at]' derivation='None' name='[none:greeks.updated_at:ok]' pivot='key' type='ordinal' />
+            <column-instance column='[greeks.updated_at]' derivation='None' name='[none:greeks.updated_at:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[strike]' derivation='None' name='[none:strike:qk]' pivot='key' type='quantitative' />
+            <column caption='Spx Close' datatype='real' name='[spx_close]' role='measure' type='quantitative' />
+            <column caption='Spx High' datatype='real' name='[spx_high]' role='measure' type='quantitative' />
+            <column caption='Spx Low' datatype='real' name='[spx_low]' role='measure' type='quantitative' />
+            <column caption='Spx Open' datatype='real' name='[spx_open]' role='measure' type='quantitative' />
+            <column caption='Strike' datatype='real' name='[strike]' role='measure' type='quantitative' />
+            <column-instance column='[Calculation_2196349250826502146]' derivation='Sum' name='[sum:Calculation_2196349250826502146:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[SPX Close (copy)_2196349250826919939]' derivation='Sum' name='[sum:SPX Close (copy)_2196349250826919939:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[SPX Close (copy)_2196349250827182084]' derivation='Sum' name='[sum:SPX Close (copy)_2196349250827182084:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[SPX Low (copy)_2196349250827530245]' derivation='Sum' name='[sum:SPX Low (copy)_2196349250827530245:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[gex]' derivation='Sum' name='[sum:gex:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[expiration_date]' derivation='Day-Trunc' name='[tdy:expiration_date:ok]' pivot='key' type='ordinal' />
+          </datasource-dependencies>
+          <filter class='categorical' column='[federated.1okw98w1c3nc5r168ipkq0khzmd7].[:Measure Names]'>
+            <groupfilter function='union' user:op='manual'>
+              <groupfilter function='member' level='[:Measure Names]' member='&quot;[federated.1okw98w1c3nc5r168ipkq0khzmd7].[sum:Calculation_2196349250826502146:qk]&quot;' />
+              <groupfilter function='member' level='[:Measure Names]' member='&quot;[federated.1okw98w1c3nc5r168ipkq0khzmd7].[sum:SPX Close (copy)_2196349250827182084:qk]&quot;' />
+              <groupfilter function='member' level='[:Measure Names]' member='&quot;[federated.1okw98w1c3nc5r168ipkq0khzmd7].[sum:SPX Close (copy)_2196349250826919939:qk]&quot;' />
+              <groupfilter function='member' level='[:Measure Names]' member='&quot;[federated.1okw98w1c3nc5r168ipkq0khzmd7].[sum:SPX Low (copy)_2196349250827530245:qk]&quot;' />
+            </groupfilter>
+          </filter>
+          <manual-sort column='[federated.1okw98w1c3nc5r168ipkq0khzmd7].[:Measure Names]' direction='ASC'>
+            <dictionary>
+              <bucket>&quot;[federated.1okw98w1c3nc5r168ipkq0khzmd7].[sum:gex:qk]&quot;</bucket>
+              <bucket>&quot;[federated.1okw98w1c3nc5r168ipkq0khzmd7].[sum:Calculation_2196349250826502146:qk]&quot;</bucket>
+              <bucket>&quot;[federated.1okw98w1c3nc5r168ipkq0khzmd7].[sum:SPX Close (copy)_2196349250827182084:qk]&quot;</bucket>
+              <bucket>&quot;[federated.1okw98w1c3nc5r168ipkq0khzmd7].[sum:SPX Close (copy)_2196349250826919939:qk]&quot;</bucket>
+              <bucket>&quot;[federated.1okw98w1c3nc5r168ipkq0khzmd7].[sum:SPX Low (copy)_2196349250827530245:qk]&quot;</bucket>
+            </dictionary>
+          </manual-sort>
+          <filter class='relative-date' column='[federated.1okw98w1c3nc5r168ipkq0khzmd7].[none:expiration_date:qk]' first-period='-2' include-future='true' include-null='false' last-period='0' period-type-v2='day' />
+          <filter class='relative-date' column='[federated.1okw98w1c3nc5r168ipkq0khzmd7].[none:greeks.updated_at:qk]' first-period='-2' include-future='true' include-null='false' last-period='0' period-type-v2='day' />
+          <filter class='quantitative' column='[federated.1okw98w1c3nc5r168ipkq0khzmd7].[none:strike:qk]' included-values='in-range'>
+            <min>6000.0</min>
+            <max>7500.0</max>
+          </filter>
+          <slices>
+            <column>[federated.1okw98w1c3nc5r168ipkq0khzmd7].[none:strike:qk]</column>
+            <column>[federated.1okw98w1c3nc5r168ipkq0khzmd7].[:Measure Names]</column>
+            <column>[federated.1okw98w1c3nc5r168ipkq0khzmd7].[none:expiration_date:qk]</column>
+            <column>[federated.1okw98w1c3nc5r168ipkq0khzmd7].[none:greeks.updated_at:qk]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='axis'>
+            <encoding attr='space' class='0' field='[federated.1okw98w1c3nc5r168ipkq0khzmd7].[Multiple Values]' field-type='quantitative' fold='true' max='1.0' min='0.0' range-type='fixed' scope='rows' type='space' />
+            <encoding attr='space' class='0' domain-expand='false' field='[federated.1okw98w1c3nc5r168ipkq0khzmd7].[sum:gex:qk]' field-type='quantitative' range-type='independent' scope='rows' type='space' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane id='4' selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Bar' />
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-show' value='false' />
+              </style-rule>
+            </style>
+          </pane>
+          <pane id='5' selection-relaxation-option='selection-relaxation-allow' y-axis-name='[federated.1okw98w1c3nc5r168ipkq0khzmd7].[sum:gex:qk]'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Bar' />
+            <encodings>
+              <color column='[federated.1okw98w1c3nc5r168ipkq0khzmd7].[dy:greeks.updated_at:ok]' />
+            </encodings>
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-show' value='false' />
+              </style-rule>
+            </style>
+          </pane>
+          <pane id='7' selection-relaxation-option='selection-relaxation-allow' y-axis-name='[federated.1okw98w1c3nc5r168ipkq0khzmd7].[Multiple Values]'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Bar' />
+            <mark-sizing mark-sizing-setting='marks-scaling-off' />
+            <encodings>
+              <color column='[federated.1okw98w1c3nc5r168ipkq0khzmd7].[:Measure Names]' />
+            </encodings>
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-show' value='false' />
+                <format attr='size' value='0.0099999997764825821' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows>(([federated.1okw98w1c3nc5r168ipkq0khzmd7].[tdy:expiration_date:ok] / [federated.1okw98w1c3nc5r168ipkq0khzmd7].[none:greeks.updated_at:ok]) * ([federated.1okw98w1c3nc5r168ipkq0khzmd7].[sum:gex:qk] + [federated.1okw98w1c3nc5r168ipkq0khzmd7].[Multiple Values]))</rows>
+        <cols>[federated.1okw98w1c3nc5r168ipkq0khzmd7].[none:Calculation_3400499202229325824:ok]</cols>
+      </table>
+      <simple-id uuid='{7279339C-68A5-4A1A-AC2D-DC6BF74E6F5B}' />
+    </worksheet>
+    <worksheet name='Sheet 2 (3)'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='gex_table (gexdb)' name='federated.1okw98w1c3nc5r168ipkq0khzmd7' />
+          </datasources>
+          <datasource-dependencies datasource='federated.1okw98w1c3nc5r168ipkq0khzmd7'>
+            <column caption='SPX Close' datatype='integer' name='[Calculation_2196349250826502146]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='if [spx_close] &gt;= [strike] - 2.5 &#13;&#10;and [spx_close] &lt; [strike] + 2.5&#13;&#10;then 1 else 0 end' />
+            </column>
+            <column caption='ROUND([Strike ]/1)' datatype='real' name='[Calculation_3400499202229325824]' role='measure' type='quantitative' user:unnamed='Sheet 2 (2)'>
+              <calculation class='tableau' formula='ROUND([Strike (copy)_1880252850928431104]/1)' />
+            </column>
+            <column caption='SPX Low' datatype='integer' name='[SPX Close (copy)_2196349250826919939]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='if [spx_low] &gt;= [strike] - 2.5 &#13;&#10;and [spx_low] &lt; [strike] + 2.5&#13;&#10;then 1 else 0 end' />
+            </column>
+            <column caption='SPX High' datatype='integer' name='[SPX Close (copy)_2196349250827182084]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='if [spx_high] &gt;= [strike] - 2.5 &#13;&#10;and [spx_high] &lt; [strike] + 2.5&#13;&#10;then 1 else 0 end' />
+            </column>
+            <column caption='SPX Open' datatype='integer' name='[SPX Low (copy)_2196349250827530245]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='if [spx_open] &gt;= [strike] - 2.5 &#13;&#10;and [spx_open] &lt; [strike] + 2.5&#13;&#10;then 1 else 0 end' />
+            </column>
+            <column caption='Strike ' datatype='real' name='[Strike (copy)_1880252850928431104]' role='dimension' type='ordinal'>
+              <calculation class='tableau' formula='[strike]' />
+            </column>
+            <column caption='Expiration Date' datatype='date' datatype-customized='true' name='[expiration_date]' role='dimension' type='ordinal' />
+            <column caption='Gex' datatype='real' name='[gex]' role='measure' type='quantitative' />
+            <column caption='Greeks.Updated At' datatype='datetime' name='[greeks.updated_at]' role='dimension' type='ordinal' />
+            <column-instance column='[Calculation_3400499202229325824]' derivation='None' name='[none:Calculation_3400499202229325824:ok]' pivot='key' type='ordinal' />
+            <column-instance column='[expiration_date]' derivation='None' name='[none:expiration_date:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[greeks.updated_at]' derivation='None' name='[none:greeks.updated_at:ok]' pivot='key' type='ordinal' />
+            <column-instance column='[greeks.updated_at]' derivation='None' name='[none:greeks.updated_at:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[option_type]' derivation='None' name='[none:option_type:nk]' pivot='key' type='nominal' />
+            <column-instance column='[strike]' derivation='None' name='[none:strike:qk]' pivot='key' type='quantitative' />
+            <column caption='Option Type' datatype='string' name='[option_type]' role='dimension' type='nominal' />
+            <column caption='Spx Close' datatype='real' name='[spx_close]' role='measure' type='quantitative' />
+            <column caption='Spx High' datatype='real' name='[spx_high]' role='measure' type='quantitative' />
+            <column caption='Spx Low' datatype='real' name='[spx_low]' role='measure' type='quantitative' />
+            <column caption='Spx Open' datatype='real' name='[spx_open]' role='measure' type='quantitative' />
+            <column caption='Strike' datatype='real' name='[strike]' role='measure' type='quantitative' />
+            <column-instance column='[Calculation_2196349250826502146]' derivation='Sum' name='[sum:Calculation_2196349250826502146:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[SPX Close (copy)_2196349250826919939]' derivation='Sum' name='[sum:SPX Close (copy)_2196349250826919939:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[SPX Close (copy)_2196349250827182084]' derivation='Sum' name='[sum:SPX Close (copy)_2196349250827182084:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[SPX Low (copy)_2196349250827530245]' derivation='Sum' name='[sum:SPX Low (copy)_2196349250827530245:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[gex]' derivation='Sum' name='[sum:gex:qk]' pivot='key' type='quantitative' />
+          </datasource-dependencies>
+          <filter class='categorical' column='[federated.1okw98w1c3nc5r168ipkq0khzmd7].[:Measure Names]'>
+            <groupfilter function='union' user:op='manual'>
+              <groupfilter function='member' level='[:Measure Names]' member='&quot;[federated.1okw98w1c3nc5r168ipkq0khzmd7].[sum:Calculation_2196349250826502146:qk]&quot;' />
+              <groupfilter function='member' level='[:Measure Names]' member='&quot;[federated.1okw98w1c3nc5r168ipkq0khzmd7].[sum:SPX Close (copy)_2196349250827182084:qk]&quot;' />
+              <groupfilter function='member' level='[:Measure Names]' member='&quot;[federated.1okw98w1c3nc5r168ipkq0khzmd7].[sum:SPX Close (copy)_2196349250826919939:qk]&quot;' />
+              <groupfilter function='member' level='[:Measure Names]' member='&quot;[federated.1okw98w1c3nc5r168ipkq0khzmd7].[sum:SPX Low (copy)_2196349250827530245:qk]&quot;' />
+            </groupfilter>
+          </filter>
+          <filter class='relative-date' column='[federated.1okw98w1c3nc5r168ipkq0khzmd7].[none:expiration_date:qk]' first-period='-2' include-future='true' include-null='false' last-period='0' period-type-v2='day' />
+          <filter class='relative-date' column='[federated.1okw98w1c3nc5r168ipkq0khzmd7].[none:greeks.updated_at:qk]' first-period='-2' include-future='true' include-null='false' last-period='0' period-type-v2='day' />
+          <filter class='quantitative' column='[federated.1okw98w1c3nc5r168ipkq0khzmd7].[none:strike:qk]' included-values='in-range'>
+            <min>6756.0</min>
+            <max>6900.0</max>
+          </filter>
+          <slices>
+            <column>[federated.1okw98w1c3nc5r168ipkq0khzmd7].[none:strike:qk]</column>
+            <column>[federated.1okw98w1c3nc5r168ipkq0khzmd7].[:Measure Names]</column>
+            <column>[federated.1okw98w1c3nc5r168ipkq0khzmd7].[none:expiration_date:qk]</column>
+            <column>[federated.1okw98w1c3nc5r168ipkq0khzmd7].[none:greeks.updated_at:qk]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='axis'>
+            <encoding attr='space' class='0' field='[federated.1okw98w1c3nc5r168ipkq0khzmd7].[Multiple Values]' field-type='quantitative' fold='true' max='1.0' min='0.0' range-type='fixed' scope='rows' type='space' />
+            <encoding attr='space' class='0' domain-expand='false' field='[federated.1okw98w1c3nc5r168ipkq0khzmd7].[sum:gex:qk]' field-type='quantitative' range-type='independent' scope='rows' type='space' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane id='4' selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Bar' />
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-show' value='false' />
+              </style-rule>
+            </style>
+          </pane>
+          <pane id='5' selection-relaxation-option='selection-relaxation-allow' y-axis-name='[federated.1okw98w1c3nc5r168ipkq0khzmd7].[sum:gex:qk]'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Bar' />
+            <mark-sizing mark-sizing-setting='marks-scaling-off' />
+            <encodings>
+              <color column='[federated.1okw98w1c3nc5r168ipkq0khzmd7].[none:option_type:nk]' />
+            </encodings>
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-show' value='false' />
+                <format attr='size' value='1.9890055656433105' />
+              </style-rule>
+            </style>
+          </pane>
+          <pane id='7' selection-relaxation-option='selection-relaxation-allow' y-axis-name='[federated.1okw98w1c3nc5r168ipkq0khzmd7].[Multiple Values]'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Bar' />
+            <mark-sizing mark-sizing-setting='marks-scaling-off' />
+            <encodings>
+              <color column='[federated.1okw98w1c3nc5r168ipkq0khzmd7].[:Measure Names]' />
+            </encodings>
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-show' value='false' />
+                <format attr='size' value='0.0099999997764825821' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows>([federated.1okw98w1c3nc5r168ipkq0khzmd7].[none:greeks.updated_at:ok] * ([federated.1okw98w1c3nc5r168ipkq0khzmd7].[sum:gex:qk] + [federated.1okw98w1c3nc5r168ipkq0khzmd7].[Multiple Values]))</rows>
+        <cols>[federated.1okw98w1c3nc5r168ipkq0khzmd7].[none:Calculation_3400499202229325824:ok]</cols>
+      </table>
+      <simple-id uuid='{BC227DC2-16E2-4EB7-A7F5-615EDBDDA184}' />
+    </worksheet>
+    <worksheet name='Sheet 6'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='gex_table (gexdb)' name='federated.1okw98w1c3nc5r168ipkq0khzmd7' />
+          </datasources>
+          <datasource-dependencies datasource='federated.1okw98w1c3nc5r168ipkq0khzmd7'>
+            <column caption='Strike ' datatype='real' name='[Strike (copy)_1880252850928431104]' role='dimension' type='ordinal'>
+              <calculation class='tableau' formula='[strike]' />
+            </column>
+            <column-instance column='[last]' derivation='Avg' name='[avg:last:qk]' pivot='key' type='quantitative' />
+            <column caption='Expiration Date' datatype='date' datatype-customized='true' name='[expiration_date]' role='dimension' type='ordinal' />
+            <column caption='Last' datatype='real' name='[last]' role='measure' type='quantitative' />
+            <column-instance column='[Strike (copy)_1880252850928431104]' derivation='None' name='[none:Strike (copy)_1880252850928431104:ok]' pivot='key' type='ordinal' />
+            <column-instance column='[expiration_date]' derivation='None' name='[none:expiration_date:ok]' pivot='key' type='ordinal' />
+            <column-instance column='[option_type]' derivation='None' name='[none:option_type:nk]' pivot='key' type='nominal' />
+            <column-instance column='[strike]' derivation='None' name='[none:strike:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[trade_date]' derivation='None' name='[none:trade_date:qk]' pivot='key' type='quantitative' />
+            <column caption='Option Type' datatype='string' name='[option_type]' role='dimension' type='nominal' />
+            <column caption='Strike' datatype='real' name='[strike]' role='measure' type='quantitative' />
+            <column-instance column='[trade_date]' derivation='Hour-Trunc' name='[thr:trade_date:qk]' pivot='key' type='quantitative' />
+            <column caption='Trade Date' datatype='datetime' name='[trade_date]' role='dimension' type='ordinal' />
+          </datasource-dependencies>
+          <filter class='categorical' column='[federated.1okw98w1c3nc5r168ipkq0khzmd7].[none:expiration_date:ok]'>
+            <groupfilter function='member' level='[none:expiration_date:ok]' member='#2025-11-28#' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
+          </filter>
+          <filter class='quantitative' column='[federated.1okw98w1c3nc5r168ipkq0khzmd7].[none:strike:qk]' included-values='in-range'>
+            <min>6800.0</min>
+            <max>6900.0</max>
+          </filter>
+          <filter class='relative-date' column='[federated.1okw98w1c3nc5r168ipkq0khzmd7].[none:trade_date:qk]' first-period='-3' include-future='true' include-null='false' last-period='0' period-type-v2='day' />
+          <slices>
+            <column>[federated.1okw98w1c3nc5r168ipkq0khzmd7].[none:expiration_date:ok]</column>
+            <column>[federated.1okw98w1c3nc5r168ipkq0khzmd7].[none:trade_date:qk]</column>
+            <column>[federated.1okw98w1c3nc5r168ipkq0khzmd7].[none:strike:qk]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style />
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <encodings>
+              <color column='[federated.1okw98w1c3nc5r168ipkq0khzmd7].[none:option_type:nk]' />
+              <lod column='[federated.1okw98w1c3nc5r168ipkq0khzmd7].[none:Strike (copy)_1880252850928431104:ok]' />
+            </encodings>
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-show' value='false' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows>[federated.1okw98w1c3nc5r168ipkq0khzmd7].[avg:last:qk]</rows>
+        <cols>[federated.1okw98w1c3nc5r168ipkq0khzmd7].[thr:trade_date:qk]</cols>
+      </table>
+      <simple-id uuid='{9147CAE6-3EF8-42FB-8A6D-D1A4283CE4E6}' />
+    </worksheet>
+    <worksheet name='collection'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='gex_table (gexdb)' name='federated.1okw98w1c3nc5r168ipkq0khzmd7' />
+          </datasources>
+          <datasource-dependencies datasource='federated.1okw98w1c3nc5r168ipkq0khzmd7'>
+            <column caption='Expiration Date' datatype='date' datatype-customized='true' name='[expiration_date]' role='dimension' type='ordinal' />
+            <column caption='Greeks.Updated At' datatype='datetime' name='[greeks.updated_at]' role='dimension' type='ordinal' />
+            <column-instance column='[expiration_date]' derivation='None' name='[none:expiration_date:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[greeks.updated_at]' derivation='None' name='[none:greeks.updated_at:qk]' pivot='key' type='quantitative' />
+          </datasource-dependencies>
+          <filter class='relative-date' column='[federated.1okw98w1c3nc5r168ipkq0khzmd7].[none:greeks.updated_at:qk]' first-period='-5' include-future='true' include-null='false' last-period='0' period-type-v2='week' />
+          <slices>
+            <column>[federated.1okw98w1c3nc5r168ipkq0khzmd7].[none:greeks.updated_at:qk]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style />
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+          </pane>
+        </panes>
+        <rows>[federated.1okw98w1c3nc5r168ipkq0khzmd7].[none:expiration_date:qk]</rows>
+        <cols>[federated.1okw98w1c3nc5r168ipkq0khzmd7].[none:greeks.updated_at:qk]</cols>
+      </table>
+      <simple-id uuid='{A5F22CD5-5F5B-42F3-B359-5E70D9438D8B}' />
+    </worksheet>
+    <worksheet name='strike'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='gex_table (gexdb)' name='federated.1okw98w1c3nc5r168ipkq0khzmd7' />
+          </datasources>
+          <datasource-dependencies datasource='federated.1okw98w1c3nc5r168ipkq0khzmd7'>
+            <column caption='Strike ' datatype='real' name='[Strike (copy)_1880252850928431104]' role='dimension' type='ordinal'>
+              <calculation class='tableau' formula='[strike]' />
+            </column>
+            <column caption='Expiration Date' datatype='date' datatype-customized='true' name='[expiration_date]' role='dimension' type='ordinal' />
+            <column caption='Gex' datatype='real' name='[gex]' role='measure' type='quantitative' />
+            <column caption='Greeks.Updated At' datatype='datetime' name='[greeks.updated_at]' role='dimension' type='ordinal' />
+            <column-instance column='[Strike (copy)_1880252850928431104]' derivation='None' name='[none:Strike (copy)_1880252850928431104:ok]' pivot='key' type='ordinal' />
+            <column-instance column='[expiration_date]' derivation='None' name='[none:expiration_date:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[greeks.updated_at]' derivation='None' name='[none:greeks.updated_at:ok]' pivot='key' type='ordinal' />
+            <column-instance column='[greeks.updated_at]' derivation='None' name='[none:greeks.updated_at:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[option_type]' derivation='None' name='[none:option_type:nk]' pivot='key' type='nominal' />
+            <column-instance column='[strike]' derivation='None' name='[none:strike:qk]' pivot='key' type='quantitative' />
+            <column caption='Option Type' datatype='string' name='[option_type]' role='dimension' type='nominal' />
+            <column caption='Strike' datatype='real' name='[strike]' role='measure' type='quantitative' />
+            <column-instance column='[gex]' derivation='Sum' name='[sum:gex:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[expiration_date]' derivation='Day-Trunc' name='[tdy:expiration_date:ok]' pivot='key' type='ordinal' />
+          </datasource-dependencies>
+          <filter class='relative-date' column='[federated.1okw98w1c3nc5r168ipkq0khzmd7].[none:expiration_date:qk]' first-period='0' include-future='true' include-null='false' last-period='13' period-type-v2='day' />
+          <filter class='relative-date' column='[federated.1okw98w1c3nc5r168ipkq0khzmd7].[none:greeks.updated_at:qk]' first-period='-2' include-future='true' include-null='false' last-period='0' period-type-v2='day' />
+          <filter class='quantitative' column='[federated.1okw98w1c3nc5r168ipkq0khzmd7].[none:strike:qk]' included-values='in-range-or-null'>
+            <min>6479.0</min>
+            <max>7073.0</max>
+          </filter>
+          <slices>
+            <column>[federated.1okw98w1c3nc5r168ipkq0khzmd7].[none:expiration_date:qk]</column>
+            <column>[federated.1okw98w1c3nc5r168ipkq0khzmd7].[none:greeks.updated_at:qk]</column>
+            <column>[federated.1okw98w1c3nc5r168ipkq0khzmd7].[none:strike:qk]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='axis'>
+            <encoding attr='space' class='0' field='[federated.1okw98w1c3nc5r168ipkq0khzmd7].[sum:gex:qk]' field-type='quantitative' range-type='independent' scope='rows' type='space' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane id='5' selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <encodings>
+              <color column='[federated.1okw98w1c3nc5r168ipkq0khzmd7].[none:option_type:nk]' />
+            </encodings>
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-show' value='false' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows>(([federated.1okw98w1c3nc5r168ipkq0khzmd7].[tdy:expiration_date:ok] / [federated.1okw98w1c3nc5r168ipkq0khzmd7].[none:greeks.updated_at:ok]) * [federated.1okw98w1c3nc5r168ipkq0khzmd7].[sum:gex:qk])</rows>
+        <cols>[federated.1okw98w1c3nc5r168ipkq0khzmd7].[none:Strike (copy)_1880252850928431104:ok]</cols>
+      </table>
+      <simple-id uuid='{30BA92AA-7A49-406A-9AF5-FE5732B06522}' />
+    </worksheet>
+    <worksheet name='wall'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='gex_table (gexdb)' name='federated.1okw98w1c3nc5r168ipkq0khzmd7' />
+          </datasources>
+          <datasource-dependencies datasource='federated.1okw98w1c3nc5r168ipkq0khzmd7'>
+            <column caption='Strike ' datatype='real' name='[Strike (copy)_1880252850928431104]' role='dimension' type='ordinal'>
+              <calculation class='tableau' formula='[strike]' />
+            </column>
+            <column-instance column='[gex]' derivation='Sum' name='[cum:sum:gex:qk]' pivot='key' type='quantitative'>
+              <table-calc aggregation='Sum' ordering-type='Rows' type='CumTotal' />
+            </column-instance>
+            <column caption='Expiration Date' datatype='date' datatype-customized='true' name='[expiration_date]' role='dimension' type='ordinal' />
+            <column caption='Gex' datatype='real' name='[gex]' role='measure' type='quantitative' />
+            <column caption='Greeks.Updated At' datatype='datetime' name='[greeks.updated_at]' role='dimension' type='ordinal' />
+            <column-instance column='[Strike (copy)_1880252850928431104]' derivation='None' name='[none:Strike (copy)_1880252850928431104:ok]' pivot='key' type='ordinal' />
+            <column-instance column='[expiration_date]' derivation='None' name='[none:expiration_date:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[greeks.updated_at]' derivation='None' name='[none:greeks.updated_at:ok]' pivot='key' type='ordinal' />
+            <column-instance column='[greeks.updated_at]' derivation='None' name='[none:greeks.updated_at:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[strike]' derivation='None' name='[none:strike:qk]' pivot='key' type='quantitative' />
+            <column caption='Strike' datatype='real' name='[strike]' role='measure' type='quantitative' />
+            <column-instance column='[gex]' derivation='Sum' name='[sum:gex:qk]' pivot='key' type='quantitative' />
+          </datasource-dependencies>
+          <filter class='relative-date' column='[federated.1okw98w1c3nc5r168ipkq0khzmd7].[none:expiration_date:qk]' first-period='-2' include-future='true' include-null='false' last-period='0' period-type-v2='day' />
+          <filter class='relative-date' column='[federated.1okw98w1c3nc5r168ipkq0khzmd7].[none:greeks.updated_at:qk]' first-period='-2' include-future='true' include-null='false' last-period='0' period-type-v2='day' />
+          <filter class='quantitative' column='[federated.1okw98w1c3nc5r168ipkq0khzmd7].[none:strike:qk]' included-values='in-range-or-null'>
+            <min>6533.0</min>
+            <max>6911.0</max>
+          </filter>
+          <slices>
+            <column>[federated.1okw98w1c3nc5r168ipkq0khzmd7].[none:expiration_date:qk]</column>
+            <column>[federated.1okw98w1c3nc5r168ipkq0khzmd7].[none:greeks.updated_at:qk]</column>
+            <column>[federated.1okw98w1c3nc5r168ipkq0khzmd7].[none:strike:qk]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='axis'>
+            <encoding attr='space' class='0' field='[federated.1okw98w1c3nc5r168ipkq0khzmd7].[cum:sum:gex:qk]' field-type='quantitative' range-type='independent' scope='rows' type='space' />
+            <encoding attr='space' class='0' domain-expand='false' field='[federated.1okw98w1c3nc5r168ipkq0khzmd7].[sum:gex:qk]' field-type='quantitative' range-type='independent' scope='rows' type='space' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane id='2' selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-show' value='false' />
+              </style-rule>
+            </style>
+          </pane>
+          <pane id='3' selection-relaxation-option='selection-relaxation-allow' y-axis-name='[federated.1okw98w1c3nc5r168ipkq0khzmd7].[sum:gex:qk]'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-show' value='false' />
+              </style-rule>
+            </style>
+          </pane>
+          <pane id='4' selection-relaxation-option='selection-relaxation-allow' y-axis-name='[federated.1okw98w1c3nc5r168ipkq0khzmd7].[cum:sum:gex:qk]'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-show' value='false' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows>([federated.1okw98w1c3nc5r168ipkq0khzmd7].[none:greeks.updated_at:ok] * ([federated.1okw98w1c3nc5r168ipkq0khzmd7].[sum:gex:qk] + [federated.1okw98w1c3nc5r168ipkq0khzmd7].[cum:sum:gex:qk]))</rows>
+        <cols>[federated.1okw98w1c3nc5r168ipkq0khzmd7].[none:Strike (copy)_1880252850928431104:ok]</cols>
+      </table>
+      <simple-id uuid='{21322725-47FE-4245-B7DF-845925C7A3BB}' />
+    </worksheet>
+  </worksheets>
+  <windows source-height='30'>
+    <window class='worksheet' name='collection'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='51'>
+            <card type='rows' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='title' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='160'>
+            <card param='[federated.1okw98w1c3nc5r168ipkq0khzmd7].[none:greeks.updated_at:qk]' show-domain='false' show-null-ctrls='false' type='filter' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <default-map-tool-selection tool='2' />
+      </viewpoint>
+      <simple-id uuid='{8D063D2C-35E4-430D-BD5D-155B448A36BD}' />
+    </window>
+    <window class='worksheet' name='Sheet 2 (2)'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+            <card type='measures' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='160'>
+            <card param='[federated.1okw98w1c3nc5r168ipkq0khzmd7].[none:greeks.updated_at:qk]' show-domain='false' show-null-ctrls='false' type='filter' />
+            <card param='[federated.1okw98w1c3nc5r168ipkq0khzmd7].[none:expiration_date:qk]' show-domain='false' show-null-ctrls='false' type='filter' />
+            <card param='[federated.1okw98w1c3nc5r168ipkq0khzmd7].[:Measure Names]' show-morefewerbutton='false' type='filter' />
+            <card pane-specification-id='5' param='[federated.1okw98w1c3nc5r168ipkq0khzmd7].[dy:greeks.updated_at:ok]' type='color' />
+            <card pane-specification-id='7' param='[federated.1okw98w1c3nc5r168ipkq0khzmd7].[:Measure Names]' type='color' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <zoom type='entire-view' />
+      </viewpoint>
+      <simple-id uuid='{DD681068-B27B-4C6E-8C3A-58C41CAEF01E}' />
+    </window>
+    <window class='worksheet' name='wall'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='160'>
+            <card param='[federated.1okw98w1c3nc5r168ipkq0khzmd7].[none:greeks.updated_at:qk]' show-domain='false' show-null-ctrls='false' type='filter' />
+            <card param='[federated.1okw98w1c3nc5r168ipkq0khzmd7].[none:expiration_date:qk]' show-domain='false' show-null-ctrls='false' type='filter' />
+            <card param='[federated.1okw98w1c3nc5r168ipkq0khzmd7].[none:strike:qk]' show-domain='false' show-null-ctrls='false' type='filter' values='relevant' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <zoom type='entire-view' />
+      </viewpoint>
+      <simple-id uuid='{B5FB740C-DF8B-49EA-B92F-B81AF6E8294F}' />
+    </window>
+    <window class='worksheet' name='Sheet 2 (3)'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+            <card type='measures' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='160'>
+            <card param='[federated.1okw98w1c3nc5r168ipkq0khzmd7].[none:strike:qk]' show-domain='false' show-null-ctrls='false' type='filter' />
+            <card param='[federated.1okw98w1c3nc5r168ipkq0khzmd7].[none:greeks.updated_at:qk]' show-domain='false' show-null-ctrls='false' show-reldate-picker='true' type='filter' />
+            <card param='[federated.1okw98w1c3nc5r168ipkq0khzmd7].[none:expiration_date:qk]' show-domain='false' show-null-ctrls='false' type='filter' />
+            <card param='[federated.1okw98w1c3nc5r168ipkq0khzmd7].[:Measure Names]' show-morefewerbutton='false' type='filter' />
+            <card pane-specification-id='5' param='[federated.1okw98w1c3nc5r168ipkq0khzmd7].[none:option_type:nk]' type='color' />
+            <card pane-specification-id='7' param='[federated.1okw98w1c3nc5r168ipkq0khzmd7].[:Measure Names]' type='color' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <zoom type='entire-view' />
+      </viewpoint>
+      <simple-id uuid='{B4CD0CCE-3CB8-41A0-BB01-EDBB2A077F14}' />
+    </window>
+    <window class='worksheet' name='strike'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='160'>
+            <card param='[federated.1okw98w1c3nc5r168ipkq0khzmd7].[none:expiration_date:qk]' show-domain='false' show-null-ctrls='false' type='filter' />
+            <card param='[federated.1okw98w1c3nc5r168ipkq0khzmd7].[none:greeks.updated_at:qk]' show-domain='false' show-null-ctrls='false' type='filter' />
+            <card param='[federated.1okw98w1c3nc5r168ipkq0khzmd7].[none:strike:qk]' show-domain='false' show-null-ctrls='false' type='filter' values='relevant' />
+            <card pane-specification-id='5' param='[federated.1okw98w1c3nc5r168ipkq0khzmd7].[none:option_type:nk]' type='color' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <zoom type='entire-view' />
+      </viewpoint>
+      <simple-id uuid='{798C1A47-2C8B-48B7-8131-6A15E70C2B95}' />
+    </window>
+    <window class='worksheet' maximized='true' name='Sheet 6'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='160'>
+            <card param='[federated.1okw98w1c3nc5r168ipkq0khzmd7].[none:trade_date:qk]' show-domain='false' show-null-ctrls='false' type='filter' />
+            <card param='[federated.1okw98w1c3nc5r168ipkq0khzmd7].[none:expiration_date:ok]' type='filter' />
+            <card pane-specification-id='0' param='[federated.1okw98w1c3nc5r168ipkq0khzmd7].[none:option_type:nk]' type='color' />
+          </strip>
+          <strip size='160'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <simple-id uuid='{43D9F690-B035-4AA9-B40B-3A1688F1C25B}' />
+    </window>
+  </windows>
+</workbook>

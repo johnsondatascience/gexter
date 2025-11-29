@@ -1,0 +1,27 @@
+{
+  "total_legs_traded": 79,
+  "call_legs": 79,
+  "put_legs": 0,
+  "winning_legs": 47,
+  "losing_legs": 30,
+  "win_rate": 0.5949367088607594,
+  "total_pnl": 1629.61,
+  "avg_pnl_per_leg": 20.627974683544302,
+  "avg_win": 37.3504255319149,
+  "avg_loss": -4.195333333333333,
+  "max_win": 494.70000000000005,
+  "max_loss": -25.275,
+  "profit_factor": 13.947799141903706,
+  "total_premium_deployed": 268.52,
+  "avg_pnl_pct": 4619.482314511108,
+  "call_performance": {
+    "win_rate": 0.5949367088607594,
+    "total_pnl": 1629.61,
+    "avg_pnl_pct": 4619.482314511108
+  },
+  "put_performance": {
+    "win_rate": 0,
+    "total_pnl": 0,
+    "avg_pnl_pct": 0
+  }
+}

@@ -1,237 +1,237 @@
 {
-  "generated_at": "2025-11-26T08:19:58.765915",
+  "generated_at": "2025-11-28T19:42:07.138166",
   "multi_timeframe_gex": {
     "0dte": {
-      "timestamp": "2025-11-25 19:59:04",
+      "timestamp": "2025-11-28 18:00:09",
       "timeframe": "0DTE",
       "max_days_to_expiry": 0,
-      "options_count": 492,
-      "current_price": 6770.89,
-      "zero_gex_level": 6825.0,
+      "options_count": 882,
+      "current_price": 6845.89,
+      "zero_gex_level": 6790.0,
       "gex_levels": {
         "resistance": [
-          6775.0,
-          6780.0,
-          6785.0
+          6850.0,
+          6855.0,
+          6860.0
         ],
         "support": [
-          6705.0,
-          6695.0,
-          6675.0
+          6785.0,
+          6780.0,
+          6775.0
         ]
       },
-      "net_gex_at_price": 6823626.25,
-      "composite_signal": "SELL",
-      "composite_confidence": 0.6,
-      "reasoning": "Below zero GEX (6825), positive GEX at spot = call resistance. May face selling pressure."
+      "net_gex_at_price": 199918916.25,
+      "composite_signal": "NEUTRAL",
+      "composite_confidence": 0.8,
+      "reasoning": "Near zero GEX (6790), expect choppy price action."
     },
     "short_term": {
-      "timestamp": "2025-11-25 19:59:04",
+      "timestamp": "2025-11-28 18:00:09",
       "timeframe": "SHORT_TERM",
       "max_days_to_expiry": 2,
-      "options_count": 984,
-      "current_price": 6770.89,
-      "zero_gex_level": 6685.0,
+      "options_count": 882,
+      "current_price": 6845.89,
+      "zero_gex_level": 6790.0,
       "gex_levels": {
         "resistance": [
-          6775.0,
-          6780.0,
-          6800.0
+          6850.0,
+          6855.0,
+          6860.0
         ],
         "support": [
-          6660.0,
-          6650.0,
-          6640.0
+          6785.0,
+          6780.0,
+          6775.0
         ]
       },
-      "net_gex_at_price": 12580574.995000001,
+      "net_gex_at_price": 199918916.25,
       "composite_signal": "NEUTRAL",
-      "composite_confidence": 0.6,
-      "reasoning": "Above zero GEX (6685), market likely to be pinned. Range-bound trading expected."
+      "composite_confidence": 0.8,
+      "reasoning": "Near zero GEX (6790), expect choppy price action."
     },
     "weekly": {
-      "timestamp": "2025-11-25 19:59:04",
+      "timestamp": "2025-11-28 18:00:09",
       "timeframe": "WEEKLY",
       "max_days_to_expiry": 7,
-      "options_count": 2738,
-      "current_price": 6770.89,
-      "zero_gex_level": 6735.0,
+      "options_count": 3340,
+      "current_price": 6845.89,
+      "zero_gex_level": 6770.0,
       "gex_levels": {
         "resistance": [
-          6775.0,
-          6790.0,
-          6800.0
+          6850.0,
+          6880.0,
+          6900.0
         ],
         "support": [
-          6710.0,
-          6670.0,
-          6650.0
+          6720.0,
+          6700.0,
+          6625.0
         ]
       },
-      "net_gex_at_price": 18096058.233000003,
+      "net_gex_at_price": 217998394.925,
       "composite_signal": "NEUTRAL",
-      "composite_confidence": 0.8,
-      "reasoning": "Near zero GEX (6735), expect choppy price action."
+      "composite_confidence": 0.6,
+      "reasoning": "Above zero GEX (6770), market likely to be pinned. Range-bound trading expected."
     },
     "all": {
-      "timestamp": "2025-11-25 19:59:04",
+      "timestamp": "2025-11-28 18:00:09",
       "timeframe": "ALL",
       "max_days_to_expiry": null,
-      "options_count": 9086,
-      "current_price": 6770.89,
-      "zero_gex_level": 6715.0,
+      "options_count": 9132,
+      "current_price": 6845.89,
+      "zero_gex_level": 6770.0,
       "gex_levels": {
         "resistance": [
-          6775.0,
-          6780.0,
-          6800.0
+          6850.0,
+          6900.0,
+          6950.0
         ],
         "support": [
-          6670.0,
-          6600.0,
-          6500.0
+          6700.0,
+          6650.0,
+          6600.0
         ]
       },
-      "net_gex_at_price": 21095917.6054,
+      "net_gex_at_price": 221693452.65864998,
       "composite_signal": "NEUTRAL",
-      "composite_confidence": 0.8,
-      "reasoning": "Near zero GEX (6715), expect choppy price action."
+      "composite_confidence": 0.6,
+      "reasoning": "Above zero GEX (6770), market likely to be pinned. Range-bound trading expected."
     },
-    "generated_at": "2025-11-26T08:19:56.762914",
-    "current_price": 6770.89
+    "generated_at": "2025-11-28T19:42:04.967263",
+    "current_price": 6845.89
   },
   "combined_signals": {
-    "timestamp": "2025-11-25 19:59:04",
+    "timestamp": "2025-11-28 18:00:09",
     "combined_signal": "BUY",
-    "combined_score": 0.45812500000000006,
+    "combined_score": 0.5112500000000001,
     "conviction_level": "MODERATE",
     "conviction_description": "Moderate - Some alignment between signals",
-    "alignment_score": 0.25,
+    "alignment_score": 0.5,
     "component_signals": {
       "gex": {
         "signal": "BUY",
-        "confidence": 0.8500000000000001,
+        "confidence": 0.75,
         "weight": 0.55
       },
       "internals": {
-        "signal": "BUY",
-        "confidence": 0.7611111111111111,
-        "score": 0.4986111111111111,
+        "signal": "STRONG_BUY",
+        "confidence": 0.7694444444444445,
+        "score": 0.6777777777777778,
         "weight": 0.45
       }
     },
     "key_levels": {
-      "zero_gex": 6715.0,
-      "current_price": 6770.89,
+      "zero_gex": 6770.0,
+      "current_price": 6845.89,
       "resistance_levels": [
-        6775.0,
-        6780.0,
-        6800.0
+        6850.0,
+        6900.0,
+        6950.0
       ],
       "support_levels": [
-        6670.0,
-        6600.0,
-        6500.0
+        6700.0,
+        6650.0,
+        6600.0
       ]
     },
     "internals_summary": {
-      "breadth_ratio": 0.6938775510204082,
-      "volume_ratio": 0.7136295561927544,
+      "breadth_ratio": 0.7755102040816326,
+      "volume_ratio": 0.4565280362638019,
       "sector_breadth": {
-        "timestamp": "2025-11-26 08:19:58.253728",
-        "sectors_advancing": 11,
-        "sectors_declining": 0,
-        "sector_breadth_ratio": 1.0,
-        "strongest_sector": "XLP (Consumer Staples)",
-        "weakest_sector": "XLK (Technology)",
+        "timestamp": "2025-11-28 19:42:06.566533",
+        "sectors_advancing": 10,
+        "sectors_declining": 1,
+        "sector_breadth_ratio": 0.8181818181818182,
+        "strongest_sector": "XLE (Energy)",
+        "weakest_sector": "XLV (Healthcare)",
         "sector_performance": {
-          "XLK": 0.049335729640216805,
-          "XLV": 0.07259184446408856,
-          "XLF": 0.6550218340611331,
-          "XLE": 1.162659442374987,
-          "XLI": 0.5886995987634087,
-          "XLC": 0.3062787136293978,
-          "XLY": 0.30740329604645156,
-          "XLP": 1.181911350243406,
-          "XLRE": 1.0201603109060036,
-          "XLU": 0.5712045696365629,
-          "XLB": 1.0468821119708713
+          "XLK": 0.6470215908291834,
+          "XLV": -0.3476611883691422,
+          "XLF": 0.43314500941618994,
+          "XLE": 1.2537781260494847,
+          "XLI": 0.4116032928263396,
+          "XLC": 0.5183152576331711,
+          "XLY": 0.3905918315360516,
+          "XLP": 0.7233502538071159,
+          "XLRE": 0.4580520732883434,
+          "XLU": 0.5435988462391778,
+          "XLB": 0.30292830696736256
         }
       }
     },
-    "recommendation": "\ud83d\ude80 BULLISH CONFLUENCE: Both GEX positioning and market internals support upside. Price is above Zero GEX (6771 > 6715), indicating positive gamma regime. Strong breadth (+69.4%) and volume flow (+71.4%) confirm broad participation. Sector rotation: 11/11 sectors advancing. Conviction: MODERATE. STRATEGY: Aggressive long positioning. Use dips to add. Trail stops.",
+    "recommendation": "\ud83d\ude80 BULLISH CONFLUENCE: Both GEX positioning and market internals support upside. Price is above Zero GEX (6846 > 6770), indicating positive gamma regime. Strong breadth (+77.6%) and volume flow (+45.7%) confirm broad participation. Sector rotation: 10/11 sectors advancing. Conviction: MODERATE. STRATEGY: Aggressive long positioning. Use dips to add. Trail stops.",
     "gex_signals": {
-      "timestamp": "2025-11-25 19:59:04",
-      "current_price": 6770.89,
-      "zero_gex_level": 6715.0,
+      "timestamp": "2025-11-28 18:00:09",
+      "current_price": 6845.89,
+      "zero_gex_level": 6770.0,
       "gex_levels": {
         "resistance": [
-          6775.0,
-          6780.0,
-          6800.0
+          6850.0,
+          6900.0,
+          6950.0
         ],
         "support": [
-          6670.0,
-          6600.0,
-          6500.0
+          6700.0,
+          6650.0,
+          6600.0
         ]
       },
-      "net_gex_at_price": 21095917.6054,
+      "net_gex_at_price": 221693452.65864998,
       "individual_signals": [
         {
           "source": "GEX_POSITIONING",
           "signal": "NEUTRAL",
-          "confidence": 0.8,
-          "reasoning": "Near zero GEX (6715), expect choppy price action."
+          "confidence": 0.6,
+          "reasoning": "Above zero GEX (6770), market likely to be pinned. Range-bound trading expected."
         },
         {
           "source": "GEX_CHANGE",
           "signal": "BUY",
           "confidence": 0.9,
-          "reasoning": "GEX increased 173.3% - bullish repositioning detected"
+          "reasoning": "GEX increased 64.2% - bullish repositioning detected"
         }
       ],
       "composite_signal": "BUY",
-      "composite_confidence": 0.8500000000000001,
-      "recommendation": "\ud83d\udfe2 BUY signal (Confidence: 85%)\nBullish bias. Consider long positions on pullbacks.\n\nCurrent SPX: 6770.89\nZero GEX: 6715.00 (SPX is above)\nResistance levels: 6775, 6780, 6800\nSupport levels: 6670, 6600, 6500"
+      "composite_confidence": 0.75,
+      "recommendation": "\ud83d\udfe2 BUY signal (Confidence: 75%)\nBullish bias. Consider long positions on pullbacks.\n\nCurrent SPX: 6845.89\nZero GEX: 6770.00 (SPX is above)\nResistance levels: 6850, 6900, 6950\nSupport levels: 6700, 6650, 6600"
     },
     "internals_signals": {
-      "timestamp": "2025-11-26 08:19:57.696169",
+      "timestamp": "2025-11-28 19:42:05.996001",
       "market_internals": {
-        "timestamp": "2025-11-26 08:19:57.696169",
-        "advances": 83,
-        "declines": 15,
+        "timestamp": "2025-11-28 19:42:05.996001",
+        "advances": 87,
+        "declines": 11,
         "unchanged": 0,
-        "advance_decline_ratio": 5.533333333333333,
-        "breadth_ratio": 0.6938775510204082,
-        "up_volume": 308232752,
-        "down_volume": 51509820,
-        "up_down_volume_ratio": 5.983960961230305,
-        "volume_ratio": 0.7136295561927544,
+        "advance_decline_ratio": 7.909090909090909,
+        "breadth_ratio": 0.7755102040816326,
+        "up_volume": 439500498,
+        "down_volume": 163990114,
+        "up_down_volume_ratio": 2.680042639643509,
+        "volume_ratio": 0.4565280362638019,
         "tick": null,
         "trin": null,
         "add": null,
         "cumulative_ad_line": null,
         "breadth_thrust": null,
         "sector_breadth": {
-          "timestamp": "2025-11-26 08:19:58.253728",
-          "sectors_advancing": 11,
-          "sectors_declining": 0,
-          "sector_breadth_ratio": 1.0,
-          "strongest_sector": "XLP (Consumer Staples)",
-          "weakest_sector": "XLK (Technology)",
+          "timestamp": "2025-11-28 19:42:06.566533",
+          "sectors_advancing": 10,
+          "sectors_declining": 1,
+          "sector_breadth_ratio": 0.8181818181818182,
+          "strongest_sector": "XLE (Energy)",
+          "weakest_sector": "XLV (Healthcare)",
           "sector_performance": {
-            "XLK": 0.049335729640216805,
-            "XLV": 0.07259184446408856,
-            "XLF": 0.6550218340611331,
-            "XLE": 1.162659442374987,
-            "XLI": 0.5886995987634087,
-            "XLC": 0.3062787136293978,
-            "XLY": 0.30740329604645156,
-            "XLP": 1.181911350243406,
-            "XLRE": 1.0201603109060036,
-            "XLU": 0.5712045696365629,
-            "XLB": 1.0468821119708713
+            "XLK": 0.6470215908291834,
+            "XLV": -0.3476611883691422,
+            "XLF": 0.43314500941618994,
+            "XLE": 1.2537781260494847,
+            "XLI": 0.4116032928263396,
+            "XLC": 0.5183152576331711,
+            "XLY": 0.3905918315360516,
+            "XLP": 0.7233502538071159,
+            "XLRE": 0.4580520732883434,
+            "XLU": 0.5435988462391778,
+            "XLB": 0.30292830696736256
           }
         }
       },
@@ -239,17 +239,17 @@
       "individual_signals": [
         {
           "source": "Breadth Analysis",
-          "signal": "BUY",
-          "confidence": 0.75,
-          "reasoning": "Strong breadth: 69.4% of stocks advancing. A/D ratio: 5.53:1",
+          "signal": "STRONG_BUY",
+          "confidence": 0.9,
+          "reasoning": "Exceptional breadth: 77.6% of stocks advancing. A/D ratio: 7.91:1",
           "weight": 0.35,
           "normalized_weight": 0.3888888888888889
         },
         {
           "source": "Volume Analysis",
           "signal": "BUY",
-          "confidence": 0.7,
-          "reasoning": "Strong buying pressure: 71.4% of volume in advancing stocks. Up/Down volume: 5.98:1",
+          "confidence": 0.55,
+          "reasoning": "Positive volume flow: 45.7% of volume in advancing stocks",
           "weight": 0.3,
           "normalized_weight": 0.33333333333333337
         },
@@ -257,15 +257,15 @@
           "source": "Sector Rotation",
           "signal": "STRONG_BUY",
           "confidence": 0.85,
-          "reasoning": "Exceptional sector rotation: 11/11 sectors advancing. Leading: XLP (Consumer Staples)",
+          "reasoning": "Exceptional sector rotation: 10/11 sectors advancing. Leading: XLE (Energy)",
           "weight": 0.25,
           "normalized_weight": 0.2777777777777778
         }
       ],
-      "composite_signal": "BUY",
-      "composite_score": 0.4986111111111111,
-      "composite_confidence": 0.7611111111111111,
-      "recommendation": "Moderately bullish internals support upside bias. Look for pullback entries on strong stocks."
+      "composite_signal": "STRONG_BUY",
+      "composite_score": 0.6777777777777778,
+      "composite_confidence": 0.7694444444444445,
+      "recommendation": "Strong bullish internals suggest high probability of upside. Market breadth and volume confirm broad participation. Consider long positions or adding to existing longs."
     }
   }
 }
