@@ -35,6 +35,12 @@ class Config:
         if self.collect_xsp:
             self.underlying_symbols.append('XSP')
 
+        # Black-Scholes calculation parameters
+        self.risk_free_rate = float(os.getenv('RISK_FREE_RATE', '0.045'))  # 4.5% default
+        self.dividend_yield = float(os.getenv('DIVIDEND_YIELD', '0.013'))  # 1.3% default (SPX)
+        self.calculate_greeks = os.getenv('CALCULATE_GREEKS', 'true').lower() == 'true'
+        self.greek_iv_source = os.getenv('GREEK_IV_SOURCE', 'mid_iv')  # 'bid_iv', 'mid_iv', or 'ask_iv'
+
         # Logging configuration
         self.log_level = os.getenv('LOG_LEVEL', 'INFO')
         self.log_file = os.getenv('LOG_FILE', 'logs/gex_collector.log')

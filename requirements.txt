@@ -4,6 +4,7 @@ python-dotenv>=0.19.0
 schedule>=1.2.0
 pytz>=2022.1
 numpy>=1.24.0
+scipy>=1.10.0
 
 # PostgreSQL support
 psycopg2-binary>=2.9.0

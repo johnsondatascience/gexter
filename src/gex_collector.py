@@ -21,6 +21,7 @@ from .config import Config
 from .utils.logger import GEXLogger
 from .api.tradier_api import TradierAPI
 from .calculations.greek_diff_calculator import GreekDifferenceCalculator
+from .calculations.black_scholes import BlackScholesCalculator
 from .indicators.technical_indicators import SPXIndicatorCalculator
 
 
@@ -52,6 +53,18 @@ class GEXCollector:
             )
 
         self.indicator_calculator = SPXIndicatorCalculator(self.api)
+
+        # Initialize Black-Scholes calculator for real-time greek calculations
+        if config.calculate_greeks:
+            self.bs_calculator = BlackScholesCalculator(
+                risk_free_rate=config.risk_free_rate,
+                dividend_yield=config.dividend_yield
+            )
+            self.logger.logger.info(f"Black-Scholes calculator enabled (r={config.risk_free_rate:.3f}, q={config.dividend_yield:.3f}, IV source={config.greek_iv_source})")
+        else:
+            self.bs_calculator = None
+            self.logger.logger.info("Black-Scholes calculator disabled - using Tradier greeks only")
+
         self.current_spx_price = None
         self.current_spx_indicators = None
     
@@ -444,6 +457,18 @@ class GEXCollector:
                     self.logger.logger.info("No existing data in database. Proceeding with initial collection.")
 
             # Note: Price data for each underlying is now added in the collection loop above
+
+            # Calculate fresh greeks using Black-Scholes if enabled
+            if self.bs_calculator and self.config.calculate_greeks:
+                iv_column = f'greeks.{self.config.greek_iv_source}'
+                self.logger.logger.info(f"Calculating fresh greeks using Black-Scholes with {iv_column}...")
+                all_chains = self.bs_calculator.calculate_greeks_for_dataframe(
+                    all_chains,
+                    underlying_price_col='spx_price',
+                    iv_col=iv_column,
+                    prefix='calc_greeks.'
+                )
+                self.logger.logger.info("Fresh greeks calculation complete")
 
             # Calculate Greek differences before saving
             self.logger.logger.info("Calculating Greek differences...")
