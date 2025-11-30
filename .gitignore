@@ -43,6 +43,8 @@ gex_logs/
 
 # Logs
 logs/*.log
+*.log
+nul
 
 # CSV data exports
 greek_differences_latest.csv
