@@ -1,0 +1,151 @@
+site_name: GEXter - Gamma Exposure Data Platform
+site_description: Production-ready SPX option chain data collector with gamma exposure analysis
+site_author: Your Name
+site_url: https://yourusername.github.io/gexter  # Update with your actual URL
+
+# Repository
+repo_name: gexter
+repo_url: https://github.com/yourusername/gexter  # Update with your actual repo
+edit_uri: edit/main/docs/
+
+# Copyright
+copyright: Copyright &copy; 2024 Your Name
+
+# Theme Configuration
+theme:
+  name: material
+  palette:
+    # Light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: blue
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    # Dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: blue
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+
+  features:
+    - navigation.instant      # Instant loading
+    - navigation.tracking     # URL tracking
+    - navigation.tabs         # Top-level tabs
+    - navigation.sections     # Expandable sections
+    - navigation.expand       # Expand all sections by default
+    - navigation.top          # Back to top button
+    - search.suggest          # Search suggestions
+    - search.highlight        # Highlight search terms
+    - search.share            # Share search results
+    - content.code.copy       # Copy code blocks
+    - content.code.annotate   # Annotate code blocks
+
+  icon:
+    repo: fontawesome/brands/github
+
+# Extensions
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - admonition
+  - tables
+  - attr_list
+  - def_list
+  - md_in_html
+  - toc:
+      permalink: true
+      toc_depth: 3
+
+# Plugins
+plugins:
+  - search
+  - mkdocstrings:
+      handlers:
+        python:
+          paths: [src]
+          options:
+            docstring_style: google
+            show_source: true
+            show_root_heading: true
+            show_root_full_path: false
+            members_order: source
+  - mkdocs-jupyter:
+      include_source: true
+      execute: false
+
+# Navigation Structure
+nav:
+  - Home: index.md
+  - Getting Started:
+      - Quick Start: quickstart.md
+      - Deployment Guide: deployment_guide.md
+      - Digital Ocean Deployment: DIGITALOCEAN_DEPLOYMENT.md
+      - Documentation Setup: DOCUMENTATION_SETUP.md
+  - Trading Strategies:
+      - Executive Summary: EXECUTIVE_SUMMARY.md
+      - Strategy Whitepaper: STRATEGY_WHITEPAPER.md
+      - Strategy Development Guide: STRATEGY_DEVELOPMENT_GUIDE.md
+      - Trading Signals Guide: TRADING_SIGNALS_GUIDE.md
+      - Strangle Backtest Guide: STRANGLE_BACKTEST_GUIDE.md
+  - Technical Documentation:
+      - Market Mechanics: MARKET_MECHANICS_TECHNICAL.md
+      - Market Internals Guide: MARKET_INTERNALS_GUIDE.md
+      - Greek Differences: README_greek_differences.md
+      - SPX Tracking: SPX_TRACKING_IMPLEMENTATION.md
+      - XSP Implementation: XSP_IMPLEMENTATION_GUIDE.md
+  - Paper Trading:
+      - Paper Trading Setup: PAPER_TRADING_SETUP.md
+      - Tradier Setup: TRADIER_SETUP.md
+  - Operations:
+      - Scheduler Guide: SCHEDULER_README.md
+      - GitHub Guide: GITHUB_GUIDE.md
+  - Investor Presentation:
+      - Pitch Deck: INVESTOR_PITCH.md
+      - Charts & Analysis: charts.md
+  - API Reference:
+      - GEX Collector: api/gex_collector.md
+      - Database: api/database.md
+      - Scheduler: api/scheduler.md
+
+# Extra CSS/JS
+extra_css:
+  - stylesheets/extra.css
+
+extra_javascript:
+  - javascripts/extra.js
+
+# Extra
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/yourusername
+    - icon: fontawesome/brands/linkedin
+      link: https://linkedin.com/in/yourprofile
+  analytics:
+    provider: google
+    property: G-XXXXXXXXXX  # Add your Google Analytics ID
+
+# Watch for changes
+watch:
+  - src/

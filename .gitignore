@@ -61,3 +61,6 @@ __pycache__/
 # IDE
 .vscode/
 .idea/
+
+# MkDocs generated site
+site/
